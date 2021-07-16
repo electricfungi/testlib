@@ -1,0 +1,684 @@
+#use-added-syntax(jitx)
+defpackage ocdb/db-parts :
+  import core
+  import collections
+  import json
+  import math
+  import jitx with :
+    prefix(Resistor) => EModel-
+    prefix(Capacitor) => EModel-
+    prefix(Inductor) => EModel-
+  import jitx/commands
+
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generator-utils
+  import ocdb/symbols
+  import ocdb/design-vars
+
+
+public deftype Component
+public defmulti x (component: Component) -> Double
+public defmulti y (component: Component) -> Double
+public defmulti area (component: Component) -> Double
+public defmulti to-esir (component: Component) -> Instantiable
+public defmulti generate-esir (component: Component) -> Instantiable
+
+defmethod area (component: Component) -> Double :
+  x(component) * y(component)
+
+defmethod generate-esir (cmp: Component) -> Instantiable :
+  val esir-cmp = to-esir(cmp)
+  ; ensure-generated(esir-cmp)
+  esir-cmp
+
+defstruct Sourcing :
+  price: Double|False
+  minimum-quantity: Int
+  stock: Int
+
+;============================================================
+;====================== Resistor ============================
+;============================================================
+
+public defstruct Resistor <: Component :
+  ; Generic properties
+  manufacturer: String
+  mpn: String
+  trust: String
+  x: Double with: (as-method => true)
+  y: Double with: (as-method => true)
+  z: Double|False
+  mounting: String
+  rated-temperature: MinMaxRange|False
+  case: String|False
+  sourcing: Sourcing
+  metadata: Tuple<KeyValue>
+  ; Resistor specific properties
+  type: String ; Type of resistor
+  tolerance: MinMaxRange|False ; Guaranteed tolerance from manufacture (Ohm/Ohm)
+  resistance: Double ; Nominal resistance (Ohm)
+  composition: String|False ; Composition of resistor
+  rated-power: Double|False ; Power dissipation limit as rated by manufacturer. One value, or PWL function (W | [degC, W])
+  TCR: TCR|False ; Temperature coefficient of resistance (ohms/ohm*degC)
+
+public defn delta-resistance (resistor: Resistor, temperature: Double) -> Double :
+  val tcr = TCR(resistor) as TCR
+  val ref-temp = reference-temperature(tcr)
+  val coeff =
+    if temperature >= ref-temp :
+      positive(tcr)
+    else :
+      negative(tcr)
+
+  (temperature - ref-temp) * coeff
+
+public defn Resistor (raw-json: JObject) -> Resistor :
+  val json = filter-json(raw-json)
+  val [x, y, z] = parse-dimensions(json["dimensions"] as JObject)
+
+  Resistor(json["manufacturer"] as String,
+           json["mpn"] as String,
+           json["trust"] as String,
+           x,
+           y,
+           z,
+           json["mounting"] as String,
+           parse-rated-temperature(json),
+           optional-string(json, "case"),
+           parse-sourcing(json),
+           entries(json["metadata"] as JObject),
+           ; Resistor specific properties
+           json["type"] as String,  ; FIXME: remove type because it is redundant with mounting ? It is not pot, photo...
+           parse-tolerance(json),
+           json["resistance"] as Double,
+           optional-string(json, "composition"),
+           optional-double(json, "rated-power"),
+           resistance-tcr(json))
+
+defn resistance-tcr (json: JObject) -> TCR|False :
+  val tcr-json = get?(json, "tcr")
+  match(tcr-json: JObject) :
+    ; reference temperature assumed to be 25 Cdeg as Digikey does not precise it in the component grids
+    TCR(25., tcr-json["pos"] as Double, tcr-json["neg"] as Double)
+
+public defstruct TCR :
+  reference-temperature: Double
+  positive: Double
+  negative: Double
+
+defmethod to-esir (resistor: Resistor) -> Instantiable :
+  pcb-component my-resistor :
+    val manufacturer-string = manufacturer(resistor)
+    match(manufacturer-string: String) :
+      manufacturer = manufacturer-string
+
+    mpn = mpn(resistor)
+
+    val description-string = lookup?(metadata(resistor), "description")
+    match(description-string: String) :
+      description = description-string
+
+    port p : pin[1 through 2]
+    val sym = resistor-sym(false)
+    symbol = sym(p[1] => sym.p[1], p[2] => sym.p[2])
+    val case = case(resistor)
+    match(case: String) :
+      if all?(digit?, to-seq(case)) :
+        val pkg = ipc-two-pin-landpattern(case)
+        landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+      else :  ; example: case = "Axial"
+        val pkg = dummy-landpattern(2, [x(resistor) y(resistor)])
+        landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+    else :
+      val pkg = dummy-landpattern(2, [x(resistor) y(resistor)])
+      landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+
+    emodel = EModel-Resistor(resistance(resistor),
+                             emodel-pourcentage-tolerance(tolerance(resistor)),
+                             double-or-unknown(rated-power(resistor)))
+    reference-prefix = "R"
+    val TCR = TCR(resistor)
+    val rated-temperature = rated-temperature(resistor)
+    val tolerance = tolerance(resistor)
+    val resistance = resistance(resistor)
+    property(self.resistor) = true
+    property(self.trust) = trust(resistor)
+    property(self.x) = x(resistor)
+    property(self.y) = y(resistor)
+    property(self.z) = z(resistor)
+    property(self.mounting) = mounting(resistor)
+    match(rated-temperature: MinMaxRange): property(self.rated-temperature) = [min(rated-temperature), max(rated-temperature)]
+    property(self.case) = /case(resistor)
+    property(self.metadata) = metadata(resistor)
+    property(self.type) = type(resistor)
+    match(tolerance: MinMaxRange):
+      ;[TODO] Current exporter IR crashes unless tolerance is a Double.
+      ;So this feature is commented out until that is fixed.
+      ;property(self.tolerance) = [min(tolerance), max(tolerance)]
+      property(self.tolerance) = max(tolerance)
+    property(self.resistance) = resistance
+    property(self.composition) = composition(resistor)  ; this is the type => "thick-film" in gen-res-cmp
+    property(self.rated-power) = /rated-power(resistor)
+    match(TCR: TCR): property(self.TCR) = [positive(TCR), negative(TCR)]
+    spice :
+      "[R] {p[1]} {p[2]} {resistance}"
+
+  my-resistor
+
+public defn Resistor (properties:Tuple<KeyValue>) -> Resistor :
+  Resistor(properties, [])
+
+public defn Resistor (properties:Tuple<KeyValue>, exist:Tuple<String>) -> Resistor :
+  Resistor(properties, exist, OPTIMIZE-FOR, ["max-rated-temperature.min" => OPERATING-TEMPERATURE[0],
+                                             "min-rated-temperature.max" => OPERATING-TEMPERATURE[1]])
+
+public defn Resistor (properties:Tuple<KeyValue>, exist:Tuple<String>, sort:Tuple<String>, temperature-properties:Tuple<KeyValue>) -> Resistor :
+  ;Query the database with the given properties
+  val query-properties = to-tuple $ cat-all([["category" => "resistor",
+                                              "_sort" => sort,
+                                              "_exist" => exist],
+                                             temperature-properties,
+                                             properties])
+
+  val json = dbquery-first(query-properties) as JObject
+  Resistor(json)
+  ; Resistor("manufacturer", "mpn", "trust", 0.0, 0.0, 0.0, "mounting", false, false, Sourcing(false, 0, 0), [], "type", false, 0.0, false, false, false)
+
+public defn Resistors (properties:Tuple<KeyValue>, exist:Tuple<String>) -> Tuple<Resistor> :
+  val sort = OPTIMIZE-FOR
+  val temperature-properties = ["max-rated-temperature.min" => OPERATING-TEMPERATURE[0],
+                                "min-rated-temperature.max" => OPERATING-TEMPERATURE[1]]
+
+  val query-properties = to-tuple $ cat-all([["category" => "resistor",
+                                              "_sort" => sort,
+                                              "_exist" => exist],
+                                             temperature-properties,
+                                             properties])
+
+  val jsons = dbquery-all(query-properties) as Tuple<JObject>
+  map(Resistor, jsons)
+  ; map(Resistor, [] as Tuple<JObject>)
+
+public defn query-available-resistance-values (properties:Tuple<KeyValue>, exist:Tuple<String>) -> Tuple<Double> :
+  val sort = OPTIMIZE-FOR
+  val temperature-properties = ["max-rated-temperature.min" => OPERATING-TEMPERATURE[0],
+                                "min-rated-temperature.max" => OPERATING-TEMPERATURE[1]]
+
+  val query-properties = to-tuple $ cat-all([["category" => "resistor",
+                                              "_sort" => sort,
+                                              "_exist" => exist,
+                                              "_distinct" => "resistance"],
+                                             temperature-properties,
+                                             properties])
+
+  dbquery-all(query-properties) as Tuple<Double>
+  ; []
+
+;============================================================
+;===================== Capacitor ============================
+;============================================================
+
+defstruct Capacitor <: Component :
+  ; Generic properties
+  manufacturer: String
+  mpn: String
+  trust: String
+  x: Double with: (as-method => true)
+  y: Double with: (as-method => true)
+  z: Double|False
+  mounting: String
+  rated-temperature: MinMaxRange|False
+  case: String|False
+  sourcing: Sourcing
+  metadata: Tuple<KeyValue>
+  ; Capacitor specific properties
+  type: String ; Type of resistor [“ceramic”, “film”, “electrolytic]
+  tolerance: MinMaxRange|False ; Guaranteed tolerance from manufacturer (Farad/Farad)
+  capacitance: Double ; Nominal capacitance (Farad)
+  anode: String|False ; Anode material of electrolytic capacitor [“aluminum”, “tantalum”, “niobium-oxide”]
+  electrolyte: String|False ; Electrolyte material of electrolytic capacitor [“polymer”, “manganese-dioxide”, “hybrid”, “non-solid”]
+  temperature-coefficient: String|False ; Temperature coefficient code of capacitance [“X7R”, ...]
+  esr: ESR|False
+  rated-voltage: Double|False ; Maximum voltage rating from manufacturer (Volts)
+  rated-voltage-ac: Double|False
+  rated-current-pk: Double|False ; Maximum peak current rating from manufacturer (Amperes)
+  rated-current-rms: Double|False ; Maximum rms current rating from manufacturer (Amperes)
+
+defstruct ESR :
+  value: Double
+  frequency: Double|False
+
+public defn Capacitor (raw-json: JObject) -> Capacitor :
+  val json = filter-json(raw-json)
+  val [x, y, z] = parse-dimensions(json["dimensions"] as JObject)
+
+  Capacitor(json["manufacturer"] as String,
+            json["mpn"] as String,
+            json["trust"] as String,
+            x,
+            y,
+            z,
+            json["mounting"] as String,
+            parse-rated-temperature(json),
+            optional-string(json, "case"),
+            parse-sourcing(json),
+            entries(json["metadata"] as JObject),
+            ; Resistor specific properties
+            json["type"] as String,
+            parse-tolerance(json),
+            json["capacitance"] as Double,
+            optional-string(json, "anode"),
+            optional-string(json, "electrolyte"),
+            capacitor-temperature-coefficient(json),
+            parse-esr(json),
+            optional-double(json, "rated-voltage"),
+            optional-double(json, "rated-voltage-ac"),
+            optional-double(json, "rated-current-pk"),
+            optional-double(json, "rated-current-rms"))
+
+defn parse-esr (json: JObject) -> ESR|False :
+  val esr-json = get?(json, "esr")
+  match(esr-json: Double) :
+    ESR(esr-json, optional-double(json, "esr_frequency")) ; FIXME: regenerate DB with esr-frequency in snake-case ?
+
+defn capacitor-temperature-coefficient (json: JObject) -> String|False :
+  val temperature-coefficient-json = get?(json, "temperature-coefficient")
+  match(temperature-coefficient-json: JObject) :
+    temperature-coefficient-json["code"] as String
+
+defmethod to-esir (capacitor: Capacitor) -> Instantiable :
+  pcb-component my-capacitor :
+    val manufacturer-string = manufacturer(capacitor)
+    match(manufacturer-string: String) :
+      manufacturer = manufacturer-string
+
+    mpn = mpn(capacitor)
+
+    val description-string = lookup?(metadata(capacitor), "description")
+    match(description-string: String) :
+      description = description-string
+
+    val type-string = type(capacitor)
+    val pol? = not (type-string == "ceramic" or type-string == "film")
+    val esr = esr(capacitor)
+    val case = case(capacitor)
+    if pol? :
+      pin a
+      pin c
+
+      val sym = capacitor-sym(true)
+      symbol = sym(a => sym.p[1], c => sym.p[2])
+
+      match(case: String) :
+        if all?(digit?, to-seq(case)) :
+          val pkg = ipc-two-pin-landpattern(case)
+          landpattern = pkg(a => pkg.a, c => pkg.c)
+        else :
+          val pkg = dummy-landpattern(2, [x(capacitor) y(capacitor)])
+          landpattern = pkg(a => pkg.p[1], c => pkg.p[2])
+      else :
+        val pkg = dummy-landpattern(2, [x(capacitor) y(capacitor)])
+        landpattern = pkg(a => pkg.p[1], c => pkg.p[2])
+
+      match(esr: ESR) :
+        val esr-value = value(esr)
+        spice :
+          "[C] {a} tmp {capacitance(capacitor)}"
+          "[R] tmp {c} {esr-value}"
+      else :
+        spice :
+          "[C] {a} {c} {capacitance(capacitor)}"
+
+    else :
+      port p : pin[1 through 2]
+
+      val sym = capacitor-sym(false)
+      symbol = sym(p[1] => sym.p[1], p[2] => sym.p[2])
+
+      match(case: String) :
+        if all?(digit?, to-seq(case)) :
+          val pkg = ipc-two-pin-landpattern(case)
+          landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+        else :
+          val pkg = dummy-landpattern(2, [x(capacitor) y(capacitor)])
+          landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+      else :
+        val pkg = dummy-landpattern(2, [x(capacitor) y(capacitor)])
+        landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+
+      match(esr: ESR) :
+        val esr-value = value(esr)
+        spice :
+          "[C] {p[1]} tmp {capacitance(capacitor)}"
+          "[R] tmp {p[2]} {esr-value}"
+      else :
+        spice :
+          "[C] {p[1]} {p[2]} {capacitance(capacitor)}"
+
+    emodel = EModel-Capacitor(capacitance(capacitor),
+                             emodel-pourcentage-tolerance(tolerance(capacitor)),
+                             double-or-unknown(rated-voltage(capacitor)),
+                             pol?,
+                             UNKNOWN, ; FIXME: define low-esr? as below a certain threshold on the esr ?
+                             string-or-unknown(temperature-coefficient(capacitor)),
+                             UNKNOWN) ; FIXME: find out the dielectric information (look at type and anode?)
+    reference-prefix = "C"
+    val rated-temperature = rated-temperature(capacitor)
+    val capacitance = capacitance(capacitor)
+    val tolerance = tolerance(capacitor)
+    property(self.capacitor) = true
+    property(self.trust) = trust(capacitor)
+    property(self.x) = x(capacitor)
+    property(self.y) = y(capacitor)
+    property(self.z) = z(capacitor)
+    property(self.mounting) = mounting(capacitor)
+    match(rated-temperature: MinMaxRange): property(self.rated-temperature) = [min(rated-temperature), max(rated-temperature)]
+    property(self.case) = /case(capacitor)
+    property(self.metadata) = metadata(capacitor)
+    property(self.type) = type(capacitor)
+    match(tolerance: MinMaxRange): property(self.tolerance) = [min(tolerance), max(tolerance)]
+    property(self.capacitance) = capacitance
+    property(self.anode) = anode(capacitor)
+    property(self.electrolyte) = electrolyte(capacitor)
+    property(self.temperature-coefficient) = temperature-coefficient(capacitor)
+    match(esr: ESR): property(self.esr) = value(esr)
+    match(esr: ESR): property(self.esr-frequency) = frequency(esr)
+    property(self.rated-voltage) = /rated-voltage(capacitor)
+    property(self.rated-current-pk) = rated-current-pk(capacitor)
+    property(self.rated-current-rms) = rated-current-rms(capacitor)
+
+  my-capacitor
+
+public defn Capacitor (properties:Tuple<KeyValue>) -> Capacitor :
+  Capacitor(properties, [])
+
+public defn Capacitor (properties:Tuple<KeyValue>, exist:Tuple<String>) -> Capacitor :
+  Capacitor(properties, exist, OPTIMIZE-FOR, ["max-rated-temperature.min" => OPERATING-TEMPERATURE[0],
+                                              "min-rated-temperature.max" => OPERATING-TEMPERATURE[1]])
+
+public defn Capacitor (properties:Tuple<KeyValue>, exist:Tuple<String>, sort:Tuple<String>, temperature-properties:Tuple<KeyValue>) -> Capacitor :
+  ;Query the database with the given properties
+  val query-properties = to-tuple $ cat-all([["category" => "capacitor",
+                                              "_sort" => sort,
+                                              "_exist" => exist],
+                                             temperature-properties,
+                                             properties])
+
+  val json = dbquery-first(query-properties) as JObject
+  Capacitor(json)
+  ; Capacitor("manufacturer", "mpn", "trust", 0.0, 0.0, 0.0, "mounting", false, false, Sourcing(false, 0, 0), [], "ceramic", false, 0.0, false, false, false, false, false, false, false)
+
+;============================================================
+;====================== Inductor ============================
+;============================================================
+
+defstruct Inductor <: Component :
+  ; Generic properties
+  manufacturer: String
+  mpn: String
+  trust: String
+  x: Double with: (as-method => true)
+  y: Double with: (as-method => true)
+  z: Double|False
+  mounting: String
+  rated-temperature: MinMaxRange|False
+  case: String|False
+  sourcing: Sourcing
+  metadata: Tuple<KeyValue>
+  ; Inductor specific properties
+  type: String ; Type of inductor ["Molded", "Multilayer", "Planar", "Thick Film", "Toroidal", "Wirewound", "adjustable", "fixed"]
+  tolerance: MinMaxRange|False ; Guaranteed tolerance from manufacture (Henry/Henry)
+  inductance: Double ; Nominal inductance (Henry)
+  material-core: String|False ; Composition of inductor [“ceramic”, “Ferrite”, ...]
+  shielding: String|False ; Magnetic field status [“semi-shielded”, “shielded”, “unshielded”]
+  current-rating: Double|False ; Maximum steady-state current rating from manufacture (Amperes)
+  saturation-current: Double|False ; Percentage inductance drop (typ 20-30%) at peak currents (Amperes)
+  dc-resistance: Double|False ; Nominal resistance (Ohm)
+  quality-factor: Double|False ; Loss factor inverse - ratio between inductors resistance and inductance (ratio@freq)
+  self-resonant-frequency: Double|False ; Frequency at which inductor impedance becomes very high / open circuit (freq in Hz)
+
+public defn Inductor (raw-json: JObject) -> Inductor :
+  val json = filter-json(raw-json)
+  val [x, y, z] = parse-dimensions(json["dimensions"] as JObject)
+
+  Inductor(json["manufacturer"] as String,
+           json["mpn"] as String,
+           json["trust"] as String,
+           x,
+           y,
+           z,
+           json["mounting"] as String,
+           parse-rated-temperature(json),
+           optional-string(json, "case"),
+           parse-sourcing(json),
+           entries(json["metadata"] as JObject),
+           ; Resistor specific properties
+           json["type"] as String,
+           parse-tolerance(json),
+           json["inductance"] as Double,
+           optional-string(json, "material-core"),
+           optional-string(json, "shielding"),
+           optional-double(json, "current-rating"),
+           optional-double(json, "saturation-current"),
+           optional-double(json, "dc-resistance"),
+           optional-double(json, "quality-factor"),
+           optional-double(json, "self-resonant-frequency"))
+
+defmethod to-esir (inductor: Inductor) -> Instantiable :
+  pcb-component my-inductor :
+    val manufacturer-string = manufacturer(inductor)
+    match(manufacturer-string: String) :
+      manufacturer = manufacturer-string
+
+    mpn = mpn(inductor)
+
+    val description-string = lookup?(metadata(inductor), "description")
+    match(description-string: String) :
+      description = description-string
+
+    port p : pin[1 through 2]
+    symbol = inductor-sym(p[1] => inductor-sym.p[1], p[2] => inductor-sym.p[2])
+    val case = case(inductor)
+    match(case: String) :
+      if all?(digit?, to-seq(case)) :
+        val pkg = ipc-two-pin-landpattern(case)
+        landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+      else :  ; example: case = "Axial"
+        val pkg = dummy-landpattern(2, [x(inductor) y(inductor)])
+        landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+    else :
+      val pkg = dummy-landpattern(2, [x(inductor) y(inductor)])
+      landpattern = pkg(p[1] => pkg.p[1], p[2] => pkg.p[2])
+
+    val inductance = inductance(inductor)
+    emodel = EModel-Inductor(inductance,
+                             emodel-pourcentage-tolerance(tolerance(inductor)),
+                             double-or-unknown(current-rating(inductor)))
+    reference-prefix = "L"
+    val rated-temperature = rated-temperature(inductor)
+    val tolerance = tolerance(inductor)
+    property(self.inductor) = true
+    property(self.trust) = trust(inductor)
+    property(self.x) = x(inductor)
+    property(self.y) = y(inductor)
+    property(self.z) = z(inductor)
+    property(self.mounting) = mounting(inductor)
+    match(rated-temperature: MinMaxRange): property(self.rated-temperature) = [min(rated-temperature), max(rated-temperature)]
+    property(self.case) = /case(inductor)
+    property(self.metadata) = metadata(inductor)
+    property(self.type) = type(inductor)
+    match(tolerance: MinMaxRange): property(self.tolerance) = [min(tolerance), max(tolerance)]
+    property(self.inductance) = inductance
+    property(self.material-core) = material-core(inductor)
+    property(self.shielding) = shielding(inductor)
+    property(self.current-rating) = current-rating(inductor)
+    property(self.saturation-current) = saturation-current(inductor)
+    property(self.dc-resistance) = dc-resistance(inductor)
+    property(self.quality-factor) = quality-factor(inductor)
+    property(self.self-resonant-frequency) = self-resonant-frequency(inductor)
+    spice :
+      "[L] {p[1]} {p[2]} {inductance}"
+
+  my-inductor
+
+public defn Inductor (properties:Tuple<KeyValue>) -> Inductor :
+  Inductor(properties, [])
+
+public defn Inductor (properties:Tuple<KeyValue>, exist:Tuple<String>) -> Inductor :
+  Inductor(properties, exist, OPTIMIZE-FOR, ["max-rated-temperature.min" => OPERATING-TEMPERATURE[0],
+                                             "min-rated-temperature.max" => OPERATING-TEMPERATURE[1]])
+
+public defn Inductor (properties:Tuple<KeyValue>, exist:Tuple<String>, sort:Tuple<String>, temperature-properties:Tuple<KeyValue>) -> Inductor :
+  val query-properties = to-tuple $ cat-all([["category" => "inductor",
+                                              "_sort" => sort,
+                                              "_exist" => exist],
+                                             temperature-properties,
+                                             properties])
+
+  val json = dbquery-first(query-properties) as JObject
+  Inductor(json)
+  ; Inductor("manufacturer", "mpn", "trust", 0.0, 0.0, 0.0, "mounting", false, false, Sourcing(false, 0, 0), [], "type", false, 0.0, false, false, false, false, false, false, false)
+
+
+;============================================================
+;====================== Printer =============================
+;============================================================
+
+defmethod print (o:OutputStream, r:Resistor) :
+  val items = [
+    "mpn = %_" % [mpn(r)]
+    "trust = %_" % [trust(r)]
+    "(x, y, z) = (%,)" % [[x(r), y(r), z(r)]]
+    "mounting = %_" % [mounting(r)]
+    "rated-temperature = %_" % [rated-temperature(r)]
+    "case = %_" % [case(r)]
+    "type = %_" % [type(r)]
+    "tolerance = %_" % [tolerance(r)]
+    "resistance = %_" % [resistance(r)]
+    "composition = %_" % [composition(r)]
+    "rated-power = %_" % [rated-power(r)]
+    "TCR = %_" % [TCR(r)]
+    "sourcing = %_" % [sourcing(r)]
+    "metadata = %_" % [indented-list(metadata(r))]]
+  print(o, "Resistor(%_)" % [indented-list(items)])
+
+defmethod print (o:OutputStream, r:Capacitor) :
+  val items = [
+    "mpn = %_" % [mpn(r)]
+    "trust = %_" % [trust(r)]
+    "(x, y, z) = (%,)" % [[x(r), y(r), z(r)]]
+    "mounting = %_" % [mounting(r)]
+    "rated-temperature = %_" % [rated-temperature(r)]
+    "case = %_" % [case(r)]
+    "type = %_" % [type(r)]
+    "tolerance = %_" % [tolerance(r)]
+    "capacitance = %_" % [capacitance(r)]
+    "anode = %_" % [anode(r)]
+    "electrolyte = %_" % [electrolyte(r)]
+    "temperature-coefficient = %_" % [temperature-coefficient(r)]
+    "esr = %_" % [esr(r)]
+    "rated-voltage = %_" % [rated-voltage(r)]
+    "rated-voltage-ac = %_" % [rated-voltage-ac(r)]
+    "rated-current-pk = %_" % [rated-current-pk(r)]
+    "rated-current-rms = %_" % [rated-current-rms(r)]
+    "sourcing = %_" % [sourcing(r)]
+    "metadata = %_" % [indented-list(metadata(r))]]
+  print(o, "Capacitor(%_)" % [indented-list(items)])
+
+defmethod print (o:OutputStream, r:Inductor) :
+  val items = [
+    "mpn = %_" % [mpn(r)]
+    "trust = %_" % [trust(r)]
+    "(x, y, z) = (%,)" % [[x(r), y(r), z(r)]]
+    "mounting = %_" % [mounting(r)]
+    "rated-temperature = %_" % [rated-temperature(r)]
+    "case = %_" % [case(r)]
+    "type = %_" % [type(r)]
+    "tolerance = %_" % [tolerance(r)]
+    "inductance = %_" % [inductance(r)]
+    "material-core = %_" % [material-core(r)]
+    "shielding = %_" % [shielding(r)]
+    "current-rating = %_" % [current-rating(r)]
+    "saturation-current = %_" % [saturation-current(r)]
+    "dc-resistance = %_" % [dc-resistance(r)]
+    "quality-factor = %_" % [quality-factor(r)]
+    "self-resonant-frequency = %_" % [self-resonant-frequency(r)]
+    "sourcing = %_" % [sourcing(r)]
+    "metadata = %_" % [indented-list(metadata(r))]]
+  print(o, "Inductor(%_)" % [indented-list(items)])
+
+defmethod print (o:OutputStream, r:MinMaxRange) :
+  print(o, "MinMaxRange(min=%_, max=%_)" % [min(r), max(r)])
+
+defmethod print (o:OutputStream, r:TCR) :
+  print(o, "TCR(positive=%_, negative=%_)" % [positive(r), negative(r)])
+
+defmethod print (o:OutputStream, esr:ESR) :
+  print(o, "ESR(value=%_, frequency=%_)" % [value(esr), frequency(esr)])
+
+defmethod print (o:OutputStream, s:Sourcing) :
+  print(o, "ESR(price=%_, minimum-quantity=%_, stock=%_)" % [price(s), minimum-quantity(s), stock(s)])
+
+public defn indented-list (items:Seqable) :
+  new Printable :
+    defmethod print (o:OutputStream, this) :
+      val o2 = IndentedStream(o)
+      do(lnprint{o2, _}, items)
+
+
+;============================================================
+;=================== Parsing utils ==========================
+;============================================================
+
+defn filter-json (json: JObject) :
+  ; qty and factory-stock seem to be deprecated attributes
+  JObject(to-tuple $ filter({not contains?(["qty", "factory-stock"], key(_))}, entries(json)))
+
+
+public defn parse-dimensions (dimensions: JObject) -> [Double, Double, Double|False] :
+  [dimensions["x"] as Double, dimensions["y"] as Double, optional-double(dimensions, "z")]
+
+defn optional-string (json: JObject, field: String) -> String|False :
+  val j = get?(json, field)
+  j as String when not (j is False or j is JNull)
+
+public defn optional-double (json: JObject, field: String) -> Double|False :
+  val j = get?(json, field)
+  j as Double when not (j is False or j is JNull)
+
+public defstruct MinMaxRange :
+  min: Double
+  max: Double
+
+public defn parse-rated-temperature (json: JObject) -> MinMaxRange|False :
+  val rated-temperature-json = get?(json, "rated-temperature")
+  match(rated-temperature-json: JObject) :
+    MinMaxRange(rated-temperature-json["min"] as Double, rated-temperature-json["max"] as Double)
+
+defn parse-tolerance (json: JObject) -> MinMaxRange|False :
+  val tolerance-json = get?(json, "tolerance")
+  match(tolerance-json: JObject) :
+      MinMaxRange(tolerance-json["min"] as Double, tolerance-json["max"] as Double)
+
+defn parse-sourcing (json: JObject) -> Sourcing :
+  ; minimum-quantity and stock are float in MongoDB even though the python scraper do gives python ints to pymongo.
+  Sourcing(optional-double(json, "price"), to-int(json["minimum_quantity"] as Double), to-int(json["stock"] as Double))
+
+defn emodel-pourcentage-tolerance (value: MinMaxRange|False) -> Double|UNKNOWN :  ; FIXME: Tolerance minmax range not handled properly but emodel is going depricated
+  match(value: MinMaxRange) :
+    100. * max(value)
+  else:
+    UNKNOWN
+
+defn double-or-unknown (value: Double|False) :
+  match(value: Double) :
+    value
+  else:
+    UNKNOWN
+
+defn string-or-unknown (value: String|False) :
+  match(value: String) :
+    value
+  else:
+    UNKNOWN

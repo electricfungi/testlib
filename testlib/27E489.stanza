@@ -1,0 +1,138 @@
+#use-added-syntax(jitx)
+defpackage testlib/27E489 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+
+pcb-landpattern _27E489-lp :
+  pad A : pth-pad(1.09, 1.598005) at loc(7.875, -8.535, 180.0) on Top
+  pad B : pth-pad(1.09, 1.598005) at loc(-7.875, -8.535) on Top
+  pad p[1] : rect-pth-pad(1.09, 3.19601, 3.19601) at loc(5.005, 8.535, 180.0) on Top
+  pad p[2] : pth-pad(1.09, 1.598005) at loc(-5.005, 8.535) on Top
+  pad p[3] : pth-pad(1.09, 1.598005) at loc(5.005, 3.835, 180.0) on Top
+  pad p[4] : pth-pad(1.09, 1.598005) at loc(-5.005, 3.835) on Top
+  pad p[5] : pth-pad(1.09, 1.598005) at loc(5.005, -2.055, 180.0) on Top
+  pad p[6] : pth-pad(1.09, 1.598005) at loc(-5.005, -2.055) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, 14.605), Point(11.049, 14.605)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(11.049, -15.494), Point(11.049, 14.605)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, -15.494), Point(11.049, -15.494)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, -15.494), Point(-11.049, 14.605)])
+  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, -15.18899), Point(-10.71858, 14.22413)])
+  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, -15.18899), Point(10.71902, -15.18899)])
+  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(10.71902, -15.18899), Point(10.71902, 14.22413)])
+  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, 14.22413), Point(10.71902, 14.22413)])
+  ; layer(Courtyard(Top)) = Rectangle(10.71902, 15.18899)
+  ; layer(Courtyard(Top)) = Rectangle(11.049, 15.494)
+  ref-label()
+
+pcb-symbol _27E489-symbol :
+  pin A at Point(5.08, -20.32) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin B at Point(10.16, -20.32) with :
+    direction = Right
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[1] at Point(5.08, -2.54) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[2] at Point(5.08, -10.16) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[3] at Point(10.16, -2.54) with :
+    direction = Right
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[4] at Point(10.16, -10.16) with :
+    direction = Right
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[5] at Point(5.08, -7.62) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin p[6] at Point(5.08, -15.24) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  layer("foreground") = Line(1.0, [
+    Point(5.08, -7.62), 
+    Point(7.62, -7.62), 
+    Point(7.62, -3.81), 
+    Point(5.08, -1.27)])
+  layer("foreground") = Line(1.0, [
+    Point(5.08, -15.24), 
+    Point(7.62, -15.24), 
+    Point(7.62, -11.43), 
+    Point(5.08, -8.89)])
+  layer("foreground") = Line(1.0, [Point(6.35, -1.27), Point(6.35, -17.78)])
+  layer("foreground") = Line(1.0, [
+    Point(7.60172440483124, -20.3082024261022), 
+    Point(7.57567397000799, -20.0656842756634), 
+    Point(7.50308745834292, -19.8328219198155), 
+    Point(7.38672081600703, -19.6184566171236), 
+    Point(7.23099222201209, -19.4307273347537), 
+    Point(7.04181433991624, -19.2767617302427), 
+    Point(6.82636982732125, -19.1624055304132), 
+    Point(6.59283862655975, -19.0920005823085), 
+    Point(6.35008739072997, -19.0682200030505), 
+    Point(6.10733283687124, -19.0919666876102), 
+    Point(5.87379180800094, -19.1623390279218), 
+    Point(5.65833133036845, -19.2766651449079), 
+    Point(5.46913195246285, -19.4306043337029), 
+    Point(5.31337714803337, -19.6183118704292), 
+    Point(5.19698057578922, -19.8326609231832), 
+    Point(5.1243615511133, -20.0655131417723), 
+    Point(5.09827725462232, -20.3080276525202)])
+  layer("foreground") = Line(1.0, [
+    Point(10.1599452544775, -20.3082080268825), 
+    Point(10.1335457843803, -20.0621359231105), 
+    Point(10.0599237928086, -19.8258559734042), 
+    Point(9.94187500801132, -19.6083406942074), 
+    Point(9.78388222535073, -19.4178500306479), 
+    Point(9.59194507722134, -19.2616176926249), 
+    Point(9.37335220245987, -19.145576461247), 
+    Point(9.13640446690674, -19.0741328968592), 
+    Point(8.89009974556665, -19.050000003917), 
+    Point(8.64379123647928, -19.0740942071065), 
+    Point(8.40683228152057, -19.1455005509497), 
+    Point(8.18822118174195, -19.2615074444077), 
+    Point(7.99625949506232, -19.4177096310867), 
+    Point(7.83823679214756, -19.6081754748479), 
+    Point(7.72015384158661, -19.8256722083016), 
+    Point(7.64649473615568, -20.0619405905775), 
+    Point(7.62005661346859, -20.3080085444947)])
+  layer("foreground") = Rectangle(7.62, 22.86, loc(7.62, -11.43))
+
+public pcb-component component :
+  name = "27E489"
+  description = "27E489"
+  manufacturer = "TE Connectivity Potter & Brumfield Relays"
+  mpn = "27E489"
+  pin A
+  pin B
+  port p : pin[1 through 6]
+  val lp = _27E489-lp
+  landpattern = lp(A => lp.A, B => lp.B, p[1] => lp.p[1], p[2] => lp.p[2], p[3] => lp.p[3], p[4] => lp.p[4], p[5] => lp.p[5], p[6] => lp.p[6])
+  val sym = _27E489-symbol
+  symbol = sym(A => sym.A, B => sym.B, p[1] => sym.p[1], p[2] => sym.p[2], p[3] => sym.p[3], p[4] => sym.p[4], p[5] => sym.p[5], p[6] => sym.p[6])
+  reference-prefix = "X"
+

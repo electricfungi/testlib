@@ -1,0 +1,57 @@
+#use-added-syntax(jitx)
+defpackage testlib/THVD1500DR :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern TID0008BSOIC-8 :
+  pad p[1] : smd-pad(0.6, 1.55) at loc(-2.7, 1.905, 90.0) on Top
+  pad p[2] : smd-pad(0.6, 1.55) at loc(-2.7, 0.635, 90.0) on Top
+  pad p[3] : smd-pad(0.6, 1.55) at loc(-2.7, -0.635, 90.0) on Top
+  pad p[4] : smd-pad(0.6, 1.55) at loc(-2.7, -1.905, 90.0) on Top
+  pad p[5] : smd-pad(0.6, 1.55) at loc(2.7, -1.905, 90.0) on Top
+  pad p[6] : smd-pad(0.6, 1.55) at loc(2.7, -0.635, 90.0) on Top
+  pad p[7] : smd-pad(0.6, 1.55) at loc(2.7, 0.635, 90.0) on Top
+  pad p[8] : smd-pad(0.6, 1.55) at loc(2.7, 1.905, 90.0) on Top
+
+  ; layer(Silkscreen("F-SilkS", Top)) = Circle(-0.573, 1.473, 0.3)
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-2.7, 2.755, 0.125)
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(3.7, -2.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, 2.75), Point(3.7, 2.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(3.7, -2.75), Point(3.7, 2.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(-3.7, 2.75)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(1.6, -2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, 2.5), Point(1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.6, -2.5), Point(1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(-1.6, 2.5)])
+  ref-label()
+
+public pcb-component component :
+  name = "THVD1500DR"
+  description = "THVD1500DR"
+  manufacturer = "Texas Instruments"
+  mpn = "THVD1500DR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [A+ | 6 | Right]
+    [B- | 7 | Right]
+    [DI | 4 | Left]
+    [RO | 1 | Left]
+    [nRE | 2 | Left]
+    [DE | 3 | Left]
+    [VCC | 8 | Left]
+    [GND | 5 | Left]
+
+  make-box-symbol()
+  assign-landpattern(TID0008BSOIC-8)
+  reference-prefix = "U"
+

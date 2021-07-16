@@ -1,0 +1,109 @@
+#use-added-syntax(jitx)
+defpackage test-the-lib :
+  import core
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/generic-components
+  import ocdb/bundles
+
+
+pcb-module ain-65V :
+  pin input0
+  pin input1
+  port power : power
+  pin out0
+  pin out1
+  inst op-amp : testlib/TLC2272IDR/module
+  net (power.vdd op-amp.power.vdd)
+  ; instance 0
+  inst rfb0 : chip-resistor(2.0e3)
+  inst rbias0 : chip-resistor(4.02e3)
+  inst cfb0 : ceramic-cap(22.0e-9)
+  inst r-out0 : chip-resistor(280.0)
+  inst cap-out0 : ceramic-cap(0.1e-6)
+  inst rin0 : chip-resistor(40.2e3)
+  inst rin-g0 : chip-resistor(1.4e3)
+  inst cap-in0 : ceramic-cap(0.1e-6)
+  net (out0 r-out0.p[1] cap-out0.p[1] rfb0.p[1])
+  net (input0 rin0.p[1])
+  net plus0 (rin0.p[2] rin-g0.p[1] op-amp.p+[0] cap-in0.p[1])
+  net minus0 (cfb0.p[2] rfb0.p[2] rbias0.p[2] op-amp.p-[0])
+  net (op-amp.power.gnd power.gnd rbias0.p[1] rin-g0.p[2] cap-in0.p[2] cap-out0.p[2])
+  net (op-amp.OUT[0] r-out0.p[2] cfb0.p[1])
+  
+  ; instance 1
+  inst rfb1 : chip-resistor(2.0e3)
+  inst rbias1 : chip-resistor(4.02e3)
+  inst cfb1 : ceramic-cap(22.0e-9)
+  inst r-out1 : chip-resistor(280.0)
+  inst cap-out1 : ceramic-cap(0.1e-6)
+  inst rin1 : chip-resistor(40.2e3)
+  inst rin-g1 : chip-resistor(1.4e3)
+  inst cap-in1 : ceramic-cap(0.1e-6)
+  net (out1 r-out1.p[1] cap-out1.p[1] rfb1.p[1])
+  net (input1 rin1.p[1])
+  net plus1 (rin1.p[2] rin-g1.p[1] op-amp.p+[1] cap-in1.p[1])
+  net minus1 (cfb1.p[2] rfb1.p[2] rbias1.p[2] op-amp.p-[1])
+  net (op-amp.power.gnd power.gnd rbias1.p[1] rin-g1.p[2] cap-in1.p[2] cap-out1.p[2])
+  net (op-amp.OUT[0] r-out1.p[2] cfb1.p[1])
+
+
+pcb-module test-the-lib :
+  inst r : chip-resistor(100.0e3)
+  inst comp01 : testlib/27E489/component 
+
+  inst comp02 : testlib/292304-1/component
+  inst comp03 : testlib/2N7002K-7/component
+  inst comp04 : testlib/742792040/component
+  inst comp05 : testlib/ATMEGA2560-16AUR/component
+  inst comp06 : testlib/B02P-VL/component
+
+  inst comp07 : testlib/B04P-VL/component
+  inst comp08 : testlib/BSS123TA/component
+  inst comp09 : testlib/CDBHD140L-G/component
+  inst comp10 : testlib/DMN3404L-7/component
+  inst comp11 : testlib/FT232RL-REEL/component
+
+  inst comp12 : testlib/LMZ23603TZE_NOPB/component
+  inst comp13 : testlib/LTST-C191KGKT/component
+  inst comp14 : testlib/LTST-C191KRKT/component
+  inst comp15 : testlib/LTST-C191TBKT/component
+
+  inst comp16 : testlib/M20-9980346/component
+  inst comp17 : testlib/MAX202CDR/component
+  inst comp18 : testlib/MCP1501T-33E_CHYCT-ND/module
+  inst comp19 : testlib/MI0805K400R-10/component
+
+  inst comp20 : testlib/PTS645SK50SMTR92_LFS/component
+  inst comp21 : testlib/S1603-8TR/component
+  inst comp22 : testlib/S1605-8TR/component
+  inst comp23 : testlib/S1615-8TR/component
+  inst comp24 : testlib/S30B-PUDSS-1_LF__SN_/component
+  inst comp25 : testlib/SK36A-LTP/component
+  inst comp26 : testlib/SSM3J328R_LF/component
+  inst comp27 : testlib/ST2378ETTR/component
+
+  inst comp28 : testlib/THVD1500DR/component
+  inst comp29 : testlib/TLC2272IDR/module
+  inst comp30 : testlib/TLV2553IDWR/module
+  inst comp31 : testlib/TPS79933DDCR/component
+  inst comp32 : testlib/ZXMP3A16GTA/component
+
+  inst example-amp : ain-65V
+  schematic-group(example-amp) = signals-in-65V
+  layout-group(example-amp) = signals-in-65V
+  net (example-amp.input0 r.p[1])
+  net gnd (example-amp.power.gnd r.p[2])
+  net p5v (example-amp.power.vdd)
+  symbol(p5v) = ocdb/symbols/supply-sym
+  symbol(gnd) = ocdb/symbols/ground-sym
+
+make-default-board(test-the-lib, 4, RoundedRectangle(150.0, 100.0, 3.0))
+
+; set-export-backend(`altium)
+; export-cad()
+
+; Show the Schematic and PCB for the design
+view-board()
+view-schematic()

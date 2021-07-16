@@ -1,0 +1,103 @@
+#use-added-syntax(jitx)
+defpackage testlib/TLV2553IDWR :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+  import ocdb/bundles
+
+pcb-landpattern TIDW0020A :
+  pad p[1] : smd-pad(0.6, 2.0) at loc(-4.65, 5.715, 90.0) on Top
+  pad p[2] : smd-pad(0.6, 2.0) at loc(-4.65, 4.445, 90.0) on Top
+  pad p[3] : smd-pad(0.6, 2.0) at loc(-4.65, 3.175, 90.0) on Top
+  pad p[4] : smd-pad(0.6, 2.0) at loc(-4.65, 1.905, 90.0) on Top
+  pad p[5] : smd-pad(0.6, 2.0) at loc(-4.65, 0.635, 90.0) on Top
+  pad p[6] : smd-pad(0.6, 2.0) at loc(-4.65, -0.635, 90.0) on Top
+  pad p[7] : smd-pad(0.6, 2.0) at loc(-4.65, -1.905, 90.0) on Top
+  pad p[8] : smd-pad(0.6, 2.0) at loc(-4.65, -3.175, 90.0) on Top
+  pad p[9] : smd-pad(0.6, 2.0) at loc(-4.65, -4.445, 90.0) on Top
+  pad p[10] : smd-pad(0.6, 2.0) at loc(-4.65, -5.715, 90.0) on Top
+  pad p[11] : smd-pad(0.6, 2.0) at loc(4.65, -5.715, 90.0) on Top
+  pad p[12] : smd-pad(0.6, 2.0) at loc(4.65, -4.445, 90.0) on Top
+  pad p[13] : smd-pad(0.6, 2.0) at loc(4.65, -3.175, 90.0) on Top
+  pad p[14] : smd-pad(0.6, 2.0) at loc(4.65, -1.905, 90.0) on Top
+  pad p[15] : smd-pad(0.6, 2.0) at loc(4.65, -0.635, 90.0) on Top
+  pad p[16] : smd-pad(0.6, 2.0) at loc(4.65, 0.635, 90.0) on Top
+  pad p[17] : smd-pad(0.6, 2.0) at loc(4.65, 1.905, 90.0) on Top
+  pad p[18] : smd-pad(0.6, 2.0) at loc(4.65, 3.175, 90.0) on Top
+  pad p[19] : smd-pad(0.6, 2.0) at loc(4.65, 4.445, 90.0) on Top
+  pad p[20] : smd-pad(0.6, 2.0) at loc(4.65, 5.715, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-2.373, 5.473, 0.3)
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-4.65, 6.565, 0.125)
+  layer(Courtyard(Top)) = Rectangle(5.925, 6.75)
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, -6.75), Point(-5.925, 6.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(5.925, -6.75), Point(5.925, 6.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, 6.75), Point(5.925, 6.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, -6.75), Point(5.925, -6.75)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, -6.5), Point(3.175, -6.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, 6.5), Point(3.175, 6.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, -6.5), Point(3.175, 6.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, -6.5), Point(-3.175, 6.5)])
+  ref-label()
+
+public pcb-component component :
+  name = "TLV2553IDWR"
+  description = "TLV2553IDWR"
+  manufacturer = "Texas Instruments"
+  mpn = "TLV2553IDWR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VCC | 20 | Right]
+    [REF+ | 14 | Right]
+    [nCS | 15 | Right]
+    [DIN | 17 | Right]
+    [DOUT | 16 | Right]
+    [SCK | 18 | Right]
+    [EOC | 19 | Right]
+    [REF- | 13 | Right]
+    [GND | 10 | Right]
+    [AIN[0] | 1 | Left]
+    [AIN[1] | 2 | Left]
+    [AIN[2] | 3 | Left]
+    [AIN[3] | 4 | Left]
+    [AIN[4] | 5 | Left]
+    [AIN[5] | 6 | Left]
+    [AIN[6] | 7 | Left]
+    [AIN[7] | 8 | Left]
+    [AIN[8] | 9 | Left]
+    [AIN[9] | 11 | Left]
+    [AIN[10] | 12 | Left]
+
+  make-box-symbol()
+  assign-landpattern(TIDW0020A)
+  reference-prefix = "U"
+
+public pcb-module module :
+  port power : power
+  inst adc : testlib/TLV2553IDWR/component
+  port ref : diff-pair
+  port ain :pin[11]
+  port spi:spi()
+  pin eoc
+  bypass-cap-strap(adc.VCC, power.gnd, 1.0e-6)
+  bypass-cap-strap(adc.VCC, power.gnd, 0.01e-6)
+  net (power.vdd adc.VCC)
+  net (power.gnd adc.GND)
+  net (ain, adc.AIN)
+  net (spi.sdo, adc.DOUT)
+  net (spi.sdi, adc.DIN)
+  net (spi.sck, adc.SCK)
+  net (spi.cs, adc.nCS)
+  net (ref.N, adc.REF-)
+  net (ref.P, adc.REF+)
+  net (eoc, adc.EOC)
+

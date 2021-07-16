@@ -1,0 +1,45 @@
+#use-added-syntax(jitx)
+defpackage testlib/B04P-VL :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern B04P-VL :
+  pad p[1] : rect-pth-pad(1.05, 3.116, 3.116) at loc(3.1, -4.14) on Top
+  pad p[2] : pth-pad(1.05, 1.558) at loc(-3.1, -4.14) on Top
+  pad p[3] : pth-pad(1.05, 1.558) at loc(3.1, 4.14) on Top
+  pad p[4] : pth-pad(1.05, 1.558) at loc(-3.1, 4.14) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.985, 7.874), Point(6.985, 7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(6.985, -7.874), Point(6.985, 7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.985, -7.874), Point(-6.985, 7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, -10.795), Point(5.461, -10.795)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, -10.795), Point(-5.461, -7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.985, -7.874), Point(-5.461, -7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.461, -7.874), Point(6.985, -7.874)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.461, -10.795), Point(5.461, -7.874)])
+  ref-label()
+
+public pcb-component component :
+  name = "B04P-VL"
+  description = "B04P-VL"
+  manufacturer = "JST Sales America Inc."
+  mpn = "B04P-VL"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[4] | 4 | Right]
+    [p[3] | 3 | Right]
+    [p[2] | 2 | Left]
+    [p[1] | 1 | Left]
+
+  make-box-symbol()
+  assign-landpattern(B04P-VL)
+  reference-prefix = "CN"
+

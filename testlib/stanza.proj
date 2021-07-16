@@ -1,0 +1,134 @@
+package testlib/27E489 defined-in "27E489.stanza"
+package testlib/292304-1 defined-in "292304-1.stanza"
+package testlib/2N7002K-7 defined-in "2N7002K-7.stanza"
+package testlib/742792040 defined-in "742792040.stanza"
+package testlib/ATMEGA2560-16AUR defined-in "ATMEGA2560-16AUR.stanza"
+package testlib/B02P-VL defined-in "B02P-VL.stanza"
+package testlib/B04P-VL defined-in "B04P-VL.stanza"
+package testlib/BSS123TA defined-in "BSS123TA.stanza"
+package testlib/CDBHD140L-G defined-in "CDBHD140L-G.stanza"
+package testlib/DMN3404L-7 defined-in "DMN3404L-7.stanza"
+package testlib/FT232RL-REEL defined-in "FT232RL-REEL.stanza"
+package testlib/LMZ23603TZE_NOPB defined-in "LMZ23603TZE_NOPB.stanza"
+package testlib/LTST-C191KGKT defined-in "LTST-C191KGKT.stanza"
+package testlib/LTST-C191KRKT defined-in "LTST-C191KRKT.stanza"
+package testlib/LTST-C191TBKT defined-in "LTST-C191TBKT.stanza"
+package testlib/M20-9980346 defined-in "M20-9980346.stanza"
+package testlib/MAX202CDR defined-in "MAX202CDR.stanza"
+package testlib/MCP1501T-33E_CHYCT-ND defined-in "MCP1501T-33E_CHYCT-ND.stanza"
+package testlib/MI0805K400R-10 defined-in "MI0805K400R-10.stanza"
+package testlib/PTS645SK50SMTR92_LFS defined-in "PTS645SK50SMTR92_LFS.stanza"
+package testlib/S1603-8TR defined-in "S1603-8TR.stanza"
+package testlib/S1605-8TR defined-in "S1605-8TR.stanza"
+package testlib/S1615-8TR defined-in "S1615-8TR.stanza"
+package testlib/S30B-PUDSS-1_LF__SN_ defined-in "S30B-PUDSS-1_LF__SN_.stanza"
+package testlib/SK36A-LTP defined-in "SK36A-LTP.stanza"
+package testlib/SSM3J328R_LF defined-in "SSM3J328R_LF.stanza"
+package testlib/ST2378ETTR defined-in "ST2378ETTR.stanza"
+package testlib/THVD1500DR defined-in "THVD1500DR.stanza"
+package testlib/TLC2272IDR defined-in "TLC2272IDR.stanza"
+package testlib/TLV2553IDWR defined-in "TLV2553IDWR.stanza"
+package testlib/TPS79933DDCR defined-in "TPS79933DDCR.stanza"
+package testlib/ZXMP3A16GTA defined-in "ZXMP3A16GTA.stanza"
+
+
+; 27E489.stanza
+; 292304-1.stanza
+; 2N7002K-7.stanza
+; 742792040.stanza
+; ATMEGA2560-16AUR.stanza
+; B02P-VL.stanza
+; B04P-VL.stanza
+; BSS123TA.stanza
+; CDBHD140L-G.stanza
+; DMN3404L-7.stanza
+; FT232RL-REEL.stanza
+; LMZ23603TZE_NOPB.stanza
+; LTST-C191KGKT.stanza
+; LTST-C191KRKT.stanza
+; LTST-C191TBKT.stanza
+; M20-9980346.stanza
+; MAX202CDR.stanza
+; MCP1501T-33E_CHYCT-ND.stanza
+; MI0805K400R-10.stanza
+; PTS645SK50SMTR92_LFS.stanza
+; S1603-8TR.stanza
+; S1605-8TR.stanza
+; S1615-8TR.stanza
+; S30B-PUDSS-1_LF__SN_.stanza
+; SK36A-LTP.stanza
+; SSM3J328R_LF.stanza
+; ST2378ETTR.stanza
+; THVD1500DR.stanza
+; TLC2272IDR.stanza
+; TLV2553IDWR.stanza
+; TPS79933DDCR.stanza
+; ZXMP3A16GTA.stanza
+
+; var k = 32
+
+; inst comp01 : testlib/27E489/component
+; inst comp02 : testlib/292304-1/component
+; inst comp03 : testlib/2N7002K-7/component
+; inst comp04 : testlib/742792040/component
+; inst comp05 : testlib/ATMEGA2560-16AUR/component
+; inst comp06 : testlib/B02P-VL/component
+; inst comp07 : testlib/B04P-VL/component
+; inst comp08 : testlib/BSS123TA/component
+; inst comp09 : testlib/CDBHD140L-G/component
+; inst comp10 : testlib/DMN3404L-7/component
+; inst comp11 : testlib/FT232RL-REEL/component
+; inst comp12 : testlib/LMZ23603TZE_NOPB/component
+; inst comp13 : testlib/LTST-C191KGKT/component
+; inst comp14 : testlib/LTST-C191KRKT/component
+; inst comp15 : testlib/LTST-C191TBKT/component
+; inst comp16 : testlib/M20-9980346/component
+; inst comp17 : testlib/MAX202CDR/component
+; inst comp18 : testlib/MCP1501T-33E_CHYCT-ND/component
+; inst comp19 : testlib/MI0805K400R-10/component
+; inst comp20 : testlib/PTS645SK50SMTR92_LFS/component
+; inst comp21 : testlib/S1603-8TR/component
+; inst comp22 : testlib/S1605-8TR/component
+; inst comp23 : testlib/S1615-8TR/component
+; inst comp24 : testlib/S30B-PUDSS-1_LF__SN_/component
+; inst comp25 : testlib/SK36A-LTP/component
+; inst comp26 : testlib/SSM3J328R_LF/component
+; inst comp27 : testlib/ST2378ETTR/component
+; inst comp28 : testlib/THVD1500DR/component
+; inst comp29 : testlib/TLC2272IDR/component
+; inst comp30 : testlib/TLV2553IDWR/component
+; inst comp31 : testlib/TPS79933DDCR/component
+; inst comp32 : testlib/ZXMP3A16nza/component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

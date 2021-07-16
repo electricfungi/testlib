@@ -1,0 +1,82 @@
+#use-added-syntax(jitx)
+defpackage testlib/SSM3J328R_LF :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+
+pcb-landpattern TOSHIBASOT-23F :
+  pad p[1] : smd-pad(0.8, 0.9) at loc(-1.05, 0.95, 90.0) on Top
+  pad p[2] : smd-pad(0.8, 0.9) at loc(-1.05, -0.95, 90.0) on Top
+  pad p[3] : smd-pad(0.8, 0.9) at loc(1.05, 0.0, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-1.05, 1.9, 0.125)
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, -1.7), Point(1.625, -1.7)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, 1.7), Point(1.625, 1.7)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(1.625, -1.7), Point(1.625, 1.7)])
+  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, -1.7), Point(-1.625, 1.7)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.95, -1.55), Point(0.95, -0.827)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.15, -1.55), Point(0.95, -1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.95, 0.827), Point(0.95, 1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.15, 1.55), Point(0.95, 1.55)])
+  ref-label()
+
+pcb-symbol P-FET20V6A003Ohms-symbol :
+  pin D at Point(5.08, 0.0) with :
+    direction = Up
+    length = 2.54
+    number-size = 1.523
+    name-size = 1.523
+  pin G at Point(0.0, -5.08) with :
+    direction = Left
+    length = 2.54
+    number-size = 1.523
+    name-size = 1.523
+  pin S at Point(5.08, -5.08) with :
+    direction = Down
+    length = 2.54
+    number-size = 1.523
+    name-size = 1.523
+  layer("foreground") = Line(1.0, [Point(5.08, -4.318), Point(2.54, -4.318)])
+  layer("foreground") = Line(1.0, [Point(5.08, -2.54), Point(2.54, -2.54)])
+  layer("foreground") = Line(1.0, [Point(5.08, -0.762), Point(2.54, -0.762)])
+  layer("foreground") = Line(1.0, [Point(2.032, -5.08), Point(2.032, 0.0)])
+  layer("foreground") = Line(1.0, [Point(2.54, -4.826), Point(2.54, -3.81)])
+  layer("foreground") = Line(1.0, [Point(2.54, -2.032), Point(2.54, -3.048)])
+  layer("foreground") = Line(1.0, [Point(2.54, -0.254), Point(2.54, -1.27)])
+  layer("foreground") = Line(1.0, [Point(0.0, -5.08), Point(2.032, -5.08)])
+  layer("foreground") = Line(1.0, [Point(5.08, -2.54), Point(5.08, -5.08)])
+  layer("foreground") = Line(1.0, [Point(5.08, -5.08), Point(7.62, -5.08)])
+  layer("foreground") = Line(1.0, [Point(5.08, 0.0), Point(7.62, 0.0)])
+  layer("foreground") = Line(1.0, [Point(7.62, 0.0), Point(7.62, -1.778)])
+  layer("foreground") = Line(1.0, [Point(7.62, -5.08), Point(7.62, -3.048)])
+  layer("foreground") = Line(1.0, [
+    Point(8.382, -3.302), 
+    Point(8.128, -3.048), 
+    Point(7.112, -3.048), 
+    Point(6.858, -2.794)])
+  layer("foreground") = Line(1.0, [Point(5.08, -0.762), Point(5.08, 0.0)])
+  layer("foreground") = Polygon([Point(7.62, -3.048), Point(6.858, -1.778), Point(8.382, -1.778)])
+  layer("foreground") = Polygon([Point(5.08, -2.54), Point(3.556, -2.032), Point(3.556, -3.048)])
+
+public pcb-component component :
+  name = "P-FET 20V 6A 0.03Ohms"
+  description = "P-FET 20V 6A 0.03Ohms"
+  manufacturer = "Toshiba Semiconductor and Storage"
+  mpn = "SSM3J328R,LF"
+  pin D
+  pin G
+  pin S
+  val lp = TOSHIBASOT-23F
+  landpattern = lp(D => lp.p[3], G => lp.p[1], S => lp.p[2])
+  val sym = P-FET20V6A003Ohms-symbol
+  symbol = sym(D => sym.D, G => sym.G, S => sym.S)
+  reference-prefix = "Q"
+

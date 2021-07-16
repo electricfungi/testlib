@@ -1,0 +1,49 @@
+#use-added-syntax(jitx)
+defpackage testlib/LMZ23603TZE_NOPB :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern NDW0007A :
+  pad p[1] : smd-pad(0.89, 3.06) at loc(-3.81, 0.0) on Top
+  pad p[2] : smd-pad(0.89, 3.06) at loc(-2.54, 0.0) on Top
+  pad p[3] : smd-pad(0.89, 3.06) at loc(-1.27, 0.0) on Top
+  pad p[4] : smd-pad(0.89, 3.06) at loc(0.0, 0.0) on Top
+  pad p[5] : smd-pad(0.89, 3.06) at loc(1.27, 0.0) on Top
+  pad p[6] : smd-pad(0.89, 3.06) at loc(2.54, 0.0) on Top
+  pad p[7] : smd-pad(0.89, 3.06) at loc(3.81, 0.0) on Top
+  pad p[8] : smd-pad(5.35, 8.54) at loc(0.0, 7.305) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-5.08, -1.905, 0.254)
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, -1.016), Point(-5.461, 13.081)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, 13.081), Point(5.461, 13.081)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.461, -1.016), Point(5.461, 13.081)])
+  ref-label()
+
+public pcb-component component :
+  name = "LMZ23603TZE/NOPB"
+  description = "LMZ23603TZE/NOPB"
+  manufacturer = "Texas Instruments"
+  mpn = "LMZ23603TZE/NOPB"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VOUT | 7 | Right]
+    [FB | 5 | Right]
+    [SS | 6 | Right]
+    [VIN | 1 | Left]
+    [EN | 3 | Left]
+    [SYNC | 2 | Left]
+    [AGND | 4 | Left]
+    [PGND | 8 | Left]
+
+  make-box-symbol()
+  assign-landpattern(NDW0007A)
+  reference-prefix = "U"
+

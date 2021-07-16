@@ -1,0 +1,94 @@
+#use-added-syntax(jitx)
+defpackage testlib/S30B-PUDSS-1_LF__SN_ :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern S30B-PUDSS-1LFSN :
+  pad MOUNT1 : pth-pad(0.8, 0.8) at loc(14.9, 4.85) on Top
+  pad MOUNT2 : pth-pad(0.8, 0.8) at loc(-14.9, 4.85) on Top
+  pad p[1] : rect-pth-pad(0.35, 1.208, 1.208) at loc(14.0, -4.85) on Top
+  pad p[2] : pth-pad(0.35, 0.604) at loc(14.0, -2.85) on Top
+  pad p[3] : pth-pad(0.35, 0.604) at loc(12.0, -4.85) on Top
+  pad p[4] : pth-pad(0.35, 0.604) at loc(12.0, -2.85) on Top
+  pad p[5] : pth-pad(0.35, 0.604) at loc(10.0, -4.85) on Top
+  pad p[6] : pth-pad(0.35, 0.604) at loc(10.0, -2.85) on Top
+  pad p[7] : pth-pad(0.35, 0.604) at loc(8.0, -4.85) on Top
+  pad p[8] : pth-pad(0.35, 0.604) at loc(8.0, -2.85) on Top
+  pad p[9] : pth-pad(0.35, 0.604) at loc(6.0, -4.85) on Top
+  pad p[10] : pth-pad(0.35, 0.604) at loc(6.0, -2.85) on Top
+  pad p[11] : pth-pad(0.35, 0.604) at loc(4.0, -4.85) on Top
+  pad p[12] : pth-pad(0.35, 0.604) at loc(4.0, -2.85) on Top
+  pad p[13] : pth-pad(0.35, 0.604) at loc(2.0, -4.85) on Top
+  pad p[14] : pth-pad(0.35, 0.604) at loc(2.0, -2.85) on Top
+  pad p[15] : pth-pad(0.35, 0.604) at loc(0.0, -4.85) on Top
+  pad p[16] : pth-pad(0.35, 0.604) at loc(0.0, -2.85) on Top
+  pad p[17] : pth-pad(0.35, 0.604) at loc(-2.0, -4.85) on Top
+  pad p[18] : pth-pad(0.35, 0.604) at loc(-2.0, -2.85) on Top
+  pad p[19] : pth-pad(0.35, 0.604) at loc(-4.0, -4.85) on Top
+  pad p[20] : pth-pad(0.35, 0.604) at loc(-4.0, -2.85) on Top
+  pad p[21] : pth-pad(0.35, 0.604) at loc(-6.0, -4.85) on Top
+  pad p[22] : pth-pad(0.35, 0.604) at loc(-6.0, -2.85) on Top
+  pad p[23] : pth-pad(0.35, 0.604) at loc(-8.0, -4.85) on Top
+  pad p[24] : pth-pad(0.35, 0.604) at loc(-8.0, -2.85) on Top
+  pad p[25] : pth-pad(0.35, 0.604) at loc(-10.0, -4.85) on Top
+  pad p[26] : pth-pad(0.35, 0.604) at loc(-10.0, -2.85) on Top
+  pad p[27] : pth-pad(0.35, 0.604) at loc(-12.0, -4.85) on Top
+  pad p[28] : pth-pad(0.35, 0.604) at loc(-12.0, -2.85) on Top
+  pad p[29] : pth-pad(0.35, 0.604) at loc(-14.0, -4.85) on Top
+  pad p[30] : pth-pad(0.35, 0.604) at loc(-14.0, -2.85) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-16.383, -5.969), Point(-16.383, 6.35)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-16.383, -5.969), Point(16.383, -5.969)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(16.383, -5.969), Point(16.383, 6.35)])
+  ref-label()
+
+public pcb-component component :
+  name = "S30B-PUDSS-1(LF)(SN)"
+  description = "S30B-PUDSS-1(LF)(SN)"
+  manufacturer = "JST Sales America Inc."
+  mpn = "S30B-PUDSS-1(LF)(SN)"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Right]
+    [p[3] | 3 | Right]
+    [p[5] | 5 | Right]
+    [p[7] | 7 | Right]
+    [p[9] | 9 | Right]
+    [p[11] | 11 | Right]
+    [p[13] | 13 | Right]
+    [p[15] | 15 | Right]
+    [p[17] | 17 | Right]
+    [p[19] | 19 | Right]
+    [p[21] | 21 | Right]
+    [p[23] | 23 | Right]
+    [p[25] | 25 | Right]
+    [p[27] | 27 | Right]
+    [p[29] | 29 | Right]
+    [p[2] | 2 | Left]
+    [p[4] | 4 | Left]
+    [p[6] | 6 | Left]
+    [p[8] | 8 | Left]
+    [p[10] | 10 | Left]
+    [p[12] | 12 | Left]
+    [p[14] | 14 | Left]
+    [p[16] | 16 | Left]
+    [p[18] | 18 | Left]
+    [p[20] | 20 | Left]
+    [p[22] | 22 | Left]
+    [p[24] | 24 | Left]
+    [p[26] | 26 | Left]
+    [p[28] | 28 | Left]
+    [p[30] | 30 | Left]
+
+  make-box-symbol()
+  assign-landpattern(S30B-PUDSS-1LFSN)
+  reference-prefix = "CN"
+
