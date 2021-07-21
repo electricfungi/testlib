@@ -1,0 +1,179 @@
+#use-added-syntax(jitx)
+defpackage test-the-lib :
+  import core
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/generic-components
+  import ocdb/bundles
+
+pcb-module test-the-lib :
+  inst comp158 : testlib/*/_0470533000/component
+  inst comp157 : testlib/*/CMP-00028-00004-1/component
+  inst comp156 : testlib/*/CMP-001-0008-02/component
+  inst comp155 : testlib/*/CMP-001-0636-04/component
+  inst comp154 : testlib/*/CMP-001-0705-03/component
+  inst comp153 : testlib/*/CMP-001-0846-01/component
+  inst comp152 : testlib/*/CMP-001-0887-02/component
+  inst comp151 : testlib/*/CMP-001-0939-01/component
+  inst comp150 : testlib/*/CMP-001-0958-01/component
+  inst comp149 : testlib/*/CMP-001-1092-01/component
+  inst comp148 : testlib/*/CMP-001-1152-01/component
+  inst comp147 : testlib/*/CMP-001-1388-02/component
+  inst comp146 : testlib/*/CMP-00242-02/component
+  inst comp145 : testlib/*/CMP-009-0024-01/component
+  inst comp144 : testlib/*/CMP-011-0063-02/component
+  inst comp143 : testlib/*/CMP-012-0002-05/component
+  inst comp142 : testlib/*/CSD19536KTT/component
+  inst comp141 : testlib/*/FIDUCIAL_1MM/component
+  inst comp140 : testlib/*/HCV1707R1-R48-R/component
+  inst comp139 : testlib/*/NetTie/component
+  inst comp138 : testlib/*/PTH-M3/component
+  inst comp137 : testlib/*/SFECF10M7EA00-R0/component
+  inst comp136 : testlib/*/Testpoint_SMT_2mm/component
+  inst comp135 : testlib/*/Testpoint_SMT_3mm/component
+  inst comp134 : testlib/*/TPS2492PWR/component
+  inst comp133 : testlib/*/XAL6060-822MEB/component
+  inst comp132 : testlib/742792040/component
+  inst comp131 : testlib/Abracon_LLC/ABM3B-8_000MHZ-B2-T/component
+  inst comp130 : testlib/Abracon_LLC/ABM3C-25_000MHZ-D4Y-T/component
+  inst comp129 : testlib/Adesto_Technologies/AT25SF128A-SHB-T/component
+  inst comp128 : testlib/Allegro_MicroSystems__LLC/ACS722LLCTR-10AU-T/component
+  inst comp127 : testlib/Allegro_MicroSystems__LLC/ACS722LLCTR-20AU-T/component
+  inst comp126 : testlib/Allegro_MicroSystems/ACS725LLCTR-10AU-T/component
+  inst comp125 : testlib/Allegro_MicroSystems/ACS725LLCTR-20AU-T/component
+  inst comp124 : testlib/Analog_Devices/ADAU7118ACPZRL/component
+  inst comp123 : testlib/Analog_Devices/ADM7171ACPZ-3_3-R7/component
+  inst comp122 : testlib/B_F_Fastener_Supply/CMP-00028-00000-1/component
+  inst comp121 : testlib/C_K_Components/PTS645SH50SMTR92_LFS/component
+  inst comp120 : testlib/C_K/KMR211GLFS/component
+  inst comp119 : testlib/C_K/PTS645SK50SMTR92_LFS/component
+  inst comp118 : testlib/CEVA_Technologies__Inc_/BNO085/component
+  inst comp117 : testlib/Coilcraft/XAL6060-333MEC/component
+  inst comp116 : testlib/Comchip_Technology/CDBHD140L-G/component
+  inst comp115 : testlib/Diodes_Incorporated/2N7002K-7/component
+  inst comp114 : testlib/Diodes_Incorporated/BAT54-7-F/component
+  inst comp113 : testlib/Diodes_Incorporated/BSS123TA/component
+  inst comp112 : testlib/Diodes_Incorporated/DMG2305UX-7/component
+  inst comp111 : testlib/Diodes_Incorporated/DMN3404L-7/component
+  inst comp110 : testlib/Diodes_Incorporated/DMP3099L-7/component
+  inst comp109 : testlib/Diodes_Incorporated/MMBZ5228B-7-F/component
+  inst comp108 : testlib/Diodes_Incorporated/ZXMP3A16GTA/component
+  inst comp107 : testlib/ECS-TXO-2520-33-160-AN-TR/CMP-001-0785-02/component
+  inst comp106 : testlib/Fairchild_Semiconductor/1N4148WS/component
+  inst comp105 : testlib/FT232RQ/component
+  inst comp104 : testlib/FTDI__Future_Technology_Devices_International_Ltd/FT232RL-REEL/component
+  inst comp103 : testlib/Harwin_Inc_/M20-9980346/component
+  inst comp102 : testlib/Hillcrest_Laboratories/BNO080/component
+  inst comp101 : testlib/Infineon_Technologies/BSC037N08NS5ATMA1/component
+  inst comp100 : testlib/IXYS_Integrated_Circuits_Division/CPC1016NTR/component
+  inst comp99 : testlib/JST_Sales_America_Inc_/B02B-PASK-1_LF__SN_/component
+  inst comp98 : testlib/JST_Sales_America_Inc_/B04B-PASK-1_LF__SN_/component
+  inst comp97 : testlib/JST_Sales_America_Inc_/B04P-VL/component
+  inst comp96 : testlib/JST_Sales_America_Inc_/B2B-PH-K-S_LF__SN_/component
+  inst comp95 : testlib/JST_Sales_America_Inc_/B3B-PH-K-S_LF__SN_/component
+  inst comp94 : testlib/JST_Sales_America_Inc_/S30B-PUDSS-1_LF__SN_/component
+  inst comp93 : testlib/JST/B02P-VL/component
+  inst comp92 : testlib/JST/B5B-PH-SM4-TB_LF__SN_/component
+  inst comp91 : testlib/JST/B6B-PH-SM4-TB_LF__SN_/component
+  inst comp90 : testlib/JST/CMP-001-1391-01/component
+  inst comp89 : testlib/Knowles/SPH0690LM4H-1/component
+  inst comp88 : testlib/Laird-Signal_Integrity_Products/MI0603L221R-10/component
+  inst comp87 : testlib/Laird-Signal_Integrity_Products/MI0805K400R-10/component
+  inst comp86 : testlib/Linear_Technology_Analog_Devices/LTC2955CTS8-1#TRMPBF/component
+  inst comp85 : testlib/Linear_Technology_Analog_Devices/LTC4357HMS8#TRPBF/component
+  inst comp84 : testlib/Lite-On_Inc_/LTST-C191KRKT/component
+  inst comp83 : testlib/Lite-On_Inc_/LTST-C191TBKT/component
+  inst comp82 : testlib/Littelfuse_Inc_/SMAJ70A/component
+  inst comp81 : testlib/Littelfuse/SMBJ58A/component
+  inst comp80 : testlib/LTST-C191KGKT/component
+  inst comp79 : testlib/Macronix/MX25L1606EM2I-12G/component
+  inst comp78 : testlib/Micro_Commercial_Co/SK36A-LTP/component
+  inst comp77 : testlib/Micro_Commercial_Co/SMAJ4752A-TP/component
+  inst comp76 : testlib/Micro_Crystal_AG/CC5V-T1A-32_768KHZ-12_5PF-20PPM-TA-QC/component
+  inst comp75 : testlib/Microchip_Micrel/MIC2039AYMTTR/component
+  inst comp74 : testlib/Microchip_Technology/ATMEGA2560-16AUR/component
+  inst comp73 : testlib/Microchip_Technology/LAN8720AI-CP/component
+  inst comp72 : testlib/Microchip_Technology/MCP1501T-33E_CHYCT-ND/component
+  inst comp71 : testlib/Microchip_Technology/MIC2039AYMT-TR/component
+  inst comp70 : testlib/Microchip_Technology/USB5807_KD/component
+  inst comp69 : testlib/Microchip/MIC5247-1_8YM5-TR/component
+  inst comp68 : testlib/Molex__LLC/0484080003/component
+  inst comp67 : testlib/Molex_Inc/0039299023/component
+  inst comp66 : testlib/Molex_Inc/0436500327/component
+  inst comp65 : testlib/Molex_Inc/CMP-001-1389-01/component
+  inst comp64 : testlib/Molex/0430450225/component
+  inst comp63 : testlib/Molex/0430450227/component
+  inst comp62 : testlib/Molex/0484090003/component
+  inst comp61 : testlib/Molex/CMP-001-1390-01/component
+  inst comp60 : testlib/Molex/CMP-001-1392-01/component
+  inst comp59 : testlib/Murata/BLM18EG121SN1D/component
+  inst comp58 : testlib/Murata/LQH43NH4R7J03L/component
+  inst comp57 : testlib/Murata/XRCGB24M000F2P29R0/component
+  inst comp56 : testlib/Nexperia_USA_Inc_/PCMF3HDMI2SZ/component
+  inst comp55 : testlib/Nexperia_USA_Inc_/PMEG100V060ELPDAZ/component
+  inst comp54 : testlib/NR8040T100M/component
+  inst comp53 : testlib/NXP_Semiconductors/MIMXRT1011CAE4A/component
+  inst comp52 : testlib/NXP_USA_Inc_/MPXV5010GP/component
+  inst comp51 : testlib/ON_Semiconductor___Fairchild/NC7SZ04M5X/component
+  inst comp50 : testlib/ON_Semiconductor/FDB047N10/component
+  inst comp49 : testlib/ON_Semiconductor/MMBT5401LT1G/component
+  inst comp48 : testlib/ON_Semiconductor/SMP3003-DL-1E/component
+  inst comp47 : testlib/PUI_Audio__Inc_/AST-01532MR-R/component
+  inst comp46 : testlib/Pulse_Electronics_Power/PA5119_901NLT/component
+  inst comp45 : testlib/Rohm/BH33MA3WHFV-TR/component
+  inst comp44 : testlib/S1603-8TR/component
+  inst comp43 : testlib/S1605-8TR/component
+  inst comp42 : testlib/S1615-8TR/component
+  inst comp41 : testlib/Samsung_Electro-Mechanics/CIM05U601NC/component
+  inst comp40 : testlib/Samtec_Inc_/FTSH-105-01-F-DV/component
+  inst comp39 : testlib/Samtec/USBR-B-S-S-O-VT/component
+  inst comp38 : testlib/SMSC/LAN89303/component
+  inst comp37 : testlib/Stewart_Connector/SI-46001-F/component
+  inst comp36 : testlib/STMicroelectronics/ST2378ETTR/component
+  inst comp35 : testlib/STMicroelectronics/STM32F405RGT6/component
+  inst comp34 : testlib/STMicroelectronics/STM32F407VGT6/component
+  inst comp33 : testlib/STMicroelectronics/STM32F407ZGT6/component
+  inst comp32 : testlib/STMicroelectronics/STM32L071KBU6/component
+  inst comp31 : testlib/STMicroelectronics/VL53L1CXV0FY_1/component
+  inst comp30 : testlib/Sullins_Connector_Solutions/CMP-001-1352-01/component
+  inst comp29 : testlib/Taiwan_Semiconductor_Corporation/TS34119CS_RLG/component
+  inst comp28 : testlib/TE_Connectivity_AMP_Connectors/1734035-2/component
+  inst comp27 : testlib/TE_Connectivity_AMP_Connectors/292304-1/component
+  inst comp26 : testlib/TE_Connectivity_AMP_Connectors/826936-2/component
+  inst comp25 : testlib/TE_Connectivity_AMP_Connectors/826936-4/component
+  inst comp24 : testlib/TE_Connectivity_Potter___Brumfield_Relays/27E489/component
+  inst comp23 : testlib/Texas_Instruments/CSD25501F3T/component
+  inst comp22 : testlib/Texas_Instruments/LM75BIMX-3_NOPB/component
+  inst comp21 : testlib/Texas_Instruments/LMZ23603TZE_NOPB/component
+  inst comp20 : testlib/Texas_Instruments/MAX202CDR/component
+  inst comp19 : testlib/Texas_Instruments/SN74LV1T125DBVR/component
+  inst comp18 : testlib/Texas_Instruments/TAS5720LRSMT/component
+  inst comp17 : testlib/Texas_Instruments/THVD1500DR/component
+  inst comp16 : testlib/Texas_Instruments/TLC2272IDR/component
+  inst comp15 : testlib/Texas_Instruments/TLV2553IDWR/component
+  inst comp14 : testlib/Texas_Instruments/TPD3S014DBVR/component
+  inst comp13 : testlib/Texas_Instruments/TPS259824ONRGET/component
+  inst comp12 : testlib/Texas_Instruments/TPS3823-30DBVR/component
+  inst comp11 : testlib/Texas_Instruments/TPS54560BQDDARQ1/component
+  inst comp10 : testlib/Texas_Instruments/TPS54561DPRR/component
+  inst comp9 : testlib/Texas_Instruments/TPS79633DCQR/component
+  inst comp8 : testlib/Texas_Instruments/TPS79933DDCR/component
+  inst comp7 : testlib/Toshiba_Semiconductor_and_Storage/DF5A5_6JE_LM/component
+  inst comp6 : testlib/Toshiba_Semiconductor_and_Storage/SSM3J328R_LF/component
+  inst comp5 : testlib/Toshiba/1SS385FV_L3F/component
+  inst comp4 : testlib/Toshiba/DF2B5M4SL_L3F/component
+  inst comp3 : testlib/TXC_CORPORATION/9B-16_000MBBK-B/component
+  inst comp2 : testlib/Vicor_Corporation/PI3545-00-LGIZ/component
+  inst comp1 : testlib/Vicor_Corporation/PI3546-00-LGIZ/component
+  inst comp0 : testlib/Vicor_Corporation/Vicor_PI3546-00-LGIZ/component
+
+
+make-default-board(test-the-lib, 4, RoundedRectangle(150.0, 100.0, 3.0))
+
+set-export-backend(`altium)
+; export-cad()
+
+; Show the Schematic and PCB for the design
+view-board()
+view-schematic()

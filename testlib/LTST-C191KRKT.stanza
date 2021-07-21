@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/LTST-C191KRKT :
+defpackage testlib/Lite-On_Inc_/LTST-C191KRKT :
   import core
   import collections
   import math
@@ -14,7 +14,7 @@ pcb-landpattern LED_0603 :
   pad A : smd-pad(0.8, 0.8) at loc(-0.75, 0.0, 90.0) on Top
   pad K : smd-pad(0.8, 0.8) at loc(0.75, 0.0, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.524, -0.381), Point(1.524, 0.381)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(1.524, -0.381), Point(1.524, 0.381)])
   ref-label()
 
 pcb-symbol LED_RED_0603-symbol :
@@ -34,6 +34,8 @@ pcb-symbol LED_RED_0603-symbol :
   layer("foreground") = Polygon([Point(0.0, -5.08), Point(2.54, -2.54), Point(0.0, 0.0)])
   layer("foreground") = Polygon([Point(5.334, 1.778), Point(4.318, 1.27), Point(4.826, 0.762)])
   layer("foreground") = Polygon([Point(4.318, 2.794), Point(3.302, 2.286), Point(3.81, 1.778)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(0.0, 3.594))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(0.0, 4.656))
 
 public pcb-component component :
   name = "LED_RED_0603"
@@ -46,5 +48,5 @@ public pcb-component component :
   landpattern = lp(A => lp.A, K => lp.K)
   val sym = LED_RED_0603-symbol
   symbol = sym(A => sym.A, K => sym.K)
-  reference-prefix = "D"
+  reference-prefix = "LED"
 

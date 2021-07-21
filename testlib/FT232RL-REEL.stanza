@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/FT232RL-REEL :
+defpackage testlib/FTDI__Future_Technology_Devices_International_Ltd/FT232RL-REEL :
   import core
   import collections
   import math
@@ -41,18 +41,46 @@ pcb-landpattern SSOP-28 :
   pad p[27] : smd-pad(0.36281, 1.65) at loc(3.625, 3.575, 90.0) on Top
   pad p[28] : smd-pad(0.36281, 1.65) at loc(3.625, 4.225, 90.0) on Top
 
-  ; layer(Silkscreen("F-SilkS", Top)) = Circle(-1.373, 4.223, 0.3)
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-3.625, 5.025, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.7, -5.5), Point(4.7, -5.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.7, 5.5), Point(4.7, 5.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(4.7, -5.5), Point(4.7, 5.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.7, -5.5), Point(-4.7, 5.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.4, -5.25), Point(2.4, -5.25)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.4, 5.25), Point(2.4, 5.25)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(2.4, -5.25), Point(2.4, 5.25)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.4, -5.25), Point(-2.4, 5.25)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-1.073, 4.223), 
+    Point(-1.09583614024661, 4.33780502970953), 
+    Point(-1.16086796564404, 4.43513203435596), 
+    Point(-1.25819497029047, 4.50016385975339), 
+    Point(-1.373, 4.523), 
+    Point(-1.48780502970953, 4.50016385975339), 
+    Point(-1.58513203435596, 4.43513203435596), 
+    Point(-1.65016385975339, 4.33780502970953), 
+    Point(-1.673, 4.223), 
+    Point(-1.65016385975339, 4.10819497029047), 
+    Point(-1.58513203435596, 4.01086796564404), 
+    Point(-1.48780502970953, 3.94583614024661), 
+    Point(-1.373, 3.923), 
+    Point(-1.25819497029047, 3.94583614024661), 
+    Point(-1.16086796564404, 4.01086796564404), 
+    Point(-1.09583614024661, 4.10819497029047), 
+    Point(-1.073, 4.223)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-3.5, 5.025), 
+    Point(-3.50951505843609, 5.07283542904564), 
+    Point(-3.53661165235168, 5.11338834764832), 
+    Point(-3.57716457095436, 5.14048494156391), 
+    Point(-3.625, 5.15), 
+    Point(-3.67283542904564, 5.14048494156391), 
+    Point(-3.71338834764832, 5.11338834764832), 
+    Point(-3.74048494156391, 5.07283542904564), 
+    Point(-3.75, 5.025), 
+    Point(-3.74048494156391, 4.97716457095436), 
+    Point(-3.71338834764832, 4.93661165235168), 
+    Point(-3.67283542904564, 4.90951505843609), 
+    Point(-3.625, 4.9), 
+    Point(-3.57716457095436, 4.90951505843609), 
+    Point(-3.53661165235168, 4.93661165235168), 
+    Point(-3.50951505843609, 4.97716457095436), 
+    Point(-3.5, 5.025)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.4, -5.25), Point(2.4, -5.25)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.4, 5.25), Point(2.4, 5.25)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(2.4, -5.25), Point(2.4, 5.25)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.4, -5.25), Point(-2.4, 5.25)])
   ref-label()
 
 public pcb-component component :

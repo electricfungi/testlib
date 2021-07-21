@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/THVD1500DR :
+defpackage testlib/Texas_Instruments/THVD1500DR :
   import core
   import collections
   import math
@@ -9,7 +9,6 @@ defpackage testlib/THVD1500DR :
   import ocdb/land-patterns
   import ocdb/generic-components
   import ocdb/symbols
-  import ocdb/box-symbol
 
 pcb-landpattern TID0008BSOIC-8 :
   pad p[1] : smd-pad(0.6, 1.55) at loc(-2.7, 1.905, 90.0) on Top
@@ -21,37 +20,145 @@ pcb-landpattern TID0008BSOIC-8 :
   pad p[7] : smd-pad(0.6, 1.55) at loc(2.7, 0.635, 90.0) on Top
   pad p[8] : smd-pad(0.6, 1.55) at loc(2.7, 1.905, 90.0) on Top
 
-  ; layer(Silkscreen("F-SilkS", Top)) = Circle(-0.573, 1.473, 0.3)
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-2.7, 2.755, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(3.7, -2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, 2.75), Point(3.7, 2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(3.7, -2.75), Point(3.7, 2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(-3.7, 2.75)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(1.6, -2.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, 2.5), Point(1.6, 2.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.6, -2.5), Point(1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.575, 2.755), 
+    Point(-2.58451505843609, 2.80283542904564), 
+    Point(-2.61161165235168, 2.84338834764832), 
+    Point(-2.65216457095436, 2.87048494156391), 
+    Point(-2.7, 2.88), 
+    Point(-2.74783542904564, 2.87048494156391), 
+    Point(-2.78838834764832, 2.84338834764832), 
+    Point(-2.81548494156391, 2.80283542904564), 
+    Point(-2.825, 2.755), 
+    Point(-2.81548494156391, 2.70716457095436), 
+    Point(-2.78838834764832, 2.66661165235168), 
+    Point(-2.74783542904564, 2.63951505843609), 
+    Point(-2.7, 2.63), 
+    Point(-2.65216457095436, 2.63951505843609), 
+    Point(-2.61161165235168, 2.66661165235168), 
+    Point(-2.58451505843609, 2.70716457095436), 
+    Point(-2.575, 2.755)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-0.273, 1.473), 
+    Point(-0.295836140246614, 1.58780502970953), 
+    Point(-0.360867965644036, 1.68513203435596), 
+    Point(-0.458194970290473, 1.75016385975339), 
+    Point(-0.573, 1.773), 
+    Point(-0.687805029709527, 1.75016385975339), 
+    Point(-0.785132034355964, 1.68513203435596), 
+    Point(-0.850163859753386, 1.58780502970953), 
+    Point(-0.873, 1.473), 
+    Point(-0.850163859753386, 1.35819497029047), 
+    Point(-0.785132034355964, 1.26086796564404), 
+    Point(-0.687805029709527, 1.19583614024661), 
+    Point(-0.573, 1.173), 
+    Point(-0.458194970290473, 1.19583614024661), 
+    Point(-0.360867965644036, 1.26086796564404), 
+    Point(-0.295836140246614, 1.35819497029047), 
+    Point(-0.273, 1.473)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(-1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.6, -2.5), Point(1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, 2.5), Point(1.6, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(1.6, -2.5)])
   ref-label()
+
+pcb-symbol THVD1500DR-symbol0 :
+  pin A+ at Point(17.78, -5.08) with :
+    direction = Right
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin B- at Point(17.78, -10.16) with :
+    direction = Right
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin DE at Point(0.0, -10.16) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin DI at Point(0.0, -2.54) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin RO at Point(0.0, -5.08) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin nRE at Point(0.0, -7.62) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  layer("foreground") = Line(1.0, [
+    Point(11.43, -7.62), 
+    Point(7.62, -3.81), 
+    Point(7.62, -11.43), 
+    Point(11.43, -7.62)])
+  layer("foreground") = Line(1.0, [Point(10.16, -5.08), Point(8.89, -5.08)])
+  layer("foreground") = Line(1.0, [Point(10.922, -10.16), Point(13.462, -10.16)])
+  layer("foreground") = Line(1.0, [Point(10.16, -5.08), Point(12.954, -5.08)])
+  layer("foreground") = Line(1.0, [Point(16.51, -5.08), Point(17.78, -5.08)])
+  layer("foreground") = Line(1.0, [Point(16.51, -10.16), Point(17.78, -10.16)])
+  layer("foreground") = Line(1.0, [
+    Point(10.82744, -10.16), 
+    Point(10.7766341551793, -9.90458176990225), 
+    Point(10.6319513500352, -9.68804864996485), 
+    Point(10.4154182300978, -9.54336584482067), 
+    Point(10.16, -9.49256), 
+    Point(9.90458176990225, -9.54336584482067), 
+    Point(9.68804864996485, -9.68804864996485), 
+    Point(9.54336584482067, -9.90458176990225), 
+    Point(9.49256, -10.16), 
+    Point(9.54336584482067, -10.4154182300978), 
+    Point(9.68804864996485, -10.6319513500352), 
+    Point(9.90458176990225, -10.7766341551793), 
+    Point(10.16, -10.82744), 
+    Point(10.4154182300978, -10.7766341551793), 
+    Point(10.6319513500352, -10.6319513500352), 
+    Point(10.7766341551793, -10.4154182300978), 
+    Point(10.82744, -10.16)])
+  layer("foreground") = Rectangle(17.78, 13.97, loc(8.89, -6.985))
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(0.0, 0.3))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(0.0, 1.362))
+
+pcb-symbol THVD1500DR-symbol1 :
+  pin GND at Point(0.0, -7.62) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin VCC at Point(0.0, -2.54) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  layer("foreground") = Rectangle(10.16, 10.16, loc(5.08, -5.08))
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(0.0, 0.3))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(0.0, 1.362))
 
 public pcb-component component :
   name = "THVD1500DR"
   description = "THVD1500DR"
   manufacturer = "Texas Instruments"
   mpn = "THVD1500DR"
-  pin-properties :
-    [pin:Ref | pads:Int ... | side:Dir]
-    [A+ | 6 | Right]
-    [B- | 7 | Right]
-    [DI | 4 | Left]
-    [RO | 1 | Left]
-    [nRE | 2 | Left]
-    [DE | 3 | Left]
-    [VCC | 8 | Left]
-    [GND | 5 | Left]
-
-  make-box-symbol()
-  assign-landpattern(TID0008BSOIC-8)
+  pin A+
+  pin B-
+  pin DE
+  pin DI
+  pin RO
+  pin nRE
+  pin GND
+  pin VCC
+  val lp = TID0008BSOIC-8
+  landpattern = lp(A+ => lp.p[6], B- => lp.p[7], DE => lp.p[3], DI => lp.p[4], RO => lp.p[1], nRE => lp.p[2], GND => lp.p[5], VCC => lp.p[8])
+  symbol :
+    val sym0 = THVD1500DR-symbol0
+    unit(0) = sym0(A+ => sym0.A+, B- => sym0.B-, DE => sym0.DE, DI => sym0.DI, RO => sym0.RO, nRE => sym0.nRE)
+    val sym1 = THVD1500DR-symbol1
+    unit(1) = sym1(GND => sym1.GND, VCC => sym1.VCC)
   reference-prefix = "U"
 

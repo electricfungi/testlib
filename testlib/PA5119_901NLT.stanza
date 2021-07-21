@@ -1,0 +1,57 @@
+#use-added-syntax(jitx)
+defpackage testlib/Pulse_Electronics_Power/PA5119_901NLT :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern PA5119 :
+  pad p[1] : smd-pad(2.4, 2.4) at loc(-3.85, 3.85) on Top
+  pad p[2] : smd-pad(2.4, 2.4) at loc(3.85, 3.85) on Top
+  pad p[3] : smd-pad(2.0, 2.9) at loc(0.0, -3.7, 270.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [
+    Point(-5.35858, 5.8), 
+    Point(-5.36934495651225, 5.85411909100507), 
+    Point(-5.4000009590046, 5.8999990409954), 
+    Point(-5.44588090899493, 5.93065504348775), 
+    Point(-5.5, 5.94142), 
+    Point(-5.55411909100507, 5.93065504348775), 
+    Point(-5.5999990409954, 5.8999990409954), 
+    Point(-5.63065504348775, 5.85411909100507), 
+    Point(-5.64142, 5.8), 
+    Point(-5.63065504348775, 5.74588090899493), 
+    Point(-5.5999990409954, 5.7000009590046), 
+    Point(-5.55411909100507, 5.66934495651225), 
+    Point(-5.5, 5.65858), 
+    Point(-5.44588090899493, 5.66934495651225), 
+    Point(-5.4000009590046, 5.7000009590046), 
+    Point(-5.36934495651225, 5.74588090899493), 
+    Point(-5.35858, 5.8)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.2, 5.3), Point(6.4, 5.3)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.2, -4.8868), Point(6.4, -4.8868)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(6.4, -4.8868), Point(6.4, 5.3)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.2, -4.8868), Point(-6.2, 5.3)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-001-1450-01"
+  description = "FIXED IND 900NH 14A 4.6 MOHM SMD"
+  manufacturer = "Pulse Electronics Power"
+  mpn = "PA5119.901NLT"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[2] | 2 | Right]
+    [TAB | 3 | Right]
+    [p[1] | 1 | Left]
+
+  make-box-symbol()
+  assign-landpattern(PA5119)
+  reference-prefix = "L"
+

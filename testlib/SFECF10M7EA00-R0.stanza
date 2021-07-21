@@ -1,0 +1,56 @@
+#use-added-syntax(jitx)
+defpackage testlib/*/SFECF10M7EA00-R0 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern SFECF10M7 :
+  pad p[1] : smd-pad(0.8, 1.05) at loc(-1.225, 1.4, 90.0) on Top
+  pad p[2] : smd-pad(0.8, 1.05) at loc(-1.225, 0.0, 90.0) on Top
+  pad p[3] : smd-pad(0.8, 1.05) at loc(-1.225, -1.4, 90.0) on Top
+  pad p[4] : smd-pad(0.8, 1.05) at loc(1.225, -1.4, 90.0) on Top
+  pad p[5] : smd-pad(0.8, 1.05) at loc(1.225, 0.0, 90.0) on Top
+  pad p[6] : smd-pad(0.8, 1.05) at loc(1.225, 1.4, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [
+    Point(-1.905, 1.905), 
+    Point(-1.91466729937107, 1.95360079591037), 
+    Point(-1.94219743878931, 1.99480256121069), 
+    Point(-1.98339920408963, 2.02233270062893), 
+    Point(-2.032, 2.032), 
+    Point(-2.08060079591037, 2.02233270062893), 
+    Point(-2.12180256121069, 1.99480256121069), 
+    Point(-2.14933270062893, 1.95360079591037), 
+    Point(-2.159, 1.905), 
+    Point(-2.14933270062893, 1.85639920408963), 
+    Point(-2.12180256121069, 1.81519743878931), 
+    Point(-2.08060079591037, 1.78766729937107), 
+    Point(-2.032, 1.778), 
+    Point(-1.98339920408963, 1.78766729937107), 
+    Point(-1.94219743878931, 1.81519743878931), 
+    Point(-1.91466729937107, 1.85639920408963), 
+    Point(-1.905, 1.905)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-001-1430-01"
+  description = ""
+  mpn = "SFECF10M7EA00-R0"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [OUT | 6 | Right]
+    [IN | 1 | Left]
+    [NC | 3, 4 | Left]
+    [GND | 2, 5 | Left]
+
+  make-box-symbol()
+  assign-landpattern(SFECF10M7)
+  reference-prefix = "U"
+

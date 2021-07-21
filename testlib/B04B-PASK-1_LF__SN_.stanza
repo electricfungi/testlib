@@ -1,0 +1,42 @@
+#use-added-syntax(jitx)
+defpackage testlib/JST_Sales_America_Inc_/B04B-PASK-1_LF__SN_ :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern B04B-PASK-1LFSN :
+  pad MOUNT : round-rect-pth-pad(1.1, 1.1, 1.1, 0.55) at loc(1.5, 1.7) on Top
+  pad p[1] : rect-pth-pad(0.8, 1.308, 1.308) at loc(0.0, 0.0) on Top
+  pad p[2] : round-rect-pth-pad(0.8, 1.308, 1.308, 0.654) at loc(-2.0, 0.0) on Top
+  pad p[3] : round-rect-pth-pad(0.8, 1.308, 1.308, 0.654) at loc(-4.0, 0.0) on Top
+  pad p[4] : round-rect-pth-pad(0.8, 1.308, 1.308, 0.654) at loc(-6.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-8.489, -3.595), Point(2.465, -3.595)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-8.489, -3.595), Point(-8.489, 2.628)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-8.489, 2.628), Point(2.465, 2.628)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(2.465, 2.628), Point(2.465, -3.595)])
+  ref-label()
+
+public pcb-component component :
+  name = "B04B-PASK-1(LF)(SN)"
+  description = "B04B-PASK-1(LF)(SN)"
+  manufacturer = "JST Sales America Inc."
+  mpn = "B04B-PASK-1(LF)(SN)"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+    [p[2] | 2 | Left]
+    [p[3] | 3 | Left]
+    [p[4] | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(B04B-PASK-1LFSN)
+  reference-prefix = "CN"
+

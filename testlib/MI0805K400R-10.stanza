@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/MI0805K400R-10 :
+defpackage testlib/Laird-Signal_Integrity_Products/MI0805K400R-10 :
   import core
   import collections
   import math
@@ -14,12 +14,6 @@ pcb-landpattern FB0805 :
   pad p[1] : smd-pad(1.47, 1.29) at loc(-0.9725, 0.0, 90.0) on Top
   pad p[2] : smd-pad(1.47, 1.29) at loc(0.9725, 0.0, 90.0) on Top
 
-  layer(Courtyard(Top)) = Line(0.0, [Point(-1.7, -1.0), Point(-1.7, 1.0)])
-  layer(Courtyard(Top)) = Line(0.0, [Point(1.7, -1.0), Point(1.7, 1.0)])
-  layer(Courtyard(Top)) = Line(0.0, [Point(-1.7, 1.0), Point(1.7, 1.0)])
-  layer(Courtyard(Top)) = Line(0.0, [Point(-1.7, -1.0), Point(1.7, -1.0)])
-  layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
   ref-label()
 
 pcb-symbol FB_40R_1A5-symbol :
@@ -177,6 +171,8 @@ pcb-symbol FB_40R_1A5-symbol :
     Point(14.2177647089605, -1.2944026938879), 
     Point(14.0944817682185, -1.27611539712631), 
     Point(13.97, -1.27)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(4.58, -0.47))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(4.58, 0.592))
 
 public pcb-component component :
   name = "FB_40R_1A5"

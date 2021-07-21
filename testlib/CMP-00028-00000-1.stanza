@@ -1,0 +1,48 @@
+#use-added-syntax(jitx)
+defpackage testlib/B_F_Fastener_Supply/CMP-00028-00000-1 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern BF-MPMS0020012PH :
+  pad p[1] : round-rect-pth-pad(2.65, 1.0, 1.0, 0.5) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [
+    Point(2.0, 0.0), 
+    Point(1.84775906502257, 0.76536686473018), 
+    Point(1.4142135623731, 1.41421356237309), 
+    Point(0.76536686473018, 1.84775906502257), 
+    Point(1.22464679914735e-16, 2.0), 
+    Point(-0.765366864730179, 1.84775906502257), 
+    Point(-1.41421356237309, 1.4142135623731), 
+    Point(-1.84775906502257, 0.76536686473018), 
+    Point(-2.0, 2.44929359829471e-16), 
+    Point(-1.84775906502257, -0.765366864730178), 
+    Point(-1.4142135623731, -1.41421356237309), 
+    Point(-0.765366864730179, -1.84775906502257), 
+    Point(-3.67394039744206e-16, -2.0), 
+    Point(0.76536686473018, -1.84775906502257), 
+    Point(1.41421356237309, -1.4142135623731), 
+    Point(1.84775906502257, -0.765366864730179), 
+    Point(2.0, -4.89858719658941e-16)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-00028-00000-1"
+  description = "MPMS0020012PH"
+  manufacturer = "B&F Fastener Supply"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+
+  make-box-symbol()
+  assign-landpattern(BF-MPMS0020012PH)
+  reference-prefix = "MH"
+

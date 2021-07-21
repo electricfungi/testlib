@@ -1,0 +1,83 @@
+#use-added-syntax(jitx)
+defpackage testlib/Linear_Technology_Analog_Devices/LTC4357HMS8#TRPBF :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern LinearMS8 :
+  pad p[1] : smd-pad(0.42, 0.889) at loc(-2.107, 0.975, 90.0) on Top
+  pad p[2] : smd-pad(0.42, 0.889) at loc(-2.107, 0.325, 90.0) on Top
+  pad p[3] : smd-pad(0.42, 0.889) at loc(-2.107, -0.325, 90.0) on Top
+  pad p[4] : smd-pad(0.42, 0.889) at loc(-2.107, -0.975, 90.0) on Top
+  pad p[5] : smd-pad(0.42, 0.889) at loc(2.107, -0.975, 90.0) on Top
+  pad p[6] : smd-pad(0.42, 0.889) at loc(2.107, -0.325, 90.0) on Top
+  pad p[7] : smd-pad(0.42, 0.889) at loc(2.107, 0.325, 90.0) on Top
+  pad p[8] : smd-pad(0.42, 0.889) at loc(2.107, 0.975, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(0.177, 0.523), 
+    Point(0.154163859753386, 0.637805029709527), 
+    Point(0.0891320343559643, 0.735132034355964), 
+    Point(-0.00819497029047306, 0.800163859753386), 
+    Point(-0.123, 0.823), 
+    Point(-0.237805029709527, 0.800163859753386), 
+    Point(-0.335132034355964, 0.735132034355964), 
+    Point(-0.400163859753386, 0.637805029709527), 
+    Point(-0.423, 0.523), 
+    Point(-0.400163859753386, 0.408194970290473), 
+    Point(-0.335132034355964, 0.310867965644036), 
+    Point(-0.237805029709527, 0.245836140246614), 
+    Point(-0.123, 0.223), 
+    Point(-0.008194970290473, 0.245836140246614), 
+    Point(0.0891320343559642, 0.310867965644036), 
+    Point(0.154163859753386, 0.408194970290473), 
+    Point(0.177, 0.523)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-1.982, 1.735), 
+    Point(-1.99151505843609, 1.78283542904564), 
+    Point(-2.01861165235168, 1.82338834764832), 
+    Point(-2.05916457095436, 1.85048494156391), 
+    Point(-2.107, 1.86), 
+    Point(-2.15483542904564, 1.85048494156391), 
+    Point(-2.19538834764832, 1.82338834764832), 
+    Point(-2.22248494156391, 1.78283542904564), 
+    Point(-2.232, 1.735), 
+    Point(-2.22248494156391, 1.68716457095436), 
+    Point(-2.19538834764832, 1.64661165235168), 
+    Point(-2.15483542904564, 1.61951505843609), 
+    Point(-2.107, 1.61), 
+    Point(-2.05916457095436, 1.61951505843609), 
+    Point(-2.01861165235168, 1.64661165235168), 
+    Point(-1.99151505843609, 1.68716457095436), 
+    Point(-1.982, 1.735)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.15, -1.55), Point(1.15, -1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.15, 1.55), Point(1.15, 1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.15, -1.55), Point(1.15, 1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.15, -1.55), Point(-1.15, 1.55)])
+  ref-label()
+
+public pcb-component component :
+  name = "LTC4357HMS8#TRPBF"
+  description = "LTC4357HMS8#TRPBF"
+  manufacturer = "Linear Technology/Analog Devices"
+  mpn = "LTC4357HMS8#TRPBF"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [OUT | 8 | Right]
+    [VDD | 7 | Right]
+    [GND | 5 | Right]
+    [IN | 1 | Left]
+    [NC | 2, 3, 6 | Left]
+    [GATE | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(LinearMS8)
+  reference-prefix = "U"
+

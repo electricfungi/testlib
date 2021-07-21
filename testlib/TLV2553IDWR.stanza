@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/TLV2553IDWR :
+defpackage testlib/Texas_Instruments/TLV2553IDWR :
   import core
   import collections
   import math
@@ -34,15 +34,42 @@ pcb-landpattern TIDW0020A :
   pad p[19] : smd-pad(0.6, 2.0) at loc(4.65, 4.445, 90.0) on Top
   pad p[20] : smd-pad(0.6, 2.0) at loc(4.65, 5.715, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-2.373, 5.473, 0.3)
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-4.65, 6.565, 0.125)
-  layer(Courtyard(Top)) = Rectangle(5.925, 6.75)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, -6.75), Point(-5.925, 6.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(5.925, -6.75), Point(5.925, 6.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, 6.75), Point(5.925, 6.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-5.925, -6.75), Point(5.925, -6.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-2.073, 5.473), 
+    Point(-2.09583614024661, 5.58780502970953), 
+    Point(-2.16086796564404, 5.68513203435596), 
+    Point(-2.25819497029047, 5.75016385975339), 
+    Point(-2.373, 5.773), 
+    Point(-2.48780502970953, 5.75016385975339), 
+    Point(-2.58513203435596, 5.68513203435596), 
+    Point(-2.65016385975339, 5.58780502970953), 
+    Point(-2.673, 5.473), 
+    Point(-2.65016385975339, 5.35819497029047), 
+    Point(-2.58513203435596, 5.26086796564404), 
+    Point(-2.48780502970953, 5.19583614024661), 
+    Point(-2.373, 5.173), 
+    Point(-2.25819497029047, 5.19583614024661), 
+    Point(-2.16086796564404, 5.26086796564404), 
+    Point(-2.09583614024661, 5.35819497029047), 
+    Point(-2.073, 5.473)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-4.525, 6.565), 
+    Point(-4.53451505843609, 6.61283542904564), 
+    Point(-4.56161165235168, 6.65338834764832), 
+    Point(-4.60216457095436, 6.68048494156391), 
+    Point(-4.65, 6.69), 
+    Point(-4.69783542904564, 6.68048494156391), 
+    Point(-4.73838834764832, 6.65338834764832), 
+    Point(-4.76548494156391, 6.61283542904564), 
+    Point(-4.775, 6.565), 
+    Point(-4.76548494156391, 6.51716457095436), 
+    Point(-4.73838834764832, 6.47661165235168), 
+    Point(-4.69783542904564, 6.44951505843609), 
+    Point(-4.65, 6.44), 
+    Point(-4.60216457095436, 6.44951505843609), 
+    Point(-4.56161165235168, 6.47661165235168), 
+    Point(-4.53451505843609, 6.51716457095436), 
+    Point(-4.525, 6.565)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, -6.5), Point(3.175, -6.5)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, 6.5), Point(3.175, 6.5)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, -6.5), Point(3.175, 6.5)])
@@ -83,9 +110,9 @@ public pcb-component component :
 
 public pcb-module module :
   port power : power
-  inst adc : testlib/TLV2553IDWR/component
+  inst adc : testlib/Texas_Instruments/TLV2553IDWR/component
   port ref : diff-pair
-  port ain :pin[11]
+  port ain : pin[11]
   port spi:spi()
   pin eoc
   bypass-cap-strap(adc.VCC, power.gnd, 1.0e-6)
@@ -100,4 +127,3 @@ public pcb-module module :
   net (ref.N, adc.REF-)
   net (ref.P, adc.REF+)
   net (eoc, adc.EOC)
-

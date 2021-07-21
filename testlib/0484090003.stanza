@@ -1,0 +1,67 @@
+#use-added-syntax(jitx)
+defpackage testlib/Molex/0484090003 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern _0484090003 :
+  pad MOUNT1 : round-rect-pth-pad(2.3, 3.0, 3.0, 1.5) at loc(-6.57, -4.025) on Top
+  pad MOUNT2 : round-rect-pth-pad(2.3, 3.0, 3.0, 1.5) at loc(6.57, -4.025) on Top
+  pad MOUNT3 : round-rect-pth-pad(2.3, 3.0, 3.0, 1.5) at loc(-6.57, 2.775) on Top
+  pad MOUNT4 : round-rect-pth-pad(2.3, 3.0, 3.0, 1.5) at loc(6.57, 2.775) on Top
+  pad p[1] : rect-pth-pad(0.7, 1.208, 1.208) at loc(-3.5, -5.005) on Top
+  pad p[2] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-1.0, -5.005) on Top
+  pad p[3] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(1.0, -5.005) on Top
+  pad p[4] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(3.5, -5.005) on Top
+  pad p[5] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(4.0, -3.505) on Top
+  pad p[6] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(2.0, -3.505) on Top
+  pad p[7] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(0.0, -3.505) on Top
+  pad p[8] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-2.0, -3.505) on Top
+  pad p[9] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-4.0, -3.505) on Top
+  pad p[10] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-3.5, 3.505) on Top
+  pad p[11] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-1.0, 3.505) on Top
+  pad p[12] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(1.0, 3.505) on Top
+  pad p[13] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(3.5, 3.505) on Top
+  pad p[14] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(4.0, 5.005) on Top
+  pad p[15] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(2.0, 5.005) on Top
+  pad p[16] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(0.0, 5.005) on Top
+  pad p[17] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-2.0, 5.005) on Top
+  pad p[18] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-4.0, 5.005) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-8.255, 7.62), Point(8.255, 7.62)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(8.255, 3.937), Point(8.255, 7.62)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-8.255, 3.937), Point(-8.255, 7.62)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-8.255, -8.763), Point(-8.255, -5.08)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(8.255, -8.763), Point(8.255, -5.08)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-8.255, -8.763), Point(8.255, -8.763)])
+  ref-label()
+
+public pcb-component component :
+  name = "0484090003"
+  description = "0484090003"
+  manufacturer = "Molex"
+  mpn = "0484090003"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [MOUNT | MOUNT1, MOUNT2, MOUNT3, MOUNT4 | Right]
+    [VBUS | p[1], p[10] | Left]
+    [D- | p[2], p[11] | Left]
+    [D+ | p[3], p[12] | Left]
+    [GND | p[4], p[13] | Left]
+    [STDA_SSRX- | p[5], p[14] | Left]
+    [STDA_SSRX+ | p[6], p[15] | Left]
+    [GND_DRAIN | p[7], p[16] | Left]
+    [STDA_SSTX- | p[8], p[17] | Left]
+    [STDA_SSTX+ | p[9], p[18] | Left]
+
+  make-box-symbol()
+  assign-landpattern(_0484090003)
+  reference-prefix = "CN"
+

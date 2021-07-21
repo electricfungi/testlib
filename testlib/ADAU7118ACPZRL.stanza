@@ -1,0 +1,89 @@
+#use-added-syntax(jitx)
+defpackage testlib/Analog_Devices/ADAU7118ACPZRL :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern PQFN50P300X300X75_HS-17L :
+  pad p[1] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-1.275, 0.75, 90.0) on Top
+  pad p[2] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-1.275, 0.25, 90.0) on Top
+  pad p[3] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-1.275, -0.25, 90.0) on Top
+  pad p[4] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-1.275, -0.75, 90.0) on Top
+  pad p[5] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-0.75, -1.275) on Top
+  pad p[6] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-0.25, -1.275) on Top
+  pad p[7] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(0.25, -1.275) on Top
+  pad p[8] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(0.75, -1.275) on Top
+  pad p[9] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(1.275, -0.75, 90.0) on Top
+  pad p[10] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(1.275, -0.25, 90.0) on Top
+  pad p[11] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(1.275, 0.25, 90.0) on Top
+  pad p[12] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(1.275, 0.75, 90.0) on Top
+  pad p[13] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(0.75, 1.275) on Top
+  pad p[14] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(0.25, 1.275) on Top
+  pad p[15] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-0.25, 1.275) on Top
+  pad p[16] : round-rect-smd-pad(0.25, 0.4, 0.125) at loc(-0.75, 1.275) on Top
+  pad p[17] : smd-pad(1.6, 1.6) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.025, 1.35), 
+    Point(-2.03451505843609, 1.39783542904564), 
+    Point(-2.06161165235168, 1.43838834764832), 
+    Point(-2.10216457095436, 1.46548494156391), 
+    Point(-2.15, 1.475), 
+    Point(-2.19783542904564, 1.46548494156391), 
+    Point(-2.23838834764832, 1.43838834764832), 
+    Point(-2.26548494156391, 1.39783542904564), 
+    Point(-2.275, 1.35), 
+    Point(-2.26548494156391, 1.30216457095436), 
+    Point(-2.23838834764832, 1.26161165235168), 
+    Point(-2.19783542904564, 1.23451505843609), 
+    Point(-2.15, 1.225), 
+    Point(-2.10216457095436, 1.23451505843609), 
+    Point(-2.06161165235168, 1.26161165235168), 
+    Point(-2.03451505843609, 1.30216457095436), 
+    Point(-2.025, 1.35)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.5, 1.275), Point(-1.5, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.5, 1.5), Point(-1.275, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(1.275, 1.5), Point(1.5, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(1.5, 1.275), Point(1.5, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(1.5, -1.5), Point(1.5, -1.275)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(1.275, -1.5), Point(1.5, -1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.5, -1.5), Point(-1.5, -1.275)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.5, -1.5), Point(-1.275, -1.5)])
+  ref-label()
+
+public pcb-component component :
+  name = "ADAU7118ACPZRL"
+  description = "ADAU7118ACPZRL"
+  manufacturer = "Analog Devices"
+  mpn = "ADAU7118ACPZRL"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [EN | 13 | Right]
+    [ADDRCONFIG | 12 | Right]
+    [SDATA | 11 | Right]
+    [BCLK | 10 | Right]
+    [DVDD | 14 | Up]
+    [GND | 15 | Up]
+    [FSYNC | 9 | Down]
+    [IOVDD | 16 | Up]
+    [SDA | 8 | Down]
+    [EPAD | 17 | Up]
+    [SCL | 7 | Down]
+    [PDM_DAT3 | 6 | Down]
+    [PDM_CLK0 | 1 | Left]
+    [PDM_DAT0 | 2 | Left]
+    [PDM_DAT1 | 3 | Left]
+    [PDM_CLK1 | 4 | Left]
+    [PDM_DAT2 | 5 | Left]
+
+  make-box-symbol()
+  assign-landpattern(PQFN50P300X300X75_HS-17L)
+  reference-prefix = "U"
+

@@ -1,0 +1,66 @@
+#use-added-syntax(jitx)
+defpackage testlib/Allegro_MicroSystems/ACS725LLCTR-20AU-T :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern SOG0508A :
+  pad p[1] : smd-pad(0.635, 2.3876) at loc(0.0, 0.0) on Top
+  pad p[2] : smd-pad(0.635, 2.3876) at loc(1.27, 0.0) on Top
+  pad p[3] : smd-pad(0.635, 2.3876) at loc(2.54, 0.0) on Top
+  pad p[4] : smd-pad(0.635, 2.3876) at loc(3.81, 0.0) on Top
+  pad p[5] : smd-pad(0.635, 2.3876) at loc(3.81, 4.9784) on Top
+  pad p[6] : smd-pad(0.635, 2.3876) at loc(2.54, 4.9784) on Top
+  pad p[7] : smd-pad(0.635, 2.3876) at loc(1.27, 4.9784) on Top
+  pad p[8] : smd-pad(0.635, 2.3876) at loc(0.0, 4.9784) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.5, [
+    Point(-1.043, 0.4064), 
+    Point(-1.05061204674887, 0.444668343236509), 
+    Point(-1.07228932188135, 0.477110678118655), 
+    Point(-1.10473165676349, 0.498787953251129), 
+    Point(-1.143, 0.5064), 
+    Point(-1.18126834323651, 0.498787953251129), 
+    Point(-1.21371067811865, 0.477110678118655), 
+    Point(-1.23538795325113, 0.444668343236509), 
+    Point(-1.243, 0.4064), 
+    Point(-1.23538795325113, 0.368131656763491), 
+    Point(-1.21371067811865, 0.335689321881345), 
+    Point(-1.18126834323651, 0.314012046748871), 
+    Point(-1.143, 0.3064), 
+    Point(-1.10473165676349, 0.314012046748871), 
+    Point(-1.07228932188135, 0.335689321881345), 
+    Point(-1.05061204674887, 0.368131656763491), 
+    Point(-1.043, 0.4064)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2032, [Point(-0.3048, 3.4544), Point(4.1148, 3.4544)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2032, [Point(-0.3048, 1.524), Point(4.1148, 1.524)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2032, [Point(0.3048, 1.524), Point(0.3048, 3.4544)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2032, [Point(-0.3048, 1.524), Point(-0.3048, 3.4544)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2032, [Point(4.1148, 1.524), Point(4.1148, 3.4544)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-010-0117-01"
+  description = "ACS725LLCTR-20AU-T"
+  manufacturer = "Allegro MicroSystems"
+  mpn = "ACS725LLCTR-20AU-T"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VCC | 8 | Right]
+    [VIOUT | 7 | Right]
+    [FILTER | 6 | Right]
+    [GND | 5 | Right]
+    [IP+ | 1, 2 | Left]
+    [IP- | 3, 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(SOG0508A)
+  reference-prefix = "U"
+

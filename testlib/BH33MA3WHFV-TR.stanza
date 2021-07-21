@@ -1,0 +1,46 @@
+#use-added-syntax(jitx)
+defpackage testlib/Rohm/BH33MA3WHFV-TR :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern HVSOF6_ROM-L :
+  pad p[1] : smd-pad(0.508, 0.2286) at loc(-1.4986, 0.5) on Top
+  pad p[2] : smd-pad(0.508, 0.2286) at loc(-1.4986, 0.0) on Top
+  pad p[3] : smd-pad(0.508, 0.2286) at loc(-1.4986, -0.5) on Top
+  pad p[4] : smd-pad(0.508, 0.2286) at loc(1.4986, -0.5) on Top
+  pad p[5] : smd-pad(0.508, 0.2286) at loc(1.4986, 0.0) on Top
+  pad p[6] : smd-pad(0.508, 0.2286) at loc(1.4986, 0.5) on Top
+  pad p[7] : smd-pad(1.6002, 1.6002) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.4732, 0.9779), Point(-0.93, 0.9779)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.4732, -0.9779), Point(-0.93, -0.9779)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(0.93, 0.9779), Point(1.4732, 0.9779)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(0.93, -0.9779), Point(1.4732, -0.9779)])
+  ref-label()
+
+public pcb-component component :
+  name = "BH33MA3WHFV-TR"
+  description = "300mA regulator"
+  manufacturer = "Rohm"
+  mpn = "BH33MA3WHFV-TR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VOUT | 2, 3 | Right]
+    [NOISE | 4 | Right]
+    [EPAD | 7 | Right]
+    [GND | 5 | Right]
+    [VIN | 1 | Left]
+    [STBY | 6 | Left]
+
+  make-box-symbol()
+  assign-landpattern(HVSOF6_ROM-L)
+  reference-prefix = "U"
+

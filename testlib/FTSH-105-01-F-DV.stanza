@@ -1,0 +1,54 @@
+#use-added-syntax(jitx)
+defpackage testlib/Samtec_Inc_/FTSH-105-01-F-DV :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern FTSH-105-01-F-DV :
+  pad p[1] : smd-pad(0.74, 2.79) at loc(2.54, 2.035, 180.0) on Top
+  pad p[2] : smd-pad(0.74, 2.79) at loc(2.54, -2.035, 180.0) on Top
+  pad p[3] : smd-pad(0.74, 2.79) at loc(1.27, 2.035, 180.0) on Top
+  pad p[4] : smd-pad(0.74, 2.79) at loc(1.27, -2.035, 180.0) on Top
+  pad p[5] : smd-pad(0.74, 2.79) at loc(0.0, 2.035, 180.0) on Top
+  pad p[6] : smd-pad(0.74, 2.79) at loc(0.0, -2.035, 180.0) on Top
+  pad p[7] : smd-pad(0.74, 2.79) at loc(-1.27, 2.035, 180.0) on Top
+  pad p[8] : smd-pad(0.74, 2.79) at loc(-1.27, -2.035, 180.0) on Top
+  pad p[9] : smd-pad(0.74, 2.79) at loc(-2.54, 2.035, 180.0) on Top
+  pad p[10] : smd-pad(0.74, 2.79) at loc(-2.54, -2.035, 180.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Text("1", 1.778, C, loc(5.3086, 5.4864, 180.0))
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-3.25999, -3.76499), Point(3.34, -3.76499)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-3.25999, 3.83499), Point(3.34, 3.83499)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(3.34, -3.76499), Point(3.34, 3.83499)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-3.25999, -3.76499), Point(-3.25999, 3.83499)])
+  ref-label()
+
+public pcb-component component :
+  name = "FTSH-105-01-F-DV"
+  description = "FTSH-105-01-F-DV"
+  manufacturer = "Samtec Inc."
+  mpn = "FTSH-105-01-F-DV"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[2] | 2 | Right]
+    [p[4] | 4 | Right]
+    [p[6] | 6 | Right]
+    [p[8] | 8 | Right]
+    [p[10] | 10 | Right]
+    [p[1] | 1 | Left]
+    [p[3] | 3 | Left]
+    [p[5] | 5 | Left]
+    [p[7] | 7 | Left]
+    [p[9] | 9 | Left]
+
+  make-box-symbol()
+  assign-landpattern(FTSH-105-01-F-DV)
+  reference-prefix = "CN"
+

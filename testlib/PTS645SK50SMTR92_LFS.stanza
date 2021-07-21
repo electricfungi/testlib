@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/PTS645SK50SMTR92_LFS :
+defpackage testlib/C_K/PTS645SK50SMTR92_LFS :
   import core
   import collections
   import math
@@ -16,10 +16,10 @@ pcb-landpattern SMTR92 :
   pad p[3] : smd-pad(1.55, 1.3) at loc(-3.975, -2.25) on Top
   pad p[4] : smd-pad(1.55, 1.3) at loc(3.975, -2.25) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.334, -3.429), Point(-5.334, 3.429)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.334, -3.429), Point(5.334, -3.429)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.334, -3.429), Point(5.334, 3.429)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.334, 3.429), Point(5.334, 3.429)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-5.334, 3.429), Point(5.334, 3.429)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(5.334, -3.429), Point(5.334, 3.429)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-5.334, -3.429), Point(5.334, -3.429)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-5.334, -3.429), Point(-5.334, 3.429)])
   ref-label()
 
 pcb-symbol SW_SMT_SPST-symbol :
@@ -56,6 +56,8 @@ pcb-symbol SW_SMT_SPST-symbol :
     Point(2.54, -1.016), 
     Point(2.54, 1.016), 
     Point(1.778, 1.016)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(-3.04, 5.88))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(-3.04, 6.942))
 
 public pcb-component component :
   name = "SW_SMT_SPST"

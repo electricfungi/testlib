@@ -1,0 +1,79 @@
+#use-added-syntax(jitx)
+defpackage testlib/STMicroelectronics/VL53L1CXV0FY_1 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern LGA12_STM :
+  pad p[1] : smd-pad(0.508, 0.508) at loc(0.79997, 1.6, 270.0) on Top
+  pad p[2] : smd-pad(0.508, 0.508) at loc(0.79997, 0.8, 270.0) on Top
+  pad p[3] : smd-pad(0.508, 0.508) at loc(0.79997, 0.0, 270.0) on Top
+  pad p[4] : smd-pad(0.508, 0.508) at loc(0.79997, -0.8, 270.0) on Top
+  pad p[5] : smd-pad(0.508, 0.508) at loc(0.79997, -1.6, 270.0) on Top
+  pad p[6] : smd-pad(0.508, 0.508) at loc(0.0, -1.59995, 180.0) on Top
+  pad p[7] : smd-pad(0.508, 0.508) at loc(-0.79997, -1.6, 270.0) on Top
+  pad p[8] : smd-pad(0.508, 0.508) at loc(-0.79997, -0.8, 270.0) on Top
+  pad p[9] : smd-pad(0.508, 0.508) at loc(-0.79997, 0.0, 270.0) on Top
+  pad p[10] : smd-pad(0.508, 0.508) at loc(-0.79997, 0.8, 270.0) on Top
+  pad p[11] : smd-pad(0.508, 0.508) at loc(-0.79997, 1.6, 270.0) on Top
+  pad p[12] : smd-pad(0.508, 0.508) at loc(0.0, 1.59995, 180.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [
+    Point(1.3716, 2.7305), 
+    Point(1.36386616050315, 2.76938063672829), 
+    Point(1.34184204896855, 2.80234204896855), 
+    Point(1.30888063672829, 2.82436616050315), 
+    Point(1.27, 2.8321), 
+    Point(1.23111936327171, 2.82436616050315), 
+    Point(1.19815795103145, 2.80234204896855), 
+    Point(1.17613383949685, 2.76938063672829), 
+    Point(1.1684, 2.7305), 
+    Point(1.17613383949685, 2.69161936327171), 
+    Point(1.19815795103145, 2.65865795103145), 
+    Point(1.23111936327171, 2.63663383949685), 
+    Point(1.27, 2.6289), 
+    Point(1.30888063672829, 2.63663383949685), 
+    Point(1.34184204896855, 2.65865795103145), 
+    Point(1.36386616050315, 2.69161936327171), 
+    Point(1.3716, 2.7305)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.2545, 6.21883), Point(0.0, 6.21883)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.0, 6.21883), Point(4.2545, 6.21883)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.28425, 0.21173), Point(-4.28425, 6.21883)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.28425, -5.79537), Point(-4.28425, 0.21173)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.0026, -5.80849), Point(4.2519, -5.80849)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.2571, -5.80849), Point(-0.0026, -5.80849)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(4.2545, -5.80589), Point(4.2545, 6.21883)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(4.2519, -5.80849), Point(4.2545, -5.80589)])
+  ref-label()
+
+public pcb-component component :
+  name = "VL53L1CXV0FY/1"
+  description = "Time of Flight Sensor"
+  manufacturer = "STMicroelectronics"
+  mpn = "VL53L1CXV0FY/1"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [AVDDVCSEL | 1 | Right]
+    [AVDD | 11 | Right]
+    [AVSSVCSEL | 2 | Right]
+    [GND | 3 | Right]
+    [GND2 | 4 | Right]
+    [GND3 | 6 | Right]
+    [GND4 | 12 | Right]
+    [XSHUT | 5 | Left]
+    [GPIO1 | 7 | Left]
+    [SDA | 9 | Left]
+    [SCL | 10 | Left]
+    [DNC | 8 | Left]
+
+  make-box-symbol()
+  assign-landpattern(LGA12_STM)
+  reference-prefix = "U"
+

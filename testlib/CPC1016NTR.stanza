@@ -1,0 +1,77 @@
+#use-added-syntax(jitx)
+defpackage testlib/IXYS_Integrated_Circuits_Division/CPC1016NTR :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern IxysSOP-4 :
+  pad p[1] : round-rect-smd-pad(0.55, 1.45, 0.275) at loc(-2.75, 1.27, 90.0) on Top
+  pad p[2] : round-rect-smd-pad(0.55, 1.45, 0.275) at loc(-2.75, -1.27, 90.0) on Top
+  pad p[3] : round-rect-smd-pad(0.55, 1.45, 0.275) at loc(2.75, -1.27, 90.0) on Top
+  pad p[4] : round-rect-smd-pad(0.55, 1.45, 0.275) at loc(2.75, 1.27, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.625, 2.095), 
+    Point(-2.63451505843609, 2.14283542904564), 
+    Point(-2.66161165235168, 2.18338834764832), 
+    Point(-2.70216457095436, 2.21048494156391), 
+    Point(-2.75, 2.22), 
+    Point(-2.79783542904564, 2.21048494156391), 
+    Point(-2.83838834764832, 2.18338834764832), 
+    Point(-2.86548494156391, 2.14283542904564), 
+    Point(-2.875, 2.095), 
+    Point(-2.86548494156391, 2.04716457095436), 
+    Point(-2.83838834764832, 2.00661165235168), 
+    Point(-2.79783542904564, 1.97951505843609), 
+    Point(-2.75, 1.97), 
+    Point(-2.70216457095436, 1.97951505843609), 
+    Point(-2.66161165235168, 2.00661165235168), 
+    Point(-2.63451505843609, 2.04716457095436), 
+    Point(-2.625, 2.095)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-0.223, 1.023), 
+    Point(-0.245836140246614, 1.13780502970953), 
+    Point(-0.310867965644036, 1.23513203435596), 
+    Point(-0.408194970290473, 1.30016385975339), 
+    Point(-0.523, 1.323), 
+    Point(-0.637805029709527, 1.30016385975339), 
+    Point(-0.735132034355964, 1.23513203435596), 
+    Point(-0.800163859753386, 1.13780502970953), 
+    Point(-0.823, 1.023), 
+    Point(-0.800163859753386, 0.908194970290473), 
+    Point(-0.735132034355964, 0.810867965644036), 
+    Point(-0.637805029709527, 0.745836140246614), 
+    Point(-0.523, 0.723), 
+    Point(-0.408194970290473, 0.745836140246614), 
+    Point(-0.310867965644036, 0.810867965644036), 
+    Point(-0.245836140246614, 0.908194970290473), 
+    Point(-0.223, 1.023)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.55, -2.05), Point(-1.55, 2.05)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.55, -2.05), Point(1.55, 2.05)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.55, 2.05), Point(1.55, 2.05)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.55, -2.05), Point(1.55, -2.05)])
+  ref-label()
+
+public pcb-component component :
+  name = "OPTO-COUPLER_100V"
+  description = "OPTO-COUPLER_100V"
+  manufacturer = "IXYS Integrated Circuits Division"
+  mpn = "CPC1016NTR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [L2 | 4 | Right]
+    [L1 | 3 | Right]
+    [A | 1 | Left]
+    [K | 2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(IxysSOP-4)
+  reference-prefix = "Q"
+

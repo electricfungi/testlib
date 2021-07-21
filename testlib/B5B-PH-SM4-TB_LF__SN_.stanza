@@ -1,0 +1,48 @@
+#use-added-syntax(jitx)
+defpackage testlib/JST/B5B-PH-SM4-TB_LF__SN_ :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern B6B-PH-SM4-TBLFSN :
+  pad MOUNT1 : smd-pad(1.6, 3.0) at loc(7.4, -1.125) on Top
+  pad MOUNT2 : smd-pad(1.6, 3.0) at loc(-5.4, -1.125) on Top
+  pad p[1] : smd-pad(1.0, 5.5) at loc(5.0, 1.125) on Top
+  pad p[2] : smd-pad(1.0, 5.5) at loc(3.0, 1.125) on Top
+  pad p[3] : smd-pad(1.0, 5.5) at loc(1.0, 1.125) on Top
+  pad p[4] : smd-pad(1.0, 5.5) at loc(-1.0, 1.125) on Top
+  pad p[5] : smd-pad(1.0, 5.5) at loc(-3.0, 1.125) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.382, 1.651), Point(-3.969, 1.651)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.382, 0.762), Point(-6.382, 1.651)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(8.382, 0.762), Point(8.382, 1.651)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.969, 1.651), Point(8.382, 1.651)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.382, -4.064), Point(-6.382, -3.048)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.382, -4.064), Point(8.382, -4.064)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(8.382, -4.064), Point(8.382, -3.048)])
+  ref-label()
+
+public pcb-component component :
+  name = "B5B-PH-SM4-TB(LF)(SN)"
+  description = "B5B-PH-SM4-TB(LF)(SN)"
+  manufacturer = "JST"
+  mpn = "B5B-PH-SM4-TB(LF)(SN)"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+    [p[2] | 2 | Left]
+    [p[3] | 3 | Left]
+    [p[4] | 4 | Left]
+    [p[5] | 5 | Left]
+
+  make-box-symbol()
+  assign-landpattern(B6B-PH-SM4-TBLFSN)
+  reference-prefix = "C"
+

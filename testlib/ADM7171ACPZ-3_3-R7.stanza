@@ -1,0 +1,68 @@
+#use-added-syntax(jitx)
+defpackage testlib/Analog_Devices/ADM7171ACPZ-3_3-R7 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern CP-8-21_ADI :
+  pad p[1] : smd-pad(0.8128, 0.254) at loc(-1.4478, 0.75) on Top
+  pad p[2] : smd-pad(0.8128, 0.254) at loc(-1.4478, 0.25) on Top
+  pad p[3] : smd-pad(0.8128, 0.254) at loc(-1.4478, -0.25) on Top
+  pad p[4] : smd-pad(0.8128, 0.254) at loc(-1.4478, -0.75) on Top
+  pad p[5] : smd-pad(0.8128, 0.254) at loc(1.4478, -0.75) on Top
+  pad p[6] : smd-pad(0.8128, 0.254) at loc(1.4478, -0.25) on Top
+  pad p[7] : smd-pad(0.8128, 0.254) at loc(1.4478, 0.25) on Top
+  pad p[8] : smd-pad(0.8128, 0.254) at loc(1.4478, 0.75) on Top
+  pad p[9] : smd-pad(1.7018, 2.54) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [
+    Point(-2.18693995445455, 0.823829118117606), 
+    Point(-2.2040861278093, 0.826180723559927), 
+    Point(-2.22132071011029, 0.824602597526309), 
+    Point(-2.23775466700108, 0.819176146588619), 
+    Point(-2.25254026384947, 0.810181290575076), 
+    Point(-2.26491479556932, 0.798082023093855), 
+    Point(-2.27423993025029, 0.783502476734342), 
+    Point(-2.28003463708092, 0.767194727606562), 
+    Point(-2.282, 0.75), 
+    Point(-2.28003463708092, 0.732805272393438), 
+    Point(-2.27423993025029, 0.716497523265658), 
+    Point(-2.26491479556932, 0.701917976906145), 
+    Point(-2.25254026384947, 0.689818709424924), 
+    Point(-2.23775466700108, 0.680823853411381), 
+    Point(-2.22132071011029, 0.675397402473691), 
+    Point(-2.2040861278093, 0.673819276440073), 
+    Point(-2.18693995445455, 0.676170881882394)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(1.6764, 1.20974), Point(1.6764, 1.6764)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.6764, -1.6764), Point(1.6764, -1.6764)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(1.6764, -1.6764), Point(1.6764, -1.20974)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.6764, 1.6764), Point(1.6764, 1.6764)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.6764, 1.20974), Point(-1.6764, 1.6764)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-1.6764, -1.6764), Point(-1.6764, -1.20974)])
+  ref-label()
+
+public pcb-component component :
+  name = "ADM7171ACPZ-3.3-R7"
+  description = "ADM7171ACPZ-3.3-R7"
+  manufacturer = "Analog Devices"
+  mpn = "ADM7171ACPZ-3.3-R7"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VIN | 7, 8 | Right]
+    [GND | 6, 9 | Right]
+    [EN | 5 | Right]
+    [VOUT | 1, 2 | Left]
+    [SENSE | 3 | Left]
+    [SS | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(CP-8-21_ADI)
+  reference-prefix = "U"
+

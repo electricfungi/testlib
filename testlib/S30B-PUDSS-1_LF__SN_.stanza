@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/S30B-PUDSS-1_LF__SN_ :
+defpackage testlib/JST_Sales_America_Inc_/S30B-PUDSS-1_LF__SN_ :
   import core
   import collections
   import math
@@ -12,38 +12,38 @@ defpackage testlib/S30B-PUDSS-1_LF__SN_ :
   import ocdb/box-symbol
 
 pcb-landpattern S30B-PUDSS-1LFSN :
-  pad MOUNT1 : pth-pad(0.8, 0.8) at loc(14.9, 4.85) on Top
-  pad MOUNT2 : pth-pad(0.8, 0.8) at loc(-14.9, 4.85) on Top
-  pad p[1] : rect-pth-pad(0.35, 1.208, 1.208) at loc(14.0, -4.85) on Top
-  pad p[2] : pth-pad(0.35, 0.604) at loc(14.0, -2.85) on Top
-  pad p[3] : pth-pad(0.35, 0.604) at loc(12.0, -4.85) on Top
-  pad p[4] : pth-pad(0.35, 0.604) at loc(12.0, -2.85) on Top
-  pad p[5] : pth-pad(0.35, 0.604) at loc(10.0, -4.85) on Top
-  pad p[6] : pth-pad(0.35, 0.604) at loc(10.0, -2.85) on Top
-  pad p[7] : pth-pad(0.35, 0.604) at loc(8.0, -4.85) on Top
-  pad p[8] : pth-pad(0.35, 0.604) at loc(8.0, -2.85) on Top
-  pad p[9] : pth-pad(0.35, 0.604) at loc(6.0, -4.85) on Top
-  pad p[10] : pth-pad(0.35, 0.604) at loc(6.0, -2.85) on Top
-  pad p[11] : pth-pad(0.35, 0.604) at loc(4.0, -4.85) on Top
-  pad p[12] : pth-pad(0.35, 0.604) at loc(4.0, -2.85) on Top
-  pad p[13] : pth-pad(0.35, 0.604) at loc(2.0, -4.85) on Top
-  pad p[14] : pth-pad(0.35, 0.604) at loc(2.0, -2.85) on Top
-  pad p[15] : pth-pad(0.35, 0.604) at loc(0.0, -4.85) on Top
-  pad p[16] : pth-pad(0.35, 0.604) at loc(0.0, -2.85) on Top
-  pad p[17] : pth-pad(0.35, 0.604) at loc(-2.0, -4.85) on Top
-  pad p[18] : pth-pad(0.35, 0.604) at loc(-2.0, -2.85) on Top
-  pad p[19] : pth-pad(0.35, 0.604) at loc(-4.0, -4.85) on Top
-  pad p[20] : pth-pad(0.35, 0.604) at loc(-4.0, -2.85) on Top
-  pad p[21] : pth-pad(0.35, 0.604) at loc(-6.0, -4.85) on Top
-  pad p[22] : pth-pad(0.35, 0.604) at loc(-6.0, -2.85) on Top
-  pad p[23] : pth-pad(0.35, 0.604) at loc(-8.0, -4.85) on Top
-  pad p[24] : pth-pad(0.35, 0.604) at loc(-8.0, -2.85) on Top
-  pad p[25] : pth-pad(0.35, 0.604) at loc(-10.0, -4.85) on Top
-  pad p[26] : pth-pad(0.35, 0.604) at loc(-10.0, -2.85) on Top
-  pad p[27] : pth-pad(0.35, 0.604) at loc(-12.0, -4.85) on Top
-  pad p[28] : pth-pad(0.35, 0.604) at loc(-12.0, -2.85) on Top
-  pad p[29] : pth-pad(0.35, 0.604) at loc(-14.0, -4.85) on Top
-  pad p[30] : pth-pad(0.35, 0.604) at loc(-14.0, -2.85) on Top
+  pad MOUNT1 : round-rect-pth-pad(1.6, 1.6, 1.6, 0.8) at loc(14.9, 4.85) on Top
+  pad MOUNT2 : round-rect-pth-pad(1.6, 1.6, 1.6, 0.8) at loc(-14.9, 4.85) on Top
+  pad p[1] : rect-pth-pad(0.7, 1.208, 1.208) at loc(14.0, -4.85) on Top
+  pad p[2] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(14.0, -2.85) on Top
+  pad p[3] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(12.0, -4.85) on Top
+  pad p[4] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(12.0, -2.85) on Top
+  pad p[5] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(10.0, -4.85) on Top
+  pad p[6] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(10.0, -2.85) on Top
+  pad p[7] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(8.0, -4.85) on Top
+  pad p[8] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(8.0, -2.85) on Top
+  pad p[9] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(6.0, -4.85) on Top
+  pad p[10] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(6.0, -2.85) on Top
+  pad p[11] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(4.0, -4.85) on Top
+  pad p[12] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(4.0, -2.85) on Top
+  pad p[13] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(2.0, -4.85) on Top
+  pad p[14] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(2.0, -2.85) on Top
+  pad p[15] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(0.0, -4.85) on Top
+  pad p[16] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(0.0, -2.85) on Top
+  pad p[17] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-2.0, -4.85) on Top
+  pad p[18] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-2.0, -2.85) on Top
+  pad p[19] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-4.0, -4.85) on Top
+  pad p[20] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-4.0, -2.85) on Top
+  pad p[21] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-6.0, -4.85) on Top
+  pad p[22] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-6.0, -2.85) on Top
+  pad p[23] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-8.0, -4.85) on Top
+  pad p[24] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-8.0, -2.85) on Top
+  pad p[25] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-10.0, -4.85) on Top
+  pad p[26] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-10.0, -2.85) on Top
+  pad p[27] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-12.0, -4.85) on Top
+  pad p[28] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-12.0, -2.85) on Top
+  pad p[29] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-14.0, -4.85) on Top
+  pad p[30] : round-rect-pth-pad(0.7, 1.208, 1.208, 0.604) at loc(-14.0, -2.85) on Top
 
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-16.383, -5.969), Point(-16.383, 6.35)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-16.383, -5.969), Point(16.383, -5.969)])

@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/BSS123TA :
+defpackage testlib/Diodes_Incorporated/BSS123TA :
   import core
   import collections
   import math
@@ -10,25 +10,36 @@ defpackage testlib/BSS123TA :
   import ocdb/generic-components
   import ocdb/symbols
 
-pcb-landpattern DIODESINCSOT23-3 :
-  pad p[1] : smd-pad(0.8, 0.9) at loc(-1.0, 0.9, 90.0) on Top
-  pad p[2] : smd-pad(0.8, 0.9) at loc(-1.0, -0.9, 90.0) on Top
+pcb-landpattern BSS123 :
+  pad p[1] : smd-pad(0.8, 0.9) at loc(-1.0, 0.95, 90.0) on Top
+  pad p[2] : smd-pad(0.8, 0.9) at loc(-1.0, -0.95, 90.0) on Top
   pad p[3] : smd-pad(0.8, 0.9) at loc(1.0, 0.0, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-1.0, 1.85, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, -1.75), Point(1.875, -1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, 1.75), Point(1.875, 1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(1.875, -1.75), Point(1.875, 1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, -1.75), Point(-1.875, 1.75)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.7, -1.5), Point(0.7, -0.827)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.3, -1.5), Point(0.7, -1.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.7, 0.827), Point(0.7, 1.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.3, 1.5), Point(0.7, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-1.272, 1.778), 
+    Point(-1.28151505843609, 1.82583542904564), 
+    Point(-1.30861165235168, 1.86638834764832), 
+    Point(-1.34916457095436, 1.89348494156391), 
+    Point(-1.397, 1.903), 
+    Point(-1.44483542904564, 1.89348494156391), 
+    Point(-1.48538834764832, 1.86638834764832), 
+    Point(-1.51248494156391, 1.82583542904564), 
+    Point(-1.522, 1.778), 
+    Point(-1.51248494156391, 1.73016457095436), 
+    Point(-1.48538834764832, 1.68961165235168), 
+    Point(-1.44483542904564, 1.66251505843609), 
+    Point(-1.397, 1.653), 
+    Point(-1.34916457095436, 1.66251505843609), 
+    Point(-1.30861165235168, 1.68961165235168), 
+    Point(-1.28151505843609, 1.73016457095436), 
+    Point(-1.272, 1.778)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(0.70432, -1.5), Point(0.70432, -0.7)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(0.10432, -1.5), Point(0.70432, -1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(0.70432, 0.7), Point(0.70432, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(0.10432, 1.5), Point(0.70432, 1.5)])
   ref-label()
 
-pcb-symbol N-FET100V017A6Ohms-symbol :
+pcb-symbol CMP-012-0021-04-symbol :
   pin D at Point(10.16, 2.54) with :
     direction = Up
     length = 5.08
@@ -65,18 +76,20 @@ pcb-symbol N-FET100V017A6Ohms-symbol :
     Point(11.938, 0.254)])
   layer("foreground") = Polygon([Point(7.62, 0.0), Point(9.144, -0.508), Point(9.144, 0.508)])
   layer("foreground") = Polygon([Point(12.7, 0.508), Point(11.938, -0.762), Point(13.462, -0.762)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(4.58, 3.34))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(4.58, 4.402))
 
 public pcb-component component :
-  name = "N-FET 100V 0.17A 6Ohms"
-  description = "N-FET 100V 0.17A 6Ohms"
+  name = "CMP-012-0021-04"
+  description = "BSS123TA"
   manufacturer = "Diodes Incorporated"
   mpn = "BSS123TA"
   pin D
   pin G
   pin S
-  val lp = DIODESINCSOT23-3
+  val lp = BSS123
   landpattern = lp(D => lp.p[3], G => lp.p[1], S => lp.p[2])
-  val sym = N-FET100V017A6Ohms-symbol
+  val sym = CMP-012-0021-04-symbol
   symbol = sym(D => sym.D, G => sym.G, S => sym.S)
   reference-prefix = "Q"
 

@@ -1,0 +1,71 @@
+#use-added-syntax(jitx)
+defpackage testlib/Texas_Instruments/TPS54561DPRR :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern SON80P400X400X80-11N :
+  pad p[1] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(-1.935, 1.6) on Top
+  pad p[2] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(-1.935, 0.8) on Top
+  pad p[3] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(-1.935, 0.0) on Top
+  pad p[4] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(-1.935, -0.8) on Top
+  pad p[5] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(-1.935, -1.6) on Top
+  pad p[6] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(1.935, -1.6, 180.0) on Top
+  pad p[7] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(1.935, -0.8, 180.0) on Top
+  pad p[8] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(1.935, 0.0, 180.0) on Top
+  pad p[9] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(1.935, 0.8, 180.0) on Top
+  pad p[10] : round-rect-smd-pad(0.86, 0.32, 0.0) at loc(1.935, 1.6, 180.0) on Top
+  pad p[11] : smd-pad(2.6, 3.0) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [
+    Point(-2.9, 1.6), 
+    Point(-2.90761204674887, 1.63826834323651), 
+    Point(-2.92928932188135, 1.67071067811865), 
+    Point(-2.96173165676349, 1.69238795325113), 
+    Point(-3.0, 1.7), 
+    Point(-3.03826834323651, 1.69238795325113), 
+    Point(-3.07071067811865, 1.67071067811865), 
+    Point(-3.09238795325113, 1.63826834323651), 
+    Point(-3.1, 1.6), 
+    Point(-3.09238795325113, 1.56173165676349), 
+    Point(-3.07071067811865, 1.52928932188135), 
+    Point(-3.03826834323651, 1.50761204674887), 
+    Point(-3.0, 1.5), 
+    Point(-2.96173165676349, 1.50761204674887), 
+    Point(-2.92928932188135, 1.52928932188135), 
+    Point(-2.90761204674887, 1.56173165676349), 
+    Point(-2.9, 1.6)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.05, -2.074), Point(2.05, -2.074)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.05, 2.074), Point(2.05, 2.074)])
+  ref-label()
+
+public pcb-component component :
+  name = "TPS54561DPRR"
+  description = "TPS54561DPRR"
+  manufacturer = "Texas Instruments"
+  mpn = "TPS54561DPRR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VIN | 2 | Right]
+    [PWRGD | 10 | Right]
+    [BOOT | 1 | Right]
+    [SW | 9 | Right]
+    [EXP | 11 | Right]
+    [GND | 8 | Right]
+    [EN | 3 | Left]
+    [RTCLK | 5 | Left]
+    [SSTR | 4 | Left]
+    [FB | 6 | Left]
+    [COMP | 7 | Left]
+
+  make-box-symbol()
+  assign-landpattern(SON80P400X400X80-11N)
+  reference-prefix = "U"
+

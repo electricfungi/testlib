@@ -1,0 +1,105 @@
+#use-added-syntax(jitx)
+defpackage testlib/Microchip_Technology/LAN8720AI-CP :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern _24-S4QFN-4x4B-05P :
+  pad p[1] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, 1.25, 90.0) on Top
+  pad p[2] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, 0.75, 90.0) on Top
+  pad p[3] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, 0.25, 90.0) on Top
+  pad p[4] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, -0.25, 90.0) on Top
+  pad p[5] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, -0.75, 90.0) on Top
+  pad p[6] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.9, -1.25, 90.0) on Top
+  pad p[7] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.25, -1.9) on Top
+  pad p[8] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-0.75, -1.9) on Top
+  pad p[9] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-0.25, -1.9) on Top
+  pad p[10] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(0.25, -1.9) on Top
+  pad p[11] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(0.75, -1.9) on Top
+  pad p[12] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.25, -1.9) on Top
+  pad p[13] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, -1.25, 90.0) on Top
+  pad p[14] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, -0.75, 90.0) on Top
+  pad p[15] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, -0.25, 90.0) on Top
+  pad p[16] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, 0.25, 90.0) on Top
+  pad p[17] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, 0.75, 90.0) on Top
+  pad p[18] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.9, 1.25, 90.0) on Top
+  pad p[19] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(1.25, 1.9) on Top
+  pad p[20] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(0.75, 1.9) on Top
+  pad p[21] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(0.25, 1.9) on Top
+  pad p[22] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-0.25, 1.9) on Top
+  pad p[23] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-0.75, 1.9) on Top
+  pad p[24] : round-rect-smd-pad(0.28, 0.69, 0.14) at loc(-1.25, 1.9) on Top
+  pad p[25] : smd-pad(2.5, 2.5) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.725, 2.05), 
+    Point(-2.73451505843609, 2.09783542904564), 
+    Point(-2.76161165235168, 2.13838834764832), 
+    Point(-2.80216457095436, 2.16548494156391), 
+    Point(-2.85, 2.175), 
+    Point(-2.89783542904564, 2.16548494156391), 
+    Point(-2.93838834764832, 2.13838834764832), 
+    Point(-2.96548494156391, 2.09783542904564), 
+    Point(-2.975, 2.05), 
+    Point(-2.96548494156391, 2.00216457095436), 
+    Point(-2.93838834764832, 1.96161165235168), 
+    Point(-2.89783542904564, 1.93451505843609), 
+    Point(-2.85, 1.925), 
+    Point(-2.80216457095436, 1.93451505843609), 
+    Point(-2.76161165235168, 1.96161165235168), 
+    Point(-2.73451505843609, 2.00216457095436), 
+    Point(-2.725, 2.05)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.2, 1.817), Point(-2.2, 2.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.2, 2.2), Point(-1.817, 2.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(1.817, 2.2), Point(2.2, 2.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(2.2, 1.817), Point(2.2, 2.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(2.2, -2.2), Point(2.2, -1.817)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(1.817, -2.2), Point(2.2, -2.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.2, -2.2), Point(-2.2, -1.817)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-2.2, -2.2), Point(-1.817, -2.2)])
+  ref-label()
+
+public pcb-component component :
+  name = "LAN8720AI-CP"
+  description = "LAN8720AI-CP"
+  manufacturer = "Microchip Technology"
+  mpn = "LAN8720AI-CP"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VDDIO | 9 | Right]
+    [VDDCR | 6 | Right]
+    [VDD1A | 19 | Right]
+    [VDD2A | 1 | Right]
+    [TXP | 21 | Right]
+    [TXN | 20 | Right]
+    [RXP | 23 | Right]
+    [RXN | 22 | Right]
+    [LED1REGOFF | 3 | Right]
+    [LED2nINTSEL | 2 | Right]
+    [RBIAS | 24 | Right]
+    [TXEN | 16 | Left]
+    [TXD0 | 17 | Left]
+    [TXD1 | 18 | Left]
+    [RXD0MODE0 | 8 | Left]
+    [RXD1MODE1 | 7 | Left]
+    [RXERPHYAD0 | 10 | Left]
+    [CRS_DVMODE2 | 11 | Left]
+    [MDIO | 12 | Left]
+    [MDC | 13 | Left]
+    [nINTREFCLK0 | 14 | Left]
+    [nRST | 15 | Left]
+    [XTAL1CKIN | 5 | Left]
+    [XTAL2 | 4 | Left]
+    [GND | 25 | Left]
+
+  make-box-symbol()
+  assign-landpattern(_24-S4QFN-4x4B-05P)
+  reference-prefix = "U"
+

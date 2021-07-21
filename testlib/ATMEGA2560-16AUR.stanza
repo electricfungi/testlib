@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/ATMEGA2560-16AUR :
+defpackage testlib/Microchip_Technology/ATMEGA2560-16AUR :
   import core
   import collections
   import math
@@ -9,6 +9,7 @@ defpackage testlib/ATMEGA2560-16AUR :
   import ocdb/land-patterns
   import ocdb/generic-components
   import ocdb/symbols
+  import ocdb/box-symbol
 
 pcb-landpattern MICROCHIP100A :
   pad p[1] : smd-pad(0.27, 1.5) at loc(-7.75, 6.0, 90.0) on Top
@@ -112,601 +113,133 @@ pcb-landpattern MICROCHIP100A :
   pad p[99] : smd-pad(0.27, 1.5) at loc(-5.5, 7.75) on Top
   pad p[100] : smd-pad(0.27, 1.5) at loc(-6.0, 7.75) on Top
 
-  ; layer(Silkscreen("F-SilkS", Top)) = Circle(-5.573, 5.573, 0.3)
+  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+  ;   Point(-5.273, 5.573), 
+  ;   Point(-5.29583614024661, 5.68780502970953), 
+  ;   Point(-5.36086796564404, 5.78513203435596), 
+  ;   Point(-5.45819497029047, 5.85016385975339), 
+  ;   Point(-5.573, 5.873), 
+  ;   Point(-5.68780502970953, 5.85016385975339), 
+  ;   Point(-5.78513203435596, 5.78513203435596), 
+  ;   Point(-5.85016385975339, 5.68780502970953), 
+  ;   Point(-5.873, 5.573), 
+  ;   Point(-5.85016385975339, 5.45819497029047), 
+  ;   Point(-5.78513203435597, 5.36086796564404), 
+  ;   Point(-5.68780502970953, 5.29583614024661), 
+  ;   Point(-5.573, 5.273), 
+  ;   Point(-5.45819497029047, 5.29583614024661), 
+  ;   Point(-5.36086796564404, 5.36086796564404), 
+  ;   Point(-5.29583614024661, 5.45819497029047), 
+  ;   Point(-5.273, 5.573)])
   layer(Silkscreen("F-SilkS", Top)) = Circle(-7.75, 6.7, 0.125)
-  ; layer(Courtyard(Top)) = Rectangle(8.725, 8.725)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-8.725, -8.725), Point(8.725, -8.725)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-8.725, 8.725), Point(8.725, 8.725)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(8.725, -8.725), Point(8.725, 8.725)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-8.725, -8.725), Point(-8.725, 8.725)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.6, -6.6), Point(6.6, -6.6)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.6, 6.6), Point(6.6, 6.6)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(6.6, -6.6), Point(6.6, 6.6)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.6, -6.6), Point(-6.6, 6.6)])
   ref-label()
 
-pcb-symbol ATMEGA2560-16AUR-symbol0 :
-  pin PA0AD0 at Point(0.0, -2.54) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA1AD1 at Point(0.0, -5.08) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA2AD2 at Point(0.0, -7.62) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA3AD3 at Point(0.0, -10.16) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA4AD4 at Point(0.0, -12.7) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA5AD5 at Point(0.0, -15.24) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA6AD6 at Point(0.0, -17.78) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PA7AD7 at Point(0.0, -20.32) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB0nSSPCINT0 at Point(0.0, -25.4) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB4OC2APCINT4 at Point(0.0, -27.94) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB5OC1APCINT5 at Point(0.0, -30.48) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB6OC1BPCINT6 at Point(0.0, -33.02) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB7OC0AOC1CPCINT7 at Point(0.0, -35.56) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC0A8 at Point(0.0, -40.64) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC1A9 at Point(0.0, -43.18) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC2A10 at Point(0.0, -45.72) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC3ALL at Point(0.0, -48.26) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC4A12 at Point(0.0, -50.8) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC5A13 at Point(0.0, -53.34) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC6A14 at Point(0.0, -55.88) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PC7A15 at Point(0.0, -58.42) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD0SCLINT0 at Point(0.0, -63.5) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD1SDAINT1 at Point(0.0, -66.04) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD2RXD1INT2 at Point(0.0, -68.58) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD3TXD1INT3 at Point(0.0, -71.12) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD4ICP1 at Point(0.0, -73.66) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD5XCK1 at Point(0.0, -76.2) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD6T1 at Point(0.0, -78.74) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PD7T0 at Point(0.0, -81.28) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE0RXD0PCINT8 at Point(0.0, -86.36) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE1TXD0 at Point(0.0, -88.9) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE2XCK0AIN0 at Point(0.0, -91.44) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE3OX3AAIN1 at Point(0.0, -93.98) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE4OC3BINT4 at Point(0.0, -96.52) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE5OC3CINT5 at Point(0.0, -99.06) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE6T3INT6 at Point(0.0, -101.6) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PE7CLKOICP3INT7 at Point(0.0, -104.14) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF0ADC0 at Point(58.42, -2.54) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF1ADC1 at Point(58.42, -5.08) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF2ADC2 at Point(58.42, -7.62) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF3ADC3 at Point(58.42, -10.16) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF4ADC4TCK at Point(58.42, -12.7) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF5ADC5TMS at Point(58.42, -15.24) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF6ADC6TDO at Point(58.42, -17.78) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PF7ADC7TDI at Point(58.42, -20.32) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG0nWR at Point(58.42, -45.72) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG1nRD at Point(58.42, -48.26) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG2ALE at Point(58.42, -50.8) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG3TOSC2 at Point(58.42, -53.34) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG4TOSC1 at Point(58.42, -55.88) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PG5OC0B at Point(58.42, -58.42) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH0RXD2 at Point(58.42, -63.5) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH1TXD2 at Point(58.42, -66.04) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH2XCK2 at Point(58.42, -68.58) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH3OC4A at Point(58.42, -71.12) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH4OC4B at Point(58.42, -73.66) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH5OC4C at Point(58.42, -76.2) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH6OC2B at Point(58.42, -78.74) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PH7T4 at Point(58.42, -81.28) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ0RXD3PCINT9 at Point(58.42, -86.36) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ1RXD3PCINT10 at Point(58.42, -88.9) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ2XCK3PCINT11 at Point(58.42, -91.44) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ3PCINT12 at Point(58.42, -93.98) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ4PCINT13 at Point(58.42, -96.52) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ5PCINT14 at Point(58.42, -99.06) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ6PCINT15 at Point(58.42, -101.6) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PJ7 at Point(58.42, -104.14) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK0ADC8PCINT16 at Point(58.42, -22.86) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK1ADC9PCINT17 at Point(58.42, -25.4) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK2ADC10PCINT18 at Point(58.42, -27.94) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK3ADC11PCINT19 at Point(58.42, -30.48) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK4ADC12PCINT20 at Point(58.42, -33.02) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK5ADC13PCINT21 at Point(58.42, -35.56) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK6ADC14PCINT22 at Point(58.42, -38.1) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PK7ADC15PCINT23 at Point(58.42, -40.64) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL0ICP4 at Point(58.42, -109.22) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL1ICP5 at Point(58.42, -111.76) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL2T5 at Point(58.42, -114.3) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL3OC5A at Point(58.42, -116.84) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL4OC5B at Point(58.42, -119.38) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL5OC5C at Point(58.42, -121.92) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL6 at Point(58.42, -124.46) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PL7 at Point(58.42, -127.0) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  layer("foreground") = Rectangle(58.42, 129.54, loc(29.21, -64.77))
-
-pcb-symbol ATMEGA2560-16AUR-symbol1 :
-  pin PB1SCKPCINT1 at Point(35.56, -5.08) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB2MOSIPCINT2 at Point(35.56, -10.16) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin PB3MISOPCINT3 at Point(35.56, -2.54) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin XTAL1 at Point(0.0, -10.16) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin XTAL2 at Point(0.0, -2.54) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin nRESET at Point(35.56, -7.62) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  layer("foreground") = Rectangle(35.56, 12.7, loc(17.78, -6.35))
-
-pcb-symbol ATMEGA2560-16AUR-symbol2 :
-  pin AREF at Point(17.78, -5.08) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin AVCC at Point(17.78, -2.54) with :
-    direction = Right
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin GND at Point(0.0, -12.7) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  pin VCC at Point(0.0, -2.54) with :
-    direction = Left
-    length = 5.08
-    number-size = 1.523
-    name-size = 1.523
-  layer("foreground") = Rectangle(17.78, 25.4, loc(8.89, -12.7))
-
 public pcb-component component :
   name = "ATMEGA2560-16AUR"
   description = "ATMEGA2560-16AUR"
   manufacturer = "Microchip Technology"
   mpn = "ATMEGA2560-16AUR"
-  pin PA0AD0
-  pin PA1AD1
-  pin PA2AD2
-  pin PA3AD3
-  pin PA4AD4
-  pin PA5AD5
-  pin PA6AD6
-  pin PA7AD7
-  pin PB0nSSPCINT0
-  pin PB4OC2APCINT4
-  pin PB5OC1APCINT5
-  pin PB6OC1BPCINT6
-  pin PB7OC0AOC1CPCINT7
-  pin PC0A8
-  pin PC1A9
-  pin PC2A10
-  pin PC3ALL
-  pin PC4A12
-  pin PC5A13
-  pin PC6A14
-  pin PC7A15
-  pin PD0SCLINT0
-  pin PD1SDAINT1
-  pin PD2RXD1INT2
-  pin PD3TXD1INT3
-  pin PD4ICP1
-  pin PD5XCK1
-  pin PD6T1
-  pin PD7T0
-  pin PE0RXD0PCINT8
-  pin PE1TXD0
-  pin PE2XCK0AIN0
-  pin PE3OX3AAIN1
-  pin PE4OC3BINT4
-  pin PE5OC3CINT5
-  pin PE6T3INT6
-  pin PE7CLKOICP3INT7
-  pin PF0ADC0
-  pin PF1ADC1
-  pin PF2ADC2
-  pin PF3ADC3
-  pin PF4ADC4TCK
-  pin PF5ADC5TMS
-  pin PF6ADC6TDO
-  pin PF7ADC7TDI
-  pin PG0nWR
-  pin PG1nRD
-  pin PG2ALE
-  pin PG3TOSC2
-  pin PG4TOSC1
-  pin PG5OC0B
-  pin PH0RXD2
-  pin PH1TXD2
-  pin PH2XCK2
-  pin PH3OC4A
-  pin PH4OC4B
-  pin PH5OC4C
-  pin PH6OC2B
-  pin PH7T4
-  pin PJ0RXD3PCINT9
-  pin PJ1RXD3PCINT10
-  pin PJ2XCK3PCINT11
-  pin PJ3PCINT12
-  pin PJ4PCINT13
-  pin PJ5PCINT14
-  pin PJ6PCINT15
-  pin PJ7
-  pin PK0ADC8PCINT16
-  pin PK1ADC9PCINT17
-  pin PK2ADC10PCINT18
-  pin PK3ADC11PCINT19
-  pin PK4ADC12PCINT20
-  pin PK5ADC13PCINT21
-  pin PK6ADC14PCINT22
-  pin PK7ADC15PCINT23
-  pin PL0ICP4
-  pin PL1ICP5
-  pin PL2T5
-  pin PL3OC5A
-  pin PL4OC5B
-  pin PL5OC5C
-  pin PL6
-  pin PL7
-  pin PB1SCKPCINT1
-  pin PB2MOSIPCINT2
-  pin PB3MISOPCINT3
-  pin XTAL1
-  pin XTAL2
-  pin nRESET
-  pin AREF
-  pin AVCC
-  pin GND
-  pin VCC
-  val lp = MICROCHIP100A
-  landpattern = lp(PA0AD0 => lp.p[78], PA1AD1 => lp.p[77], PA2AD2 => lp.p[76], PA3AD3 => lp.p[75], PA4AD4 => lp.p[74], PA5AD5 => lp.p[73], PA6AD6 => lp.p[72], PA7AD7 => lp.p[71], PB0nSSPCINT0 => lp.p[19], PB4OC2APCINT4 => lp.p[23], PB5OC1APCINT5 => lp.p[24], PB6OC1BPCINT6 => lp.p[25], PB7OC0AOC1CPCINT7 => lp.p[26], PC0A8 => lp.p[53], PC1A9 => lp.p[54], PC2A10 => lp.p[55], PC3ALL => lp.p[56], PC4A12 => lp.p[57], PC5A13 => lp.p[58], PC6A14 => lp.p[59], PC7A15 => lp.p[60], PD0SCLINT0 => lp.p[43], PD1SDAINT1 => lp.p[44], PD2RXD1INT2 => lp.p[45], PD3TXD1INT3 => lp.p[46], PD4ICP1 => lp.p[47], PD5XCK1 => lp.p[48], PD6T1 => lp.p[49], PD7T0 => lp.p[50], PE0RXD0PCINT8 => lp.p[2], PE1TXD0 => lp.p[3], PE2XCK0AIN0 => lp.p[4], PE3OX3AAIN1 => lp.p[5], PE4OC3BINT4 => lp.p[6], PE5OC3CINT5 => lp.p[7], PE6T3INT6 => lp.p[8], PE7CLKOICP3INT7 => lp.p[9], PF0ADC0 => lp.p[97], PF1ADC1 => lp.p[96], PF2ADC2 => lp.p[95], PF3ADC3 => lp.p[94], PF4ADC4TCK => lp.p[93], PF5ADC5TMS => lp.p[92], PF6ADC6TDO => lp.p[91], PF7ADC7TDI => lp.p[90], PG0nWR => lp.p[51], PG1nRD => lp.p[52], PG2ALE => lp.p[70], PG3TOSC2 => lp.p[28], PG4TOSC1 => lp.p[29], PG5OC0B => lp.p[1], PH0RXD2 => lp.p[12], PH1TXD2 => lp.p[13], PH2XCK2 => lp.p[14], PH3OC4A => lp.p[15], PH4OC4B => lp.p[16], PH5OC4C => lp.p[17], PH6OC2B => lp.p[18], PH7T4 => lp.p[27], PJ0RXD3PCINT9 => lp.p[63], PJ1RXD3PCINT10 => lp.p[64], PJ2XCK3PCINT11 => lp.p[65], PJ3PCINT12 => lp.p[66], PJ4PCINT13 => lp.p[67], PJ5PCINT14 => lp.p[68], PJ6PCINT15 => lp.p[69], PJ7 => lp.p[79], PK0ADC8PCINT16 => lp.p[89], PK1ADC9PCINT17 => lp.p[88], PK2ADC10PCINT18 => lp.p[87], PK3ADC11PCINT19 => lp.p[86], PK4ADC12PCINT20 => lp.p[85], PK5ADC13PCINT21 => lp.p[84], PK6ADC14PCINT22 => lp.p[83], PK7ADC15PCINT23 => lp.p[82], PL0ICP4 => lp.p[35], PL1ICP5 => lp.p[36], PL2T5 => lp.p[37], PL3OC5A => lp.p[38], PL4OC5B => lp.p[39], PL5OC5C => lp.p[40], PL6 => lp.p[41], PL7 => lp.p[42], PB1SCKPCINT1 => lp.p[20], PB2MOSIPCINT2 => lp.p[21], PB3MISOPCINT3 => lp.p[22], XTAL1 => lp.p[34], XTAL2 => lp.p[33], nRESET => lp.p[30], AREF => lp.p[98], AVCC => lp.p[100], GND => lp.p[11], GND => lp.p[32], GND => lp.p[62], GND => lp.p[81], GND => lp.p[99], VCC => lp.p[10], VCC => lp.p[31], VCC => lp.p[61], VCC => lp.p[80])
-  symbol :
-    val sym0 = ATMEGA2560-16AUR-symbol0
-    unit(0) = sym0(PA0AD0 => sym0.PA0AD0, PA1AD1 => sym0.PA1AD1, PA2AD2 => sym0.PA2AD2, PA3AD3 => sym0.PA3AD3, PA4AD4 => sym0.PA4AD4, PA5AD5 => sym0.PA5AD5, PA6AD6 => sym0.PA6AD6, PA7AD7 => sym0.PA7AD7, PB0nSSPCINT0 => sym0.PB0nSSPCINT0, PB4OC2APCINT4 => sym0.PB4OC2APCINT4, PB5OC1APCINT5 => sym0.PB5OC1APCINT5, PB6OC1BPCINT6 => sym0.PB6OC1BPCINT6, PB7OC0AOC1CPCINT7 => sym0.PB7OC0AOC1CPCINT7, PC0A8 => sym0.PC0A8, PC1A9 => sym0.PC1A9, PC2A10 => sym0.PC2A10, PC3ALL => sym0.PC3ALL, PC4A12 => sym0.PC4A12, PC5A13 => sym0.PC5A13, PC6A14 => sym0.PC6A14, PC7A15 => sym0.PC7A15, PD0SCLINT0 => sym0.PD0SCLINT0, PD1SDAINT1 => sym0.PD1SDAINT1, PD2RXD1INT2 => sym0.PD2RXD1INT2, PD3TXD1INT3 => sym0.PD3TXD1INT3, PD4ICP1 => sym0.PD4ICP1, PD5XCK1 => sym0.PD5XCK1, PD6T1 => sym0.PD6T1, PD7T0 => sym0.PD7T0, PE0RXD0PCINT8 => sym0.PE0RXD0PCINT8, PE1TXD0 => sym0.PE1TXD0, PE2XCK0AIN0 => sym0.PE2XCK0AIN0, PE3OX3AAIN1 => sym0.PE3OX3AAIN1, PE4OC3BINT4 => sym0.PE4OC3BINT4, PE5OC3CINT5 => sym0.PE5OC3CINT5, PE6T3INT6 => sym0.PE6T3INT6, PE7CLKOICP3INT7 => sym0.PE7CLKOICP3INT7, PF0ADC0 => sym0.PF0ADC0, PF1ADC1 => sym0.PF1ADC1, PF2ADC2 => sym0.PF2ADC2, PF3ADC3 => sym0.PF3ADC3, PF4ADC4TCK => sym0.PF4ADC4TCK, PF5ADC5TMS => sym0.PF5ADC5TMS, PF6ADC6TDO => sym0.PF6ADC6TDO, PF7ADC7TDI => sym0.PF7ADC7TDI, PG0nWR => sym0.PG0nWR, PG1nRD => sym0.PG1nRD, PG2ALE => sym0.PG2ALE, PG3TOSC2 => sym0.PG3TOSC2, PG4TOSC1 => sym0.PG4TOSC1, PG5OC0B => sym0.PG5OC0B, PH0RXD2 => sym0.PH0RXD2, PH1TXD2 => sym0.PH1TXD2, PH2XCK2 => sym0.PH2XCK2, PH3OC4A => sym0.PH3OC4A, PH4OC4B => sym0.PH4OC4B, PH5OC4C => sym0.PH5OC4C, PH6OC2B => sym0.PH6OC2B, PH7T4 => sym0.PH7T4, PJ0RXD3PCINT9 => sym0.PJ0RXD3PCINT9, PJ1RXD3PCINT10 => sym0.PJ1RXD3PCINT10, PJ2XCK3PCINT11 => sym0.PJ2XCK3PCINT11, PJ3PCINT12 => sym0.PJ3PCINT12, PJ4PCINT13 => sym0.PJ4PCINT13, PJ5PCINT14 => sym0.PJ5PCINT14, PJ6PCINT15 => sym0.PJ6PCINT15, PJ7 => sym0.PJ7, PK0ADC8PCINT16 => sym0.PK0ADC8PCINT16, PK1ADC9PCINT17 => sym0.PK1ADC9PCINT17, PK2ADC10PCINT18 => sym0.PK2ADC10PCINT18, PK3ADC11PCINT19 => sym0.PK3ADC11PCINT19, PK4ADC12PCINT20 => sym0.PK4ADC12PCINT20, PK5ADC13PCINT21 => sym0.PK5ADC13PCINT21, PK6ADC14PCINT22 => sym0.PK6ADC14PCINT22, PK7ADC15PCINT23 => sym0.PK7ADC15PCINT23, PL0ICP4 => sym0.PL0ICP4, PL1ICP5 => sym0.PL1ICP5, PL2T5 => sym0.PL2T5, PL3OC5A => sym0.PL3OC5A, PL4OC5B => sym0.PL4OC5B, PL5OC5C => sym0.PL5OC5C, PL6 => sym0.PL6, PL7 => sym0.PL7)
-    val sym1 = ATMEGA2560-16AUR-symbol1
-    unit(1) = sym1(PB1SCKPCINT1 => sym1.PB1SCKPCINT1, PB2MOSIPCINT2 => sym1.PB2MOSIPCINT2, PB3MISOPCINT3 => sym1.PB3MISOPCINT3, XTAL1 => sym1.XTAL1, XTAL2 => sym1.XTAL2, nRESET => sym1.nRESET)
-    val sym2 = ATMEGA2560-16AUR-symbol2
-    unit(2) = sym2(AREF => sym2.AREF, AVCC => sym2.AVCC, GND => sym2.GND, VCC => sym2.VCC)
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [PF0ADC0 | 97 | Right]
+    [PF1ADC1 | 96 | Right]
+    [PF2ADC2 | 95 | Right]
+    [PF3ADC3 | 94 | Right]
+    [PF4ADC4TCK | 93 | Right]
+    [PF5ADC5TMS | 92 | Right]
+    [PF6ADC6TDO | 91 | Right]
+    [PF7ADC7TDI | 90 | Right]
+    [PK0ADC8PCINT16 | 89 | Right]
+    [PK1ADC9PCINT17 | 88 | Right]
+    [PK2ADC10PCINT18 | 87 | Right]
+    [PK3ADC11PCINT19 | 86 | Right]
+    [PK4ADC12PCINT20 | 85 | Right]
+    [PK5ADC13PCINT21 | 84 | Right]
+    [PK6ADC14PCINT22 | 83 | Right]
+    [PK7ADC15PCINT23 | 82 | Right]
+    [PG0nWR | 51 | Right]
+    [PG1nRD | 52 | Right]
+    [PG2ALE | 70 | Right]
+    [PG3TOSC2 | 28 | Right]
+    [PG4TOSC1 | 29 | Right]
+    [PG5OC0B | 1 | Right]
+    [PH0RXD2 | 12 | Right]
+    [PH1TXD2 | 13 | Right]
+    [PH2XCK2 | 14 | Right]
+    [PH3OC4A | 15 | Right]
+    [PH4OC4B | 16 | Right]
+    [PH5OC4C | 17 | Right]
+    [PH6OC2B | 18 | Right]
+    [PH7T4 | 27 | Right]
+    [PJ0RXD3PCINT9 | 63 | Right]
+    [PJ1RXD3PCINT10 | 64 | Right]
+    [PJ2XCK3PCINT11 | 65 | Right]
+    [PJ3PCINT12 | 66 | Right]
+    [PJ4PCINT13 | 67 | Right]
+    [PJ5PCINT14 | 68 | Right]
+    [PJ6PCINT15 | 69 | Right]
+    [PJ7 | 79 | Right]
+    [PL0ICP4 | 35 | Right]
+    [PL1ICP5 | 36 | Right]
+    [PL2T5 | 37 | Right]
+    [PL3OC5A | 38 | Right]
+    [PL4OC5B | 39 | Right]
+    [PL5OC5C | 40 | Right]
+    [PL6 | 41 | Right]
+    [PL7 | 42 | Right]
+    [PA0AD0 | 78 | Left]
+    [PA1AD1 | 77 | Left]
+    [PA2AD2 | 76 | Left]
+    [PA3AD3 | 75 | Left]
+    [PA4AD4 | 74 | Left]
+    [PA5AD5 | 73 | Left]
+    [PA6AD6 | 72 | Left]
+    [PA7AD7 | 71 | Left]
+    [PB0nSSPCINT0 | 19 | Left]
+    [PB4OC2APCINT4 | 23 | Left]
+    [PB5OC1APCINT5 | 24 | Left]
+    [PB6OC1BPCINT6 | 25 | Left]
+    [PB7OC0AOC1CPCINT7 | 26 | Left]
+    [PC0A8 | 53 | Left]
+    [PC1A9 | 54 | Left]
+    [PC2A10 | 55 | Left]
+    [PC3ALL | 56 | Left]
+    [PC4A12 | 57 | Left]
+    [PC5A13 | 58 | Left]
+    [PC6A14 | 59 | Left]
+    [PC7A15 | 60 | Left]
+    [PD0SCLINT0 | 43 | Left]
+    [PD1SDAINT1 | 44 | Left]
+    [PD2RXD1INT2 | 45 | Left]
+    [PD3TXD1INT3 | 46 | Left]
+    [PD4ICP1 | 47 | Left]
+    [PD5XCK1 | 48 | Left]
+    [PD6T1 | 49 | Left]
+    [PD7T0 | 50 | Left]
+    [PE0RXD0PCINT8 | 2 | Left]
+    [PE1TXD0 | 3 | Left]
+    [PE2XCK0AIN0 | 4 | Left]
+    [PE3OX3AAIN1 | 5 | Left]
+    [PE4OC3BINT4 | 6 | Left]
+    [PE5OC3CINT5 | 7 | Left]
+    [PE6T3INT6 | 8 | Left]
+    [PE7CLKOICP3INT7 | 9 | Left]
+    [PB3MISOPCINT3 | 22 | Right]
+    [PB1SCKPCINT1 | 20 | Right]
+    [nRESET | 30 | Right]
+    [PB2MOSIPCINT2 | 21 | Right]
+    [XTAL2 | 33 | Left]
+    [XTAL1 | 34 | Left]
+    [AVCC | 100 | Right]
+    [AREF | 98 | Right]
+    [VCC | 10, 31, 61, 80 | Left]
+    [GND | 11, 32, 62, 81, 99 | Left]
+
+  make-box-symbol()
+  assign-landpattern(MICROCHIP100A)
   reference-prefix = "U"
 

@@ -1,0 +1,96 @@
+#use-added-syntax(jitx)
+defpackage testlib/FT232RQ :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern QFN50P500X500X90-33N :
+  pad p[1] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, 1.75) on Top
+  pad p[2] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, 1.25) on Top
+  pad p[3] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, 0.75) on Top
+  pad p[4] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, 0.25) on Top
+  pad p[5] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, -0.25) on Top
+  pad p[6] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, -0.75) on Top
+  pad p[7] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, -1.25) on Top
+  pad p[8] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-2.45, -1.75) on Top
+  pad p[9] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-1.75, -2.45, 90.0) on Top
+  pad p[10] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-1.25, -2.45, 90.0) on Top
+  pad p[11] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-0.75, -2.45, 90.0) on Top
+  pad p[12] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-0.25, -2.45, 90.0) on Top
+  pad p[13] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(0.25, -2.45, 90.0) on Top
+  pad p[14] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(0.75, -2.45, 90.0) on Top
+  pad p[15] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(1.25, -2.45, 90.0) on Top
+  pad p[16] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(1.75, -2.45, 90.0) on Top
+  pad p[17] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, -1.75) on Top
+  pad p[18] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, -1.25) on Top
+  pad p[19] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, -0.75) on Top
+  pad p[20] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, -0.25) on Top
+  pad p[21] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, 0.25) on Top
+  pad p[22] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, 0.75) on Top
+  pad p[23] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, 1.25) on Top
+  pad p[24] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(2.45, 1.75) on Top
+  pad p[25] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(1.75, 2.45, 90.0) on Top
+  pad p[26] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(1.25, 2.45, 90.0) on Top
+  pad p[27] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(0.75, 2.45, 90.0) on Top
+  pad p[28] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(0.25, 2.45, 90.0) on Top
+  pad p[29] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-0.25, 2.45, 90.0) on Top
+  pad p[30] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-0.75, 2.45, 90.0) on Top
+  pad p[31] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-1.25, 2.45, 90.0) on Top
+  pad p[32] : round-rect-smd-pad(0.81, 0.27, 0.0) at loc(-1.75, 2.45, 90.0) on Top
+  pad p[33] : smd-pad(3.4, 3.4) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Circle(-3.46, 1.75, 0.1)
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.5, 2.205), Point(-2.5, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.5, -2.5), Point(-2.5, -2.205)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(2.5, 2.205), Point(2.5, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(2.5, -2.5), Point(2.5, -2.205)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.5, 2.5), Point(-2.205, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-2.5, -2.5), Point(-2.205, -2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(2.205, 2.5), Point(2.5, 2.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(2.205, -2.5), Point(2.5, -2.5)])
+  ref-label()
+
+public pcb-component component :
+  name = "FT232RQ"
+  description = "IC USB FS SERIAL UART 32-QFN"
+  manufacturer = "FTDI, Future Technology Devices International Ltd"
+  mpn = "FT232RQ-REEL"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VCC | 19 | Right]
+    [VCCIO | 1 | Right]
+    [USBDP | 14 | Right]
+    [USBDM | 15 | Right]
+    [CBUS0 | 22 | Right]
+    [CBUS1 | 21 | Right]
+    [CBUS2 | 10 | Right]
+    [CBUS3 | 11 | Right]
+    [CBUS4 | 9 | Right]
+    [p3V3OUT | 16 | Right]
+    [AGND | 24 | Right]
+    [GND | 4, 17, 20 | Right]
+    [EXP | 33 | Right]
+    [nRESET | 18 | Left]
+    [TXD | 30 | Left]
+    [RXD | 2 | Left]
+    [nRTS | 32 | Left]
+    [nCTS | 8 | Left]
+    [nDTR | 31 | Left]
+    [nDSR | 6 | Left]
+    [nDCD | 7 | Left]
+    [nRI | 3 | Left]
+    [OSCI | 27 | Left]
+    [OSCO | 28 | Left]
+    [TEST | 26 | Left]
+
+  make-box-symbol()
+  assign-landpattern(QFN50P500X500X90-33N)
+  reference-prefix = "U"
+

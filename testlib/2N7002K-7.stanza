@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/2N7002K-7 :
+defpackage testlib/Diodes_Incorporated/2N7002K-7 :
   import core
   import collections
   import math
@@ -10,23 +10,16 @@ defpackage testlib/2N7002K-7 :
   import ocdb/generic-components
   import ocdb/symbols
 
-pcb-landpattern DIODESINCSOT23-3 :
+pcb-landpattern DiodesIncSOT23-3 :
   pad p[1] : smd-pad(0.8, 0.9) at loc(-1.0, 0.9, 90.0) on Top
   pad p[2] : smd-pad(0.8, 0.9) at loc(-1.0, -0.9, 90.0) on Top
   pad p[3] : smd-pad(0.8, 0.9) at loc(1.0, 0.0, 90.0) on Top
 
   layer(Silkscreen("F-SilkS", Top)) = Circle(-1.0, 1.85, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, -1.75), Point(1.875, -1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, 1.75), Point(1.875, 1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(1.875, -1.75), Point(1.875, 1.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.875, -1.75), Point(-1.875, 1.75)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.7, -1.5), Point(0.7, -0.827)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.3, -1.5), Point(0.7, -1.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.7, 0.827), Point(0.7, 1.5)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.3, 1.5), Point(0.7, 1.5)])
-
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.7, -1.5), Point(0.7, -0.827)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-0.3, -1.5), Point(0.7, -1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.7, 0.827), Point(0.7, 1.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-0.3, 1.5), Point(0.7, 1.5)])
   ref-label()
 
 pcb-symbol N-FET60V038A3Ohms-symbol :
@@ -66,6 +59,8 @@ pcb-symbol N-FET60V038A3Ohms-symbol :
     Point(11.938, 0.254)])
   layer("foreground") = Polygon([Point(7.62, 0.0), Point(9.144, -0.508), Point(9.144, 0.508)])
   layer("foreground") = Polygon([Point(12.7, 0.508), Point(11.938, -0.762), Point(13.462, -0.762)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(4.58, 3.34))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(4.58, 4.402))
 
 public pcb-component component :
   name = "N-FET 60V 0.38A 3Ohms"
@@ -75,7 +70,7 @@ public pcb-component component :
   pin D
   pin G
   pin S
-  val lp = DIODESINCSOT23-3
+  val lp = DiodesIncSOT23-3
   landpattern = lp(D => lp.p[3], G => lp.p[1], S => lp.p[2])
   val sym = N-FET60V038A3Ohms-symbol
   symbol = sym(D => sym.D, G => sym.G, S => sym.S)

@@ -1,0 +1,112 @@
+#use-added-syntax(jitx)
+defpackage testlib/Texas_Instruments/TAS5720LRSMT :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern AUDIO_POWER_AMP :
+  pad p[1] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, 1.4, 90.0) on Top
+  pad p[2] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, 1.0, 90.0) on Top
+  pad p[3] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, 0.6, 90.0) on Top
+  pad p[4] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, 0.2, 90.0) on Top
+  pad p[5] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, -0.2, 90.0) on Top
+  pad p[6] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, -0.6, 90.0) on Top
+  pad p[7] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, -1.0, 90.0) on Top
+  pad p[8] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.9, -1.4, 90.0) on Top
+  pad p[9] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.4, -1.9) on Top
+  pad p[10] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.0, -1.9) on Top
+  pad p[11] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-0.6, -1.9) on Top
+  pad p[12] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-0.2, -1.9) on Top
+  pad p[13] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(0.2, -1.9) on Top
+  pad p[14] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(0.6, -1.9) on Top
+  pad p[15] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.0, -1.9) on Top
+  pad p[16] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.4, -1.9) on Top
+  pad p[17] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, -1.4, 90.0) on Top
+  pad p[18] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, -1.0, 90.0) on Top
+  pad p[19] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, -0.6, 90.0) on Top
+  pad p[20] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, -0.2, 90.0) on Top
+  pad p[21] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, 0.2, 90.0) on Top
+  pad p[22] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, 0.6, 90.0) on Top
+  pad p[23] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, 1.0, 90.0) on Top
+  pad p[24] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.9, 1.4, 90.0) on Top
+  pad p[25] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.4, 1.9) on Top
+  pad p[26] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(1.0, 1.9) on Top
+  pad p[27] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(0.6, 1.9) on Top
+  pad p[28] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(0.2, 1.9) on Top
+  pad p[29] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-0.2, 1.9) on Top
+  pad p[30] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-0.6, 1.9) on Top
+  pad p[31] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.0, 1.9) on Top
+  pad p[32] : round-rect-smd-pad(0.2, 0.6, 0.1) at loc(-1.4, 1.9) on Top
+  pad p[33] : smd-pad(2.8, 2.8) at loc(0.0, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [
+    Point(-2.667, 1.905), 
+    Point(-2.67666729937107, 1.95360079591037), 
+    Point(-2.70419743878931, 1.99480256121069), 
+    Point(-2.74539920408963, 2.02233270062893), 
+    Point(-2.794, 2.032), 
+    Point(-2.84260079591037, 2.02233270062893), 
+    Point(-2.88380256121069, 1.99480256121069), 
+    Point(-2.91133270062893, 1.95360079591037), 
+    Point(-2.921, 1.905), 
+    Point(-2.91133270062893, 1.85639920408963), 
+    Point(-2.88380256121069, 1.81519743878931), 
+    Point(-2.84260079591037, 1.78766729937107), 
+    Point(-2.794, 1.778), 
+    Point(-2.74539920408963, 1.78766729937107), 
+    Point(-2.70419743878931, 1.81519743878931), 
+    Point(-2.67666729937107, 1.85639920408963), 
+    Point(-2.667, 1.905)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-2.225, -2.225), Point(-2.025, -2.225)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-2.225, -2.225), Point(-2.225, -2.025)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(2.025, -2.225), Point(2.225, -2.225)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(2.225, -2.225), Point(2.225, -2.025)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(2.225, 2.025), Point(2.225, 2.225)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-2.225, 1.725), Point(-2.225, 2.225)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-2.225, 2.225), Point(-1.725, 2.225)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(2.025, 2.225), Point(2.225, 2.225)])
+  ref-label()
+
+public pcb-component component :
+  name = "TAS5720LRSMT"
+  description = "TAS5720LRSMT"
+  manufacturer = "Texas Instruments"
+  mpn = "TAS5720LRSMT"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VREF_N | 1 | Right]
+    [VCOM | 32 | Right]
+    [VREG | 31 | Right]
+    [BST_P | 23 | Right]
+    [OUT_P | 24, 25 | Right]
+    [BST_N | 18 | Right]
+    [OUT_N | 16, 17 | Right]
+    [GND | 10, 29 | Right]
+    [PGND | 19, 20, 21, 22 | Right]
+    [PAD | 33 | Right]
+    [AVDD | 28 | Left]
+    [DVDD | 11 | Left]
+    [GVDD | 30 | Left]
+    [PVDD | 14, 15, 26, 27 | Left]
+    [MCLK | 5 | Left]
+    [BCLK | 6 | Left]
+    [LRCLK | 4 | Left]
+    [ADR0 | 13 | Left]
+    [ADR1 | 12 | Left]
+    [SDA | 9 | Left]
+    [SCL | 8 | Left]
+    [SDIN | 7 | Left]
+    [SD_N | 3 | Left]
+    [FAULT_N | 2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(AUDIO_POWER_AMP)
+  reference-prefix = "U"
+

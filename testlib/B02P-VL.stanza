@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/B02P-VL :
+defpackage testlib/JST/B02P-VL :
   import core
   import collections
   import math
@@ -12,25 +12,25 @@ defpackage testlib/B02P-VL :
   import ocdb/box-symbol
 
 pcb-landpattern B02P-VL :
-  pad p[1] : rect-pth-pad(1.4, 3.9, 3.9) at loc(3.1, 0.0127) on Top
-  pad p[2] : pth-pad(1.4, 1.95) at loc(-3.1, -0.0127) on Top
+  pad p[1] : rect-pth-pad(2.8, 3.9, 3.9) at loc(3.1, 0.0127) on Top
+  pad p[2] : round-rect-pth-pad(2.8, 3.9, 3.9, 1.95) at loc(-3.1, -0.0127) on Top
 
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, 5.207), Point(3.175, 5.207)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.715, 5.207), Point(7.112, 5.207)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.715, 5.207), Point(5.715, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, 7.239), Point(5.715, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, 5.207), Point(3.175, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, 5.207), Point(-3.175, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.715, 7.239), Point(-3.175, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.715, 5.207), Point(-5.715, 7.239)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, -3.81), Point(-7.112, 5.207)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, 5.207), Point(-5.715, 5.207)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(7.112, -3.81), Point(7.112, 5.207)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.207, -3.81), Point(7.112, -3.81)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.715, 5.20699), Point(7.112, 5.20699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.715, 5.20699), Point(5.715, 7.239)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, 7.23899), Point(5.715, 7.239)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.175, 5.207), Point(3.175, 7.23899)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.175, 5.207), Point(-3.175, 7.23899)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.715, 7.239), Point(-3.175, 7.23899)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.715, 7.239), Point(-5.715, 5.20699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, -3.81001), Point(-7.112, 5.20699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, 5.20699), Point(-5.715, 5.20699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(7.112, -3.81001), Point(7.112, 5.20699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.207, -3.81), Point(7.112, -3.81001)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.207, -6.731), Point(5.207, -3.81)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.207, -6.731), Point(5.207, -6.731)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.207, -6.731), Point(-5.207, -3.81)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, -3.81), Point(-5.207, -3.81)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.207, -3.81001), Point(-5.207, -6.731)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-7.112, -3.81001), Point(-5.207, -3.81001)])
   ref-label()
 
 public pcb-component component :

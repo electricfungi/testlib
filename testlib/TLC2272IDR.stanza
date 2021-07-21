@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/TLC2272IDR :
+defpackage testlib/Texas_Instruments/TLC2272IDR :
   import core
   import collections
   import math
@@ -21,14 +21,42 @@ pcb-landpattern TID0008ASOIC-8 :
   pad p[7] : smd-pad(0.6, 1.55) at loc(2.7, 0.635, 90.0) on Top
   pad p[8] : smd-pad(0.6, 1.55) at loc(2.7, 1.905, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-2.7, 2.755, 0.125)
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-0.573, 1.473, 0.3)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(-3.7, 2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(3.7, -2.75), Point(3.7, 2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, 2.75), Point(3.7, 2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-3.7, -2.75), Point(3.7, -2.75)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.575, 2.755), 
+    Point(-2.58451505843609, 2.80283542904564), 
+    Point(-2.61161165235168, 2.84338834764832), 
+    Point(-2.65216457095436, 2.87048494156391), 
+    Point(-2.7, 2.88), 
+    Point(-2.74783542904564, 2.87048494156391), 
+    Point(-2.78838834764832, 2.84338834764832), 
+    Point(-2.81548494156391, 2.80283542904564), 
+    Point(-2.825, 2.755), 
+    Point(-2.81548494156391, 2.70716457095436), 
+    Point(-2.78838834764832, 2.66661165235168), 
+    Point(-2.74783542904564, 2.63951505843609), 
+    Point(-2.7, 2.63), 
+    Point(-2.65216457095436, 2.63951505843609), 
+    Point(-2.61161165235168, 2.66661165235168), 
+    Point(-2.58451505843609, 2.70716457095436), 
+    Point(-2.575, 2.755)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-0.273, 1.473), 
+    Point(-0.295836140246614, 1.58780502970953), 
+    Point(-0.360867965644036, 1.68513203435596), 
+    Point(-0.458194970290473, 1.75016385975339), 
+    Point(-0.573, 1.773), 
+    Point(-0.687805029709527, 1.75016385975339), 
+    Point(-0.785132034355964, 1.68513203435596), 
+    Point(-0.850163859753386, 1.58780502970953), 
+    Point(-0.873, 1.473), 
+    Point(-0.850163859753386, 1.35819497029047), 
+    Point(-0.785132034355964, 1.26086796564404), 
+    Point(-0.687805029709527, 1.19583614024661), 
+    Point(-0.573, 1.173), 
+    Point(-0.458194970290473, 1.19583614024661), 
+    Point(-0.360867965644036, 1.26086796564404), 
+    Point(-0.295836140246614, 1.35819497029047), 
+    Point(-0.273, 1.473)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, -2.5), Point(-1.6, 2.5)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.6, -2.5), Point(1.6, 2.5)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.6, 2.5), Point(1.6, 2.5)])
@@ -58,6 +86,8 @@ pcb-symbol TLC2272IDR-symbol0 :
     Point(0.0, -10.16), 
     Point(7.62, -5.08), 
     Point(0.0, 0.0)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(-0.5, 0.8))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(-0.5, 1.862))
 
 pcb-symbol TLC2272IDR-symbol1 :
   pin OUT[1] at Point(7.62, -5.08) with :
@@ -82,6 +112,8 @@ pcb-symbol TLC2272IDR-symbol1 :
     Point(0.0, -10.16), 
     Point(7.62, -5.08), 
     Point(0.0, 0.0)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(-0.5, 0.8))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(-0.5, 1.862))
 
 pcb-symbol TLC2272IDR-symbol2 :
   pin VDD at Point(0.0, -2.54) with :
@@ -95,6 +127,8 @@ pcb-symbol TLC2272IDR-symbol2 :
     number-size = 1.523
     name-size = 1.523
   layer("foreground") = Rectangle(7.62, 12.7, loc(3.81, -6.35))
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(0.0, 0.3))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(0.0, 1.362))
 
 public pcb-component component :
   name = "TLC2272IDR"
@@ -122,7 +156,7 @@ public pcb-module module :
   port p+ : pin[2]
   port p- : pin[2]
   port OUT : pin[2]
-  inst opamp : testlib/TLC2272IDR/component
+  inst opamp : testlib/Texas_Instruments/TLC2272IDR/component
   bypass-cap-strap(opamp.VDD, opamp.VSS, 0.1e-6)
   net (power.vdd opamp.VDD)
   net (power.gnd opamp.VSS)

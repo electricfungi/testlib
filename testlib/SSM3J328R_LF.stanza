@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/SSM3J328R_LF :
+defpackage testlib/Toshiba_Semiconductor_and_Storage/SSM3J328R_LF :
   import core
   import collections
   import math
@@ -15,17 +15,28 @@ pcb-landpattern TOSHIBASOT-23F :
   pad p[2] : smd-pad(0.8, 0.9) at loc(-1.05, -0.95, 90.0) on Top
   pad p[3] : smd-pad(0.8, 0.9) at loc(1.05, 0.0, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-1.05, 1.9, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, -1.7), Point(1.625, -1.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, 1.7), Point(1.625, 1.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(1.625, -1.7), Point(1.625, 1.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-1.625, -1.7), Point(-1.625, 1.7)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.95, -1.55), Point(0.95, -0.827)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.15, -1.55), Point(0.95, -1.55)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.95, 0.827), Point(0.95, 1.55)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.15, 1.55), Point(0.95, 1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-0.925, 1.9), 
+    Point(-0.934515058436089, 1.94783542904564), 
+    Point(-0.961611652351682, 1.98838834764832), 
+    Point(-1.00216457095436, 2.01548494156391), 
+    Point(-1.05, 2.025), 
+    Point(-1.09783542904564, 2.01548494156391), 
+    Point(-1.13838834764832, 1.98838834764832), 
+    Point(-1.16548494156391, 1.94783542904564), 
+    Point(-1.175, 1.9), 
+    Point(-1.16548494156391, 1.85216457095436), 
+    Point(-1.13838834764832, 1.81161165235168), 
+    Point(-1.09783542904564, 1.78451505843609), 
+    Point(-1.05, 1.775), 
+    Point(-1.00216457095436, 1.78451505843609), 
+    Point(-0.961611652351682, 1.81161165235168), 
+    Point(-0.934515058436089, 1.85216457095436), 
+    Point(-0.925, 1.9)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.95, -1.55), Point(0.95, -0.827)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.15, -1.55), Point(0.95, -1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.95, 0.827), Point(0.95, 1.55)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.15, 1.55), Point(0.95, 1.55)])
   ref-label()
 
 pcb-symbol P-FET20V6A003Ohms-symbol :
@@ -65,6 +76,8 @@ pcb-symbol P-FET20V6A003Ohms-symbol :
   layer("foreground") = Line(1.0, [Point(5.08, -0.762), Point(5.08, 0.0)])
   layer("foreground") = Polygon([Point(7.62, -3.048), Point(6.858, -1.778), Point(8.382, -1.778)])
   layer("foreground") = Polygon([Point(5.08, -2.54), Point(3.556, -2.032), Point(3.556, -3.048)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(-0.5, 0.8))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(-0.5, 1.862))
 
 public pcb-component component :
   name = "P-FET 20V 6A 0.03Ohms"

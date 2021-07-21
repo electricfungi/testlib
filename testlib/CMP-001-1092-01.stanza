@@ -1,0 +1,61 @@
+#use-added-syntax(jitx)
+defpackage testlib/*/CMP-001-1092-01 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern BGA8C50P2X4_89X189X50 :
+  pad A1 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(-0.25, 0.75) on Top
+  pad A2 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(0.25, 0.75) on Top
+  pad B1 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(-0.25, 0.25) on Top
+  pad B2 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(0.25, 0.25) on Top
+  pad C1 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(-0.25, -0.25) on Top
+  pad C2 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(0.25, -0.25) on Top
+  pad D1 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(-0.25, -0.75) on Top
+  pad D2 : round-rect-smd-pad(0.2, 0.2, 0.1) at loc(0.25, -0.75) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1, [
+    Point(-0.5, 1.05), 
+    Point(-0.503806023374436, 1.06913417161825), 
+    Point(-0.514644660940673, 1.08535533905933), 
+    Point(-0.530865828381746, 1.09619397662556), 
+    Point(-0.55, 1.1), 
+    Point(-0.569134171618255, 1.09619397662556), 
+    Point(-0.585355339059327, 1.08535533905933), 
+    Point(-0.596193976625564, 1.06913417161825), 
+    Point(-0.6, 1.05), 
+    Point(-0.596193976625564, 1.03086582838175), 
+    Point(-0.585355339059327, 1.01464466094067), 
+    Point(-0.569134171618255, 1.00380602337444), 
+    Point(-0.55, 1.0), 
+    Point(-0.530865828381746, 1.00380602337444), 
+    Point(-0.514644660940673, 1.01464466094067), 
+    Point(-0.503806023374436, 1.03086582838175), 
+    Point(-0.5, 1.05)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-001-1092-01"
+  description = "TXB0102YZPR"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [VCCB | B2 | Right]
+    [B1 | A2 | Right]
+    [B2 | A1 | Right]
+    [GND | B1 | Right]
+    [VCCA | C1 | Left]
+    [A1 | D2 | Left]
+    [A2 | D1 | Left]
+    [OE | C2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(BGA8C50P2X4_89X189X50)
+  reference-prefix = "U"
+

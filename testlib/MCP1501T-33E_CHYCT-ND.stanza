@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/MCP1501T-33E_CHYCT-ND :
+defpackage testlib/Microchip_Technology/MCP1501T-33E_CHYCT-ND :
   import core
   import collections
   import math
@@ -20,13 +20,24 @@ pcb-landpattern MICROCHIPCHSOT23-6 :
   pad p[5] : smd-pad(0.6, 1.0) at loc(1.375, 0.0, 90.0) on Top
   pad p[6] : smd-pad(0.6, 1.0) at loc(1.375, 0.95, 90.0) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-1.375, 1.8, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-2.1, -1.8), Point(2.1, -1.8)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-2.1, 1.8), Point(2.1, 1.8)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(2.1, -1.8), Point(2.1, 1.8)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-2.1, -1.8), Point(-2.1, 1.8)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-1.25, 1.8), 
+    Point(-1.25951505843609, 1.84783542904564), 
+    Point(-1.28661165235168, 1.88838834764832), 
+    Point(-1.32716457095436, 1.91548494156391), 
+    Point(-1.375, 1.925), 
+    Point(-1.42283542904564, 1.91548494156391), 
+    Point(-1.46338834764832, 1.88838834764832), 
+    Point(-1.49048494156391, 1.84783542904564), 
+    Point(-1.5, 1.8), 
+    Point(-1.49048494156391, 1.75216457095436), 
+    Point(-1.46338834764832, 1.71161165235168), 
+    Point(-1.42283542904564, 1.68451505843609), 
+    Point(-1.375, 1.675), 
+    Point(-1.32716457095436, 1.68451505843609), 
+    Point(-1.28661165235168, 1.71161165235168), 
+    Point(-1.25951505843609, 1.75216457095436), 
+    Point(-1.25, 1.8)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.5, -1.55), Point(0.5, 1.55)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.5, -1.55), Point(-0.5, 1.55)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.5, -1.55), Point(0.5, -1.55)])
@@ -41,7 +52,7 @@ public pcb-component component :
   pin-properties :
     [pin:Ref | pads:Int ... | side:Dir]
     [OUT | 1 | Right]
-    [VCC | 6 | Left]
+    [VDD | 6 | Left]
     [nSHDN | 4 | Left]
     [GND | 2, 3, 5 | Left]
 
@@ -53,9 +64,9 @@ public pcb-module module :
   port power : power
   pin out
   pin nSHDN
-  inst vref : testlib/MCP1501T-33E_CHYCT-ND/component
-  bypass-cap-strap(vref.VCC, power.gnd, 0.01e-6)
+  inst vref : testlib/Microchip_Technology/MCP1501T-33E_CHYCT-ND/component
+  bypass-cap-strap(vref.VDD, power.gnd, 0.01e-6)
   net (nSHDN vref.nSHDN)
   net (out vref.OUT)
-  net (power.vdd vref.VCC)
+  net (power.vdd vref.VDD)
   net (power.gnd vref.GND)

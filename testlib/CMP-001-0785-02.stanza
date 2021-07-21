@@ -1,0 +1,54 @@
+#use-added-syntax(jitx)
+defpackage testlib/ECS-TXO-2520-33-160-AN-TR/CMP-001-0785-02 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern ECS-TXO-2520-33-160-AN-TR-Footprint-1 :
+  pad p[1] : smd-pad(0.9, 0.8) at loc(0.0, 0.0) on Top
+  pad p[2] : smd-pad(0.9, 0.8) at loc(1.85, 0.0) on Top
+  pad p[3] : smd-pad(0.9, 0.8) at loc(1.85, 1.45) on Top
+  pad p[4] : smd-pad(0.9, 0.8) at loc(0.0, 1.45) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [
+    Point(-0.81566, -0.14), 
+    Point(-0.822841204902885, -0.103897644990677), 
+    Point(-0.843291546262861, -0.0732915462628611), 
+    Point(-0.873897644990677, -0.0528412049028852), 
+    Point(-0.91, -0.04566), 
+    Point(-0.946102355009323, -0.0528412049028852), 
+    Point(-0.976708453737139, -0.0732915462628611), 
+    Point(-0.997158795097115, -0.103897644990677), 
+    Point(-1.00434, -0.14), 
+    Point(-0.997158795097115, -0.176102355009323), 
+    Point(-0.976708453737139, -0.206708453737139), 
+    Point(-0.946102355009323, -0.227158795097115), 
+    Point(-0.91, -0.23434), 
+    Point(-0.873897644990677, -0.227158795097115), 
+    Point(-0.843291546262861, -0.206708453737139), 
+    Point(-0.822841204902885, -0.176102355009323), 
+    Point(-0.81566, -0.14)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-001-0785-02"
+  description = "16.0000MHZ"
+  manufacturer = "ECS-TXO-2520-33-160-AN-TR"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [Out | 3 | Right]
+    [GND | 2 | Right]
+    [VDD | 4 | Left]
+    [Tri-state | 1 | Left]
+
+  make-box-symbol()
+  assign-landpattern(ECS-TXO-2520-33-160-AN-TR-Footprint-1)
+  reference-prefix = "Y"
+

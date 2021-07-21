@@ -1,0 +1,85 @@
+#use-added-syntax(jitx)
+defpackage testlib/Macronix/MX25L1606EM2I-12G :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern Macronix209MIL :
+  pad p[1] : smd-pad(0.65, 1.7) at loc(-3.55, 1.905, 90.0) on Top
+  pad p[2] : smd-pad(0.65, 1.7) at loc(-3.55, 0.635, 90.0) on Top
+  pad p[3] : smd-pad(0.65, 1.7) at loc(-3.55, -0.635, 90.0) on Top
+  pad p[4] : smd-pad(0.65, 1.7) at loc(-3.55, -1.905, 90.0) on Top
+  pad p[5] : smd-pad(0.65, 1.7) at loc(3.55, -1.905, 90.0) on Top
+  pad p[6] : smd-pad(0.65, 1.7) at loc(3.55, -0.635, 90.0) on Top
+  pad p[7] : smd-pad(0.65, 1.7) at loc(3.55, 0.635, 90.0) on Top
+  pad p[8] : smd-pad(0.65, 1.7) at loc(3.55, 1.905, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-3.425, 2.78), 
+    Point(-3.43451505843609, 2.82783542904564), 
+    Point(-3.46161165235168, 2.86838834764832), 
+    Point(-3.50216457095436, 2.89548494156391), 
+    Point(-3.55, 2.905), 
+    Point(-3.59783542904564, 2.89548494156391), 
+    Point(-3.63838834764832, 2.86838834764832), 
+    Point(-3.66548494156391, 2.82783542904564), 
+    Point(-3.675, 2.78), 
+    Point(-3.66548494156391, 2.73216457095436), 
+    Point(-3.63838834764832, 2.69161165235168), 
+    Point(-3.59783542904564, 2.66451505843609), 
+    Point(-3.55, 2.655), 
+    Point(-3.50216457095436, 2.66451505843609), 
+    Point(-3.46161165235168, 2.69161165235168), 
+    Point(-3.43451505843609, 2.73216457095436), 
+    Point(-3.425, 2.78)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-0.973, 1.623), 
+    Point(-0.995836140246614, 1.73780502970953), 
+    Point(-1.06086796564404, 1.83513203435596), 
+    Point(-1.15819497029047, 1.90016385975339), 
+    Point(-1.273, 1.923), 
+    Point(-1.38780502970953, 1.90016385975339), 
+    Point(-1.48513203435596, 1.83513203435596), 
+    Point(-1.55016385975339, 1.73780502970953), 
+    Point(-1.573, 1.623), 
+    Point(-1.55016385975339, 1.50819497029047), 
+    Point(-1.48513203435596, 1.41086796564404), 
+    Point(-1.38780502970953, 1.34583614024661), 
+    Point(-1.273, 1.323), 
+    Point(-1.15819497029047, 1.34583614024661), 
+    Point(-1.06086796564404, 1.41086796564404), 
+    Point(-0.995836140246614, 1.50819497029047), 
+    Point(-0.973, 1.623)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.3, -2.65), Point(-2.3, 2.65)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(2.3, -2.65), Point(2.3, 2.65)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.3, 2.65), Point(2.3, 2.65)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-2.3, -2.65), Point(2.3, -2.65)])
+  ref-label()
+
+public pcb-component component :
+  name = "MX25L1606EM2I-12G"
+  description = "DNP"
+  manufacturer = "Macronix"
+  mpn = "MX25L1606EM2I-12G"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [Vcc | 8 | Right]
+    [nHOLD | 7 | Right]
+    [Sck | 6 | Right]
+    [SI | 5 | Right]
+    [nCS | 1 | Left]
+    [SO | 2 | Left]
+    [WP | 3 | Left]
+    [Vss | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(Macronix209MIL)
+  reference-prefix = "U"
+

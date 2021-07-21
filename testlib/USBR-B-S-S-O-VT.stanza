@@ -1,0 +1,64 @@
+#use-added-syntax(jitx)
+defpackage testlib/Samtec/USBR-B-S-S-O-VT :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern SAMTEC_USBR-B-S-S-O-VT :
+  pad S1 : round-rect-pth-pad(1.9, 2.85, 2.85, 1.425) at loc(6.0, -0.9) on Top
+  pad S2 : round-rect-pth-pad(1.9, 2.85, 2.85, 1.425) at loc(-6.0, -0.9) on Top
+  pad p[1] : rect-pth-pad(0.95, 1.458, 1.458) at loc(1.25, 1.6) on Top
+  pad p[2] : round-rect-pth-pad(0.95, 1.458, 1.458, 0.729) at loc(-1.25, 1.6) on Top
+  pad p[3] : round-rect-pth-pad(0.95, 1.458, 1.458, 0.729) at loc(-1.25, -1.6) on Top
+  pad p[4] : round-rect-pth-pad(0.95, 1.458, 1.458, 0.729) at loc(1.25, -1.6) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [
+    Point(3.148, 6.096), 
+    Point(3.14038795325113, 6.13426834323651), 
+    Point(3.11871067811865, 6.16671067811865), 
+    Point(3.08626834323651, 6.18838795325113), 
+    Point(3.048, 6.196), 
+    Point(3.00973165676349, 6.18838795325113), 
+    Point(2.97728932188135, 6.16671067811865), 
+    Point(2.95561204674887, 6.13426834323651), 
+    Point(2.948, 6.096), 
+    Point(2.95561204674887, 6.05773165676349), 
+    Point(2.97728932188135, 6.02528932188135), 
+    Point(3.00973165676349, 6.00361204674887), 
+    Point(3.048, 5.996), 
+    Point(3.08626834323651, 6.00361204674887), 
+    Point(3.11871067811865, 6.02528932188135), 
+    Point(3.14038795325113, 6.05773165676349), 
+    Point(3.148, 6.096)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-7.5, -5.5), Point(-7.5, -2.58)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-7.5, -5.5), Point(7.5, -5.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(7.5, -5.5), Point(7.5, -2.58)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(7.5, 0.78), Point(7.5, 5.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-7.5, 5.5), Point(7.5, 5.5)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-7.5, 0.78), Point(-7.5, 5.5)])
+  ref-label()
+
+public pcb-component component :
+  name = "USBR-B-S-S-O-VT"
+  description = "USBR-B-S-S-O-VT"
+  manufacturer = "Samtec"
+  mpn = "USBR-B-S-S-O-VT"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [VCC | p[1] | Left]
+    [D- | p[2] | Left]
+    [D+ | p[3] | Left]
+    [GND | p[4] | Left]
+    [SHIELD | S1, S2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(SAMTEC_USBR-B-S-S-O-VT)
+  reference-prefix = "CN"
+

@@ -1,0 +1,240 @@
+#use-added-syntax(jitx)
+defpackage testlib/Microchip_Technology/USB5807_KD :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern MICROCHIPVQFN-100 :
+  pad PAD : smd-pad(8.1, 8.1) at loc(0.0, 0.0) on Top
+  pad p[1] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 4.8, 90.0) on Top
+  pad p[2] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 4.4, 90.0) on Top
+  pad p[3] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 4.0, 90.0) on Top
+  pad p[4] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 3.6, 90.0) on Top
+  pad p[5] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 3.2, 90.0) on Top
+  pad p[6] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 2.8, 90.0) on Top
+  pad p[7] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 2.4, 90.0) on Top
+  pad p[8] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 2.0, 90.0) on Top
+  pad p[9] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 1.6, 90.0) on Top
+  pad p[10] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 1.2, 90.0) on Top
+  pad p[11] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 0.8, 90.0) on Top
+  pad p[12] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 0.4, 90.0) on Top
+  pad p[13] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, 0.0, 90.0) on Top
+  pad p[14] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -0.4, 90.0) on Top
+  pad p[15] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -0.8, 90.0) on Top
+  pad p[16] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -1.2, 90.0) on Top
+  pad p[17] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -1.6, 90.0) on Top
+  pad p[18] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -2.0, 90.0) on Top
+  pad p[19] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -2.4, 90.0) on Top
+  pad p[20] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -2.8, 90.0) on Top
+  pad p[21] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -3.2, 90.0) on Top
+  pad p[22] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -3.6, 90.0) on Top
+  pad p[23] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -4.0, 90.0) on Top
+  pad p[24] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -4.4, 90.0) on Top
+  pad p[25] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-5.85, -4.8, 90.0) on Top
+  pad p[26] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.8, -5.85) on Top
+  pad p[27] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.4, -5.85) on Top
+  pad p[28] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.0, -5.85) on Top
+  pad p[29] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-3.6, -5.85) on Top
+  pad p[30] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-3.2, -5.85) on Top
+  pad p[31] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.8, -5.85) on Top
+  pad p[32] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.4, -5.85) on Top
+  pad p[33] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.0, -5.85) on Top
+  pad p[34] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-1.6, -5.85) on Top
+  pad p[35] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-1.2, -5.85) on Top
+  pad p[36] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-0.8, -5.85) on Top
+  pad p[37] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-0.4, -5.85) on Top
+  pad p[38] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.0, -5.85) on Top
+  pad p[39] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.4, -5.85) on Top
+  pad p[40] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.8, -5.85) on Top
+  pad p[41] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(1.2, -5.85) on Top
+  pad p[42] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(1.6, -5.85) on Top
+  pad p[43] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.0, -5.85) on Top
+  pad p[44] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.4, -5.85) on Top
+  pad p[45] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.8, -5.85) on Top
+  pad p[46] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(3.2, -5.85) on Top
+  pad p[47] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(3.6, -5.85) on Top
+  pad p[48] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.0, -5.85) on Top
+  pad p[49] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.4, -5.85) on Top
+  pad p[50] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.8, -5.85) on Top
+  pad p[51] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -4.8, 90.0) on Top
+  pad p[52] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -4.4, 90.0) on Top
+  pad p[53] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -4.0, 90.0) on Top
+  pad p[54] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -3.6, 90.0) on Top
+  pad p[55] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -3.2, 90.0) on Top
+  pad p[56] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -2.8, 90.0) on Top
+  pad p[57] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -2.4, 90.0) on Top
+  pad p[58] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -2.0, 90.0) on Top
+  pad p[59] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -1.6, 90.0) on Top
+  pad p[60] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -1.2, 90.0) on Top
+  pad p[61] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -0.8, 90.0) on Top
+  pad p[62] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, -0.4, 90.0) on Top
+  pad p[63] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 0.0, 90.0) on Top
+  pad p[64] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 0.4, 90.0) on Top
+  pad p[65] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 0.8, 90.0) on Top
+  pad p[66] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 1.2, 90.0) on Top
+  pad p[67] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 1.6, 90.0) on Top
+  pad p[68] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 2.0, 90.0) on Top
+  pad p[69] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 2.4, 90.0) on Top
+  pad p[70] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 2.8, 90.0) on Top
+  pad p[71] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 3.2, 90.0) on Top
+  pad p[72] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 3.6, 90.0) on Top
+  pad p[73] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 4.0, 90.0) on Top
+  pad p[74] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 4.4, 90.0) on Top
+  pad p[75] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(5.85, 4.8, 90.0) on Top
+  pad p[76] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.8, 5.85) on Top
+  pad p[77] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.4, 5.85) on Top
+  pad p[78] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(4.0, 5.85) on Top
+  pad p[79] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(3.6, 5.85) on Top
+  pad p[80] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(3.2, 5.85) on Top
+  pad p[81] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.8, 5.85) on Top
+  pad p[82] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.4, 5.85) on Top
+  pad p[83] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(2.0, 5.85) on Top
+  pad p[84] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(1.6, 5.85) on Top
+  pad p[85] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(1.2, 5.85) on Top
+  pad p[86] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.8, 5.85) on Top
+  pad p[87] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.4, 5.85) on Top
+  pad p[88] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(0.0, 5.85) on Top
+  pad p[89] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-0.4, 5.85) on Top
+  pad p[90] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-0.8, 5.85) on Top
+  pad p[91] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-1.2, 5.85) on Top
+  pad p[92] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-1.6, 5.85) on Top
+  pad p[93] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.0, 5.85) on Top
+  pad p[94] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.4, 5.85) on Top
+  pad p[95] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-2.8, 5.85) on Top
+  pad p[96] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-3.2, 5.85) on Top
+  pad p[97] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-3.6, 5.85) on Top
+  pad p[98] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.0, 5.85) on Top
+  pad p[99] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.4, 5.85) on Top
+  pad p[100] : round-rect-smd-pad(0.2, 1.05, 0.1) at loc(-4.8, 5.85) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-6.675, 6.0), 
+    Point(-6.68451505843609, 6.04783542904564), 
+    Point(-6.71161165235168, 6.08838834764832), 
+    Point(-6.75216457095436, 6.11548494156391), 
+    Point(-6.8, 6.125), 
+    Point(-6.84783542904564, 6.11548494156391), 
+    Point(-6.88838834764832, 6.08838834764832), 
+    Point(-6.91548494156391, 6.04783542904564), 
+    Point(-6.925, 6.0), 
+    Point(-6.91548494156391, 5.95216457095436), 
+    Point(-6.88838834764832, 5.91161165235168), 
+    Point(-6.84783542904564, 5.88451505843609), 
+    Point(-6.8, 5.875), 
+    Point(-6.75216457095436, 5.88451505843609), 
+    Point(-6.71161165235168, 5.91161165235168), 
+    Point(-6.68451505843609, 5.95216457095436), 
+    Point(-6.675, 6.0)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.15, -6.15), Point(-5.327, -6.15)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.15, -6.15), Point(-6.15, -5.327)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(5.327, -6.15), Point(6.15, -6.15)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(6.15, -6.15), Point(6.15, -5.327)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(6.15, 5.327), Point(6.15, 6.15)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(5.327, 6.15), Point(6.15, 6.15)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.15, 6.15), Point(-5.327, 6.15)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-6.15, 5.327), Point(-6.15, 6.15)])
+  ref-label()
+
+public pcb-component component :
+  name = "USB5807/KD"
+  description = "USB5807/KD"
+  manufacturer = "Microchip Technology"
+  mpn = "USB5807/KD"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [USB2DN_DM4PRT_DIS_M4 | p[36] | Right]
+    [USB2DN_DP4PRT_DIS_P4 | p[35] | Right]
+    [USB3DN_RXDM4 | p[41] | Right]
+    [USB3DN_RXDP4 | p[40] | Right]
+    [USB3DN_TXDM4 | p[38] | Right]
+    [USB3DN_TXDP4 | p[37] | Right]
+    [USB2DN_DM5PRT_DIS_M5 | p[44] | Right]
+    [USB2DN_DP5PRT_DIS_P5 | p[43] | Right]
+    [USB3DN_RXDM5 | p[49] | Right]
+    [USB3DN_RXDP5 | p[48] | Right]
+    [USB3DN_TXDM5 | p[46] | Right]
+    [USB3DN_TXDP5 | p[45] | Right]
+    [USB2DN_DM6PRT_DIS_M6 | p[87] | Right]
+    [USB2DN_DP6PRT_DIS_P6 | p[86] | Right]
+    [USB3DN_RXDM6 | p[92] | Right]
+    [USB3DN_RXDP6 | p[91] | Right]
+    [USB3DN_TXDM6 | p[89] | Right]
+    [USB3DN_TXDP6 | p[88] | Right]
+    [USB2DN_DM7PRT_DIS_M7 | p[80] | Right]
+    [USB2DN_DP7PRT_DIS_P7 | p[79] | Right]
+    [USB3DN_RXDM7 | p[85] | Right]
+    [USB3DN_RXDP7 | p[84] | Right]
+    [USB3DN_TXDM7 | p[82] | Right]
+    [USB3DN_TXDP7 | p[81] | Right]
+    [USB2UP_DM | p[95] | Left]
+    [USB2UP_DP | p[94] | Left]
+    [USB3UP_RXDM | p[100] | Left]
+    [USB3UP_RXDP | p[99] | Left]
+    [USB3UP_TXDM | p[97] | Left]
+    [USB3UP_TXDP | p[96] | Left]
+    [USB2DN_DM1PRT_DIS_M1 | p[7] | Left]
+    [USB2DN_DP1PRT_DIS_P1 | p[6] | Left]
+    [USB3DN_RXDM1 | p[12] | Left]
+    [USB3DN_RXDP1 | p[11] | Left]
+    [USB3DN_TXDM1 | p[9] | Left]
+    [USB3DN_TXDP1 | p[8] | Left]
+    [USB2DN_DM2PRT_DIS_M2 | p[14] | Left]
+    [USB2DN_DP2PRT_DIS_P2 | p[13] | Left]
+    [USB3DN_RXDM2 | p[19] | Left]
+    [USB3DN_RXDP2 | p[18] | Left]
+    [USB3DN_TXDM2 | p[16] | Left]
+    [USB3DN_TXDP2 | p[15] | Left]
+    [USB2DN_DM3PRT_DIS_M3 | p[29] | Left]
+    [USB2DN_DP3PRT_DIS_P3 | p[28] | Left]
+    [USB3DN_RXDM3 | p[34] | Left]
+    [USB3DN_RXDP3 | p[33] | Left]
+    [USB3DN_TXDM3 | p[31] | Left]
+    [USB3DN_TXDP3 | p[30] | Left]
+    [VBUS_DETGPIO16 | p[24] | Right]
+    [FLEX_STATEGPIO72 | p[22] | Right]
+    [FLEX_CMDGPIO10 | p[21] | Right]
+    [C_ATTACH0GPIO64 | p[76] | Right]
+    [C_ATTACH1GPIO1 | p[73] | Right]
+    [SPI_CE_NGPIO7CFG_NON_REM | p[68] | Right]
+    [SPI_CLKC_ATTACH3GPIO4 | p[65] | Right]
+    [SPI_DOC_ATTACH2GPIO5 | p[66] | Right]
+    [SPI_DIGPIO9CFG_BC_EN | p[67] | Right]
+    [SMBCLKGPIO8 | p[75] | Right]
+    [SMBDATAGPIO6 | p[74] | Right]
+    [GPIO12CFG_STRAP | p[20] | Right]
+    [SUSP_INDGPIO68 | p[77] | Right]
+    [RBIAS | p[1] | Right]
+    [TESTEN | p[23] | Right]
+    [RESET_N | p[25] | Left]
+    [XTALICLKIN | p[3] | Left]
+    [XTALO | p[4] | Left]
+    [PRT_CTL1GPIO17 | p[70] | Left]
+    [PRT_CTL2GPIO18 | p[62] | Left]
+    [PRT_CTL3GPIO19 | p[58] | Left]
+    [PRT_CTL4GANG_PWRGPIO20 | p[57] | Left]
+    [PRT_CTL6GPIO22 | p[51] | Left]
+    [PRT_CTL5GPIO21 | p[52] | Left]
+    [PRT_CTL7GPIO23 | p[53] | Left]
+    [SPEED_IND1BC_IND1GPIO70 | p[63] | Left]
+    [SPEED_IND2BC_IND2GPIO71 | p[61] | Left]
+    [SPEED_IND3BC_IND3GPIO2 | p[56] | Left]
+    [SPEED_IND4BC_IND4GPIO3 | p[60] | Left]
+    [SPEED_IND5BC_IND5GPIO65 | p[50] | Left]
+    [SPEED_IND6BC_IND6GPIO66 | p[71] | Left]
+    [SPEED_IND7BC_IND7GPIO67 | p[55] | Left]
+    [GPIO69 | p[69] | Left]
+    [VDD33 | p[2], p[5], p[27], p[42], p[54], p[64], p[72], p[93] | Right]
+    [VSS | PAD | Right]
+    [VDD12 | p[10], p[17], p[26], p[32], p[39], p[47], p[59], p[78], p[83], p[90], p[98] | Left]
+
+  make-box-symbol()
+  assign-landpattern(MICROCHIPVQFN-100)
+  reference-prefix = "U"
+

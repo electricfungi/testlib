@@ -6,7 +6,7 @@ defpackage test-the-lib :
   import ocdb/defaults
   import ocdb/generic-components
   import ocdb/bundles
-
+  ; import testlib
 
 pcb-module ain-65V :
   pin input0
@@ -14,7 +14,7 @@ pcb-module ain-65V :
   port power : power
   pin out0
   pin out1
-  inst op-amp : testlib/TLC2272IDR/module
+  inst op-amp : testlib/Texas_Instruments/TLC2272IDR/module
   net (power.vdd op-amp.power.vdd)
   ; instance 0
   inst rfb0 : chip-resistor(2.0e3)
@@ -51,44 +51,9 @@ pcb-module ain-65V :
 
 pcb-module test-the-lib :
   inst r : chip-resistor(100.0e3)
-  inst comp01 : testlib/27E489/component 
-
-  inst comp02 : testlib/292304-1/component
-  inst comp03 : testlib/2N7002K-7/component
-  inst comp04 : testlib/742792040/component
-  inst comp05 : testlib/ATMEGA2560-16AUR/component
-  inst comp06 : testlib/B02P-VL/component
-
-  inst comp07 : testlib/B04P-VL/component
-  inst comp08 : testlib/BSS123TA/component
-  inst comp09 : testlib/CDBHD140L-G/component
-  inst comp10 : testlib/DMN3404L-7/component
-  inst comp11 : testlib/FT232RL-REEL/component
-
-  inst comp12 : testlib/LMZ23603TZE_NOPB/component
-  inst comp13 : testlib/LTST-C191KGKT/component
-  inst comp14 : testlib/LTST-C191KRKT/component
-  inst comp15 : testlib/LTST-C191TBKT/component
-
-  inst comp16 : testlib/M20-9980346/component
-  inst comp17 : testlib/MAX202CDR/component
-  inst comp18 : testlib/MCP1501T-33E_CHYCT-ND/module
-  inst comp19 : testlib/MI0805K400R-10/component
-
-  inst comp20 : testlib/PTS645SK50SMTR92_LFS/component
-  inst comp21 : testlib/S1603-8TR/component
-  inst comp22 : testlib/S1605-8TR/component
-  inst comp23 : testlib/S1615-8TR/component
-  inst comp24 : testlib/S30B-PUDSS-1_LF__SN_/component
-  inst comp25 : testlib/SK36A-LTP/component
-  inst comp26 : testlib/SSM3J328R_LF/component
-  inst comp27 : testlib/ST2378ETTR/component
-
-  inst comp28 : testlib/THVD1500DR/component
-  inst comp29 : testlib/TLC2272IDR/module
-  inst comp30 : testlib/TLV2553IDWR/module
-  inst comp31 : testlib/TPS79933DDCR/component
-  inst comp32 : testlib/ZXMP3A16GTA/component
+  inst comp18 : testlib/Microchip_Technology/MCP1501T-33E_CHYCT-ND/module
+  inst comp29 : testlib/Texas_Instruments/TLC2272IDR/module
+  inst comp30 : testlib/Texas_Instruments/TLV2553IDWR/module
 
   inst example-amp : ain-65V
   schematic-group(example-amp) = signals-in-65V
@@ -101,7 +66,7 @@ pcb-module test-the-lib :
 
 make-default-board(test-the-lib, 4, RoundedRectangle(150.0, 100.0, 3.0))
 
-; set-export-backend(`altium)
+set-export-backend(`altium)
 ; export-cad()
 
 ; Show the Schematic and PCB for the design

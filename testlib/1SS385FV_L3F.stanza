@@ -1,0 +1,55 @@
+#use-added-syntax(jitx)
+defpackage testlib/Toshiba/1SS385FV_L3F :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern SOT-723VESM_TOS :
+  pad p[1] : smd-pad(0.4572, 0.4064) at loc(-0.575, 0.4) on Top
+  pad p[2] : smd-pad(0.4572, 0.4064) at loc(-0.575, -0.4) on Top
+  pad p[3] : smd-pad(0.4572, 0.508) at loc(0.575, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [
+    Point(-1.1938, 0.889), 
+    Point(-1.19960037962264, 0.91816047754622), 
+    Point(-1.21611846327359, 0.942881536726415), 
+    Point(-1.24083952245378, 0.95939962037736), 
+    Point(-1.27, 0.9652), 
+    Point(-1.29916047754622, 0.95939962037736), 
+    Point(-1.32388153672641, 0.942881536726415), 
+    Point(-1.34039962037736, 0.91816047754622), 
+    Point(-1.3462, 0.889), 
+    Point(-1.34039962037736, 0.85983952245378), 
+    Point(-1.32388153672641, 0.835118463273585), 
+    Point(-1.29916047754622, 0.81860037962264), 
+    Point(-1.27, 0.8128), 
+    Point(-1.24083952245378, 0.81860037962264), 
+    Point(-1.21611846327359, 0.835118463273585), 
+    Point(-1.19960037962264, 0.85983952245378), 
+    Point(-1.1938, 0.889)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-0.7874, 0.9779), Point(0.7874, 0.9779)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1524, [Point(-0.7874, -0.9779), Point(0.7874, -0.9779)])
+  ref-label()
+
+public pcb-component component :
+  name = "1SS385FV,L3F"
+  description = "1SS385FV,L3F"
+  manufacturer = "Toshiba"
+  mpn = "1SS385FV,L3F"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [ANODE2 | 2 | Down]
+    [CATHODE | 3 | Up]
+    [ANODE1 | 1 | Down]
+
+  make-box-symbol()
+  assign-landpattern(SOT-723VESM_TOS)
+  reference-prefix = "D"
+

@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/LMZ23603TZE_NOPB :
+defpackage testlib/Texas_Instruments/LMZ23603TZE_NOPB :
   import core
   import collections
   import math
@@ -21,10 +21,27 @@ pcb-landpattern NDW0007A :
   pad p[7] : smd-pad(0.89, 3.06) at loc(3.81, 0.0) on Top
   pad p[8] : smd-pad(5.35, 8.54) at loc(0.0, 7.305) on Top
 
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-5.08, -1.905, 0.254)
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, -1.016), Point(-5.461, 13.081)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.461, 13.081), Point(5.461, 13.081)])
-  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(5.461, -1.016), Point(5.461, 13.081)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.508, [
+    Point(-4.826, -1.905), 
+    Point(-4.84533459874213, -1.80779840817927), 
+    Point(-4.90039487757862, -1.72539487757862), 
+    Point(-4.98279840817927, -1.67033459874213), 
+    Point(-5.08, -1.651), 
+    Point(-5.17720159182073, -1.67033459874213), 
+    Point(-5.25960512242138, -1.72539487757862), 
+    Point(-5.31466540125787, -1.80779840817927), 
+    Point(-5.334, -1.905), 
+    Point(-5.31466540125787, -2.00220159182073), 
+    Point(-5.25960512242138, -2.08460512242138), 
+    Point(-5.17720159182073, -2.13966540125787), 
+    Point(-5.08, -2.159), 
+    Point(-4.98279840817927, -2.13966540125787), 
+    Point(-4.90039487757862, -2.08460512242138), 
+    Point(-4.84533459874213, -2.00220159182073), 
+    Point(-4.826, -1.905)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-5.461, -1.016), Point(-5.461, 13.081)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-5.461, 13.081), Point(5.461, 13.081)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(5.461, -1.016), Point(5.461, 13.081)])
   ref-label()
 
 public pcb-component component :

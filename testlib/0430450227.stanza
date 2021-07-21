@@ -1,0 +1,39 @@
+#use-added-syntax(jitx)
+defpackage testlib/Molex/0430450227 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern _0430450227 :
+  pad p[0][1] : round-rect-pth-pad(1.02, 1.02, 1.02, 0.51) at loc(-3.0, 1.97) on Top
+  pad p[0][2] : round-rect-pth-pad(1.02, 1.02, 1.02, 0.51) at loc(3.0, 1.97) on Top
+  pad p[1] : rect-pth-pad(1.02, 1.746, 1.746) at loc(0.0, -1.97) on Top
+  pad p[2] : round-rect-pth-pad(1.02, 1.746, 1.746, 0.873) at loc(0.0, 1.03) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.985, -4.826), Point(-3.985, 4.699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.985, -4.826), Point(4.064, -4.826)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(4.064, -4.826), Point(4.064, 4.699)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.985, 4.699), Point(4.064, 4.699)])
+  ref-label()
+
+public pcb-component component :
+  name = "0430450227"
+  description = "0430450227"
+  manufacturer = "Molex"
+  mpn = "0430450227"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+    [p[2] | 2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(_0430450227)
+  reference-prefix = "CN"
+

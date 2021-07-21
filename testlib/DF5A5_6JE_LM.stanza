@@ -1,0 +1,60 @@
+#use-added-syntax(jitx)
+defpackage testlib/Toshiba_Semiconductor_and_Storage/DF5A5_6JE_LM :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern TOSHIBASON5-P-050 :
+  pad p[1] : smd-pad(0.3, 0.45) at loc(-0.675, 0.5, 90.0) on Top
+  pad p[2] : smd-pad(0.3, 0.45) at loc(-0.675, 0.0, 90.0) on Top
+  pad p[3] : smd-pad(0.3, 0.45) at loc(-0.675, -0.5, 90.0) on Top
+  pad p[4] : smd-pad(0.3, 0.45) at loc(0.675, -0.5, 90.0) on Top
+  pad p[5] : smd-pad(0.3, 0.45) at loc(0.675, 0.5, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-0.55, 1.2), 
+    Point(-0.559515058436089, 1.24783542904564), 
+    Point(-0.586611652351682, 1.28838834764832), 
+    Point(-0.627164570954364, 1.31548494156391), 
+    Point(-0.675, 1.325), 
+    Point(-0.722835429045636, 1.31548494156391), 
+    Point(-0.763388347648319, 1.28838834764832), 
+    Point(-0.790484941563911, 1.24783542904564), 
+    Point(-0.8, 1.2), 
+    Point(-0.790484941563911, 1.15216457095436), 
+    Point(-0.763388347648319, 1.11161165235168), 
+    Point(-0.722835429045636, 1.08451505843609), 
+    Point(-0.675, 1.075), 
+    Point(-0.627164570954364, 1.08451505843609), 
+    Point(-0.586611652351682, 1.11161165235168), 
+    Point(-0.559515058436089, 1.15216457095436), 
+    Point(-0.55, 1.2)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(0.05, -0.85), Point(0.05, 0.85)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-0.05, -0.85), Point(-0.05, 0.85)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-0.05, -0.85), Point(0.05, -0.85)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-0.05, 0.85), Point(0.05, 0.85)])
+  ref-label()
+
+public pcb-component component :
+  name = "TVS_SOT553_5V6"
+  description = "TVS_SOT553_5V6"
+  manufacturer = "Toshiba Semiconductor and Storage"
+  mpn = "DF5A5.6JE,LM"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [A | 4, 5 | Right]
+    [K2 | 1 | Left]
+    [COM | 2 | Left]
+    [K1 | 3 | Left]
+
+  make-box-symbol()
+  assign-landpattern(TOSHIBASON5-P-050)
+  reference-prefix = "D"
+

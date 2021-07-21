@@ -1,0 +1,40 @@
+#use-added-syntax(jitx)
+defpackage testlib/NR8040T100M :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern TAIYOYUDENNR8040 :
+  pad p[1] : smd-pad(7.5, 1.8) at loc(-2.8, 0.0, 90.0) on Top
+  pad p[2] : smd-pad(7.5, 1.8) at loc(2.8, 0.0, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.1, -4.1), Point(4.1, -4.1)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.1, 4.1), Point(4.1, 4.1)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(-4.925, -4.35), Point(4.925, -4.35)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(-4.925, 4.35), Point(4.925, 4.35)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(4.925, -4.35), Point(4.925, 4.35)])
+  layer(Courtyard(Top)) = Line(0.0, [Point(-4.925, -4.35), Point(-4.925, 4.35)])
+  ref-label()
+
+public pcb-component component :
+  name = "IND_10u_3A1"
+  description = "IND_10u_3A1"
+  manufacturer = "Taiyo Yuden"
+  mpn = "NR8040T100M"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[2] | 2 | Right]
+    [p[1] | 1 | Left]
+
+  make-box-symbol()
+  assign-landpattern(TAIYOYUDENNR8040)
+

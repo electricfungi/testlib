@@ -1,0 +1,37 @@
+#use-added-syntax(jitx)
+defpackage testlib/TE_Connectivity_AMP_Connectors/826936-2 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern HDR1X2 :
+  pad p[1] : rect-pth-pad(1.0668, 1.5748, 1.5748) at loc(0.0, 0.0) on Top
+  pad p[2] : round-rect-pth-pad(1.0668, 1.5748, 1.5748, 0.7874) at loc(2.54, 0.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.27, 1.27), Point(3.81, 1.27)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.27, -1.27), Point(-1.27, 1.27)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(-1.27, -1.27), Point(3.81, -1.27)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.2, [Point(3.81, -1.27), Point(3.81, 1.27)])
+  ref-label()
+
+public pcb-component component :
+  name = "CMP-001-0280-01"
+  description = "Header 2_DK"
+  manufacturer = "TE Connectivity AMP Connectors"
+  mpn = "826936-2"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+    [p[2] | 2 | Left]
+
+  make-box-symbol()
+  assign-landpattern(HDR1X2)
+  reference-prefix = "CN"
+

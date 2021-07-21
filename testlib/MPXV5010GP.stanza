@@ -1,0 +1,80 @@
+#use-added-syntax(jitx)
+defpackage testlib/NXP_USA_Inc_/MPXV5010GP :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern NXP1369-01 :
+  pad p[1] : smd-pad(1.2, 2.6) at loc(-8.275, 3.81, 90.0) on Top
+  pad p[2] : smd-pad(1.2, 2.6) at loc(-8.275, 1.27, 90.0) on Top
+  pad p[3] : smd-pad(1.2, 2.6) at loc(-8.275, -1.27, 90.0) on Top
+  pad p[4] : smd-pad(1.2, 2.6) at loc(-8.275, -3.81, 90.0) on Top
+  pad p[5] : smd-pad(1.2, 2.6) at loc(8.275, -3.81, 90.0) on Top
+  pad p[6] : smd-pad(1.2, 2.6) at loc(8.275, -1.27, 90.0) on Top
+  pad p[7] : smd-pad(1.2, 2.6) at loc(8.275, 1.27, 90.0) on Top
+  pad p[8] : smd-pad(1.2, 2.6) at loc(8.275, 3.81, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-8.15, 4.96), 
+    Point(-8.15951505843609, 5.00783542904564), 
+    Point(-8.18661165235168, 5.04838834764832), 
+    Point(-8.22716457095436, 5.07548494156391), 
+    Point(-8.275, 5.085), 
+    Point(-8.32283542904564, 5.07548494156391), 
+    Point(-8.36338834764832, 5.04838834764832), 
+    Point(-8.39048494156391, 5.00783542904564), 
+    Point(-8.4, 4.96), 
+    Point(-8.39048494156391, 4.91216457095436), 
+    Point(-8.36338834764832, 4.87161165235168), 
+    Point(-8.32283542904564, 4.84451505843609), 
+    Point(-8.275, 4.835), 
+    Point(-8.22716457095436, 4.84451505843609), 
+    Point(-8.18661165235168, 4.87161165235168), 
+    Point(-8.15951505843609, 4.91216457095436), 
+    Point(-8.15, 4.96)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-5.2372, 4.80062), 
+    Point(-5.26003614024661, 4.91542502970953), 
+    Point(-5.32506796564404, 5.01275203435596), 
+    Point(-5.42239497029047, 5.07778385975339), 
+    Point(-5.5372, 5.10062), 
+    Point(-5.65200502970953, 5.07778385975339), 
+    Point(-5.74933203435596, 5.01275203435596), 
+    Point(-5.81436385975339, 4.91542502970953), 
+    Point(-5.8372, 4.80062), 
+    Point(-5.81436385975339, 4.68581497029047), 
+    Point(-5.74933203435597, 4.58848796564404), 
+    Point(-5.65200502970953, 4.52345614024661), 
+    Point(-5.5372, 4.50062), 
+    Point(-5.42239497029047, 4.52345614024661), 
+    Point(-5.32506796564404, 4.58848796564404), 
+    Point(-5.26003614024661, 4.68581497029047), 
+    Point(-5.2372, 4.80062)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.575, -6.175), Point(6.575, -6.175)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(6.575, -6.175), Point(6.575, 5.81662)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-6.575, -6.175), Point(-6.575, 5.81662)])
+  ref-label()
+
+public pcb-component component :
+  name = "MPXV5010GP"
+  description = "MPXV5010GP"
+  manufacturer = "NXP USA Inc."
+  mpn = "MPXV5010GP"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [NC | 1, 5, 6, 7, 8 | Left]
+    [p+V | 2 | Left]
+    [GND | 3 | Left]
+    [VOUT | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(NXP1369-01)
+  reference-prefix = "U"
+

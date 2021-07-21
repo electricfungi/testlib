@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/CDBHD140L-G :
+defpackage testlib/Comchip_Technology/CDBHD140L-G :
   import core
   import collections
   import math
@@ -16,19 +16,46 @@ pcb-landpattern COMCHIPTO-269AA :
   pad p[3] : smd-pad(0.9, 1.85) at loc(3.025, -1.25, 90.0) on Top
   pad p[4] : smd-pad(0.9, 1.85) at loc(3.025, 1.25, 90.0) on Top
 
-  ; layer(Silkscreen("F-SilkS", Top)) = Circle(-0.673, 1.423, 0.3)
-  layer(Silkscreen("F-SilkS", Top)) = Circle(-3.025, 2.25, 0.125)
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(0.0, -0.5), Point(0.0, 0.5)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-0.5, 0.0), Point(0.5, 0.0)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.175, -2.7), Point(4.175, -2.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.175, 2.7), Point(4.175, 2.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(4.175, -2.7), Point(4.175, 2.7)])
-  ; layer(Courtyard(Top)) = Line(0.0, [Point(-4.175, -2.7), Point(-4.175, 2.7)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.6, [
+    Point(-0.373, 1.423), 
+    Point(-0.395836140246614, 1.53780502970953), 
+    Point(-0.460867965644036, 1.63513203435596), 
+    Point(-0.558194970290473, 1.70016385975339), 
+    Point(-0.673, 1.723), 
+    Point(-0.787805029709527, 1.70016385975339), 
+    Point(-0.885132034355964, 1.63513203435596), 
+    Point(-0.950163859753386, 1.53780502970953), 
+    Point(-0.973, 1.423), 
+    Point(-0.950163859753386, 1.30819497029047), 
+    Point(-0.885132034355964, 1.21086796564404), 
+    Point(-0.787805029709527, 1.14583614024661), 
+    Point(-0.673, 1.123), 
+    Point(-0.558194970290473, 1.14583614024661), 
+    Point(-0.460867965644036, 1.21086796564404), 
+    Point(-0.395836140246614, 1.30819497029047), 
+    Point(-0.373, 1.423)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-2.9, 2.25), 
+    Point(-2.90951505843609, 2.29783542904564), 
+    Point(-2.93661165235168, 2.33838834764832), 
+    Point(-2.97716457095436, 2.36548494156391), 
+    Point(-3.025, 2.375), 
+    Point(-3.07283542904564, 2.36548494156391), 
+    Point(-3.11338834764832, 2.33838834764832), 
+    Point(-3.14048494156391, 2.29783542904564), 
+    Point(-3.15, 2.25), 
+    Point(-3.14048494156391, 2.20216457095436), 
+    Point(-3.11338834764832, 2.16161165235168), 
+    Point(-3.07283542904564, 2.13451505843609), 
+    Point(-3.025, 2.125), 
+    Point(-2.97716457095436, 2.13451505843609), 
+    Point(-2.93661165235168, 2.16161165235168), 
+    Point(-2.90951505843609, 2.20216457095436), 
+    Point(-2.9, 2.25)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.7, -2.45), Point(1.7, -2.45)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.7, 2.45), Point(1.7, 2.45)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.7, -2.45), Point(1.7, 2.45)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.7, -2.45), Point(-1.7, 2.45)])
-
   ref-label()
 
 pcb-symbol BRIDGE_40V_1A-symbol :
@@ -57,6 +84,8 @@ pcb-symbol BRIDGE_40V_1A-symbol :
     Point(0.0, -5.08), 
     Point(5.08, -10.16), 
     Point(10.16, -5.08)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(0.0, 0.3))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(0.0, 1.362))
 
 public pcb-component component :
   name = "BRIDGE_40V_1A"
@@ -71,3 +100,4 @@ public pcb-component component :
   val sym = BRIDGE_40V_1A-symbol
   symbol = sym(p+ => sym.p+, p- => sym.p-, p~[0] => sym.p~[0], p~[1] => sym.p~[1])
   reference-prefix = "D"
+

@@ -1,0 +1,75 @@
+#use-added-syntax(jitx)
+defpackage testlib/Nexperia_USA_Inc_/PCMF3HDMI2SZ :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern NXPWLCSP15 :
+  pad A1 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, 1.0) on Top
+  pad A2 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, 0.6) on Top
+  pad A3 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, 0.2) on Top
+  pad A4 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, -0.2) on Top
+  pad A5 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, -0.6) on Top
+  pad A6 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.4, -1.0) on Top
+  pad B1 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.0, 0.8) on Top
+  pad B2 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.0, 0.0) on Top
+  pad B3 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(0.0, -0.8) on Top
+  pad C1 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, 1.0) on Top
+  pad C2 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, 0.6) on Top
+  pad C3 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, 0.2) on Top
+  pad C4 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, -0.2) on Top
+  pad C5 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, -0.6) on Top
+  pad C6 : round-rect-smd-pad(0.25, 0.25, 0.125) at loc(-0.4, -1.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1, [
+    Point(0.812, 1.397), 
+    Point(0.808193976625564, 1.41613417161825), 
+    Point(0.797355339059327, 1.43235533905933), 
+    Point(0.781134171618254, 1.44319397662556), 
+    Point(0.762, 1.447), 
+    Point(0.742865828381746, 1.44319397662556), 
+    Point(0.726644660940673, 1.43235533905933), 
+    Point(0.715806023374436, 1.41613417161825), 
+    Point(0.712, 1.397), 
+    Point(0.715806023374436, 1.37786582838175), 
+    Point(0.726644660940673, 1.36164466094067), 
+    Point(0.742865828381746, 1.35080602337444), 
+    Point(0.762, 1.347), 
+    Point(0.781134171618254, 1.35080602337444), 
+    Point(0.797355339059327, 1.36164466094067), 
+    Point(0.808193976625564, 1.37786582838175), 
+    Point(0.812, 1.397)])
+  ref-label()
+
+public pcb-component component :
+  name = "PCMF3HDMI2SZ"
+  description = "PCMF3HDMI2SZ"
+  manufacturer = "Nexperia USA Inc."
+  mpn = "PCMF3HDMI2SZ"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [C1 | C1 | Right]
+    [C2 | C2 | Right]
+    [A1 | A1 | Left]
+    [A2 | A2 | Left]
+    [C3 | C3 | Right]
+    [C4 | C4 | Right]
+    [A3 | A3 | Left]
+    [A4 | A4 | Left]
+    [C5 | C5 | Right]
+    [C6 | C6 | Right]
+    [A5 | A5 | Left]
+    [A6 | A6 | Left]
+    [GND | B1, B2, B3 | Left]
+
+  make-box-symbol()
+  assign-landpattern(NXPWLCSP15)
+  reference-prefix = "L"
+

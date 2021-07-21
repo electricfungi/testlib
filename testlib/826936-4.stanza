@@ -1,0 +1,41 @@
+#use-added-syntax(jitx)
+defpackage testlib/TE_Connectivity_AMP_Connectors/826936-4 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern _826936-4 :
+  pad p[1] : rect-pth-pad(1.0, 1.905, 1.905) at loc(0.0, 3.81) on Top
+  pad p[2] : round-rect-pth-pad(1.0, 1.905, 1.905, 0.9525) at loc(0.0, 1.27) on Top
+  pad p[3] : round-rect-pth-pad(1.0, 1.905, 1.905, 0.9525) at loc(0.0, -1.27) on Top
+  pad p[4] : round-rect-pth-pad(1.0, 1.905, 1.905, 0.9525) at loc(0.0, -3.81) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-1.651, 5.461), Point(1.651, 5.461)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(1.651, -5.461), Point(1.651, 5.461)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-1.651, -5.461), Point(1.651, -5.461)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1778, [Point(-1.651, -5.461), Point(-1.651, 5.461)])
+  ref-label()
+
+public pcb-component component :
+  name = "826936-4"
+  description = "STM32_UART_DEBUG"
+  manufacturer = "TE Connectivity AMP Connectors"
+  mpn = "826936-4"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Left]
+    [p[2] | 2 | Left]
+    [p[3] | 3 | Left]
+    [p[4] | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(_826936-4)
+  reference-prefix = "CN"
+

@@ -1,0 +1,31 @@
+#use-added-syntax(jitx)
+defpackage testlib/*/NetTie :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern NETTIE_10MIL :
+  pad p[1] : round-rect-smd-pad(0.254, 0.254, 0.127) at loc(0.0, 0.6858) on Top
+  pad p[2] : smd-pad(0.254, 0.254) at loc(0.0, -0.508) on Top
+
+  ref-label()
+
+public pcb-component component :
+  name = "NetTie"
+  description = "Short"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [p[1] | 1 | Up]
+    [p[2] | 2 | Down]
+
+  make-box-symbol()
+  assign-landpattern(NETTIE_10MIL)
+  reference-prefix = "NetTie"
+

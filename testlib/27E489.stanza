@@ -1,5 +1,5 @@
 #use-added-syntax(jitx)
-defpackage testlib/27E489 :
+defpackage testlib/TE_Connectivity_Potter___Brumfield_Relays/27E489 :
   import core
   import collections
   import math
@@ -11,25 +11,19 @@ defpackage testlib/27E489 :
   import ocdb/symbols
 
 pcb-landpattern _27E489-lp :
-  pad A : pth-pad(1.09, 1.598005) at loc(7.875, -8.535, 180.0) on Top
-  pad B : pth-pad(1.09, 1.598005) at loc(-7.875, -8.535) on Top
-  pad p[1] : rect-pth-pad(1.09, 3.19601, 3.19601) at loc(5.005, 8.535, 180.0) on Top
-  pad p[2] : pth-pad(1.09, 1.598005) at loc(-5.005, 8.535) on Top
-  pad p[3] : pth-pad(1.09, 1.598005) at loc(5.005, 3.835, 180.0) on Top
-  pad p[4] : pth-pad(1.09, 1.598005) at loc(-5.005, 3.835) on Top
-  pad p[5] : pth-pad(1.09, 1.598005) at loc(5.005, -2.055, 180.0) on Top
-  pad p[6] : pth-pad(1.09, 1.598005) at loc(-5.005, -2.055) on Top
+  pad A : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(7.875, -8.535, 180.0) on Top
+  pad B : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(-7.875, -8.535) on Top
+  pad p[1] : rect-pth-pad(2.18, 3.19601, 3.19601) at loc(5.005, 8.535, 180.0) on Top
+  pad p[2] : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(-5.005, 8.535) on Top
+  pad p[3] : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(5.005, 3.835, 180.0) on Top
+  pad p[4] : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(-5.005, 3.835) on Top
+  pad p[5] : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(5.005, -2.055, 180.0) on Top
+  pad p[6] : round-rect-pth-pad(2.18, 3.19601, 3.19601, 1.598005) at loc(-5.005, -2.055) on Top
 
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, 14.605), Point(11.049, 14.605)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(11.049, -15.494), Point(11.049, 14.605)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, -15.494), Point(11.049, -15.494)])
   layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-11.049, -15.494), Point(-11.049, 14.605)])
-  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, -15.18899), Point(-10.71858, 14.22413)])
-  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, -15.18899), Point(10.71902, -15.18899)])
-  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(10.71902, -15.18899), Point(10.71902, 14.22413)])
-  ; layer(Silkscreen("F-SilkS", Top)) = Line(0.15, [Point(-10.71858, 14.22413), Point(10.71902, 14.22413)])
-  ; layer(Courtyard(Top)) = Rectangle(10.71902, 15.18899)
-  ; layer(Courtyard(Top)) = Rectangle(11.049, 15.494)
   ref-label()
 
 pcb-symbol _27E489-symbol :
@@ -73,6 +67,7 @@ pcb-symbol _27E489-symbol :
     length = 5.08
     number-size = 1.523
     name-size = 1.523
+  layer("foreground") = Rectangle(7.62, 22.86, loc(7.62, -11.43))
   layer("foreground") = Line(1.0, [
     Point(5.08, -7.62), 
     Point(7.62, -7.62), 
@@ -120,7 +115,8 @@ pcb-symbol _27E489-symbol :
     Point(7.72015384158661, -19.8256722083016), 
     Point(7.64649473615568, -20.0619405905775), 
     Point(7.62005661346859, -20.3080085444947)])
-  layer("foreground") = Rectangle(7.62, 22.86, loc(7.62, -11.43))
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(3.81, 0.3))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(3.81, 1.362))
 
 public pcb-component component :
   name = "27E489"

@@ -1,0 +1,60 @@
+#use-added-syntax(jitx)
+defpackage testlib/TE_Connectivity_AMP_Connectors/1734035-2 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern _1734035-2 :
+  pad MOUNT1 : round-rect-pth-pad(0.9, 1.397, 1.397, 0.6985) at loc(0.2, 2.2) on Top
+  pad MOUNT2 : round-rect-pth-pad(0.9, 1.397, 1.397, 0.6985) at loc(0.2, -2.2) on Top
+  pad MOUNT3 : smd-pad(2.5, 2.0) at loc(2.7, 4.45) on Top
+  pad MOUNT4 : smd-pad(2.5, 2.0) at loc(-2.8, 4.45) on Top
+  pad MOUNT5 : smd-pad(2.5, 2.0) at loc(-2.8, -4.45) on Top
+  pad MOUNT6 : smd-pad(2.5, 2.0) at loc(2.7, -4.45) on Top
+  pad p[1] : smd-pad(2.3, 0.5) at loc(2.8, 1.6) on Top
+  pad p[2] : smd-pad(2.3, 0.5) at loc(2.8, 0.8) on Top
+  pad p[3] : smd-pad(2.3, 0.5) at loc(2.8, 0.0) on Top
+  pad p[4] : smd-pad(2.3, 0.5) at loc(2.8, -0.8) on Top
+  pad p[5] : smd-pad(2.3, 0.5) at loc(2.8, -1.6) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.03238, 5.334), Point(-4.445, 5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.445, 5.334), Point(-4.445, 5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.445, 5.842), Point(-1.143, 5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.143, 5.334), Point(-1.143, 5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.143, 5.334), Point(1.016, 5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.016, 5.334), Point(1.016, 5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.016, 5.842), Point(4.318, 5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.016, -5.842), Point(4.318, -5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(1.016, -5.842), Point(1.016, -5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.143, -5.334), Point(1.016, -5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-1.143, -5.334), Point(-1.143, -5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.445, -5.842), Point(-1.143, -5.842)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-4.445, -5.842), Point(-4.445, -5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-5.03238, -5.334), Point(-4.445, -5.334)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(4.318, -5.842), Point(4.318, 5.842)])
+  ref-label()
+
+public pcb-component component :
+  name = "1734035-2"
+  description = "1734035-2"
+  manufacturer = "TE Connectivity AMP Connectors"
+  mpn = "1734035-2"
+  pin-properties :
+    [pin:Ref | pads:Ref ... | side:Dir]
+    [VBUS | p[1] | Left]
+    [D- | p[2] | Left]
+    [D+ | p[3] | Left]
+    [NC | p[4] | Left]
+    [GND | MOUNT1, MOUNT2, MOUNT3, MOUNT4, MOUNT5, MOUNT6, p[5] | Left]
+
+  make-box-symbol()
+  assign-landpattern(_1734035-2)
+  reference-prefix = "CN"
+

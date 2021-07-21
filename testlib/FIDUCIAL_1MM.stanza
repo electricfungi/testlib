@@ -1,0 +1,46 @@
+#use-added-syntax(jitx)
+defpackage testlib/*/FIDUCIAL_1MM :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+
+pcb-landpattern FIDUCIAL_1MM-lp :
+  ref-label()
+
+pcb-symbol FIDUCIAL_1MM-symbol :
+  layer("foreground") = Line(1.0, [
+    Point(1.2644, 0.0), 
+    Point(1.16815328090727, 0.48386493188242), 
+    Point(0.894065814132271, 0.894065814132271), 
+    Point(0.48386493188242, 1.16815328090727), 
+    Point(7.74221706420957e-17, 1.2644), 
+    Point(-0.483864931882419, 1.16815328090727), 
+    Point(-0.894065814132271, 0.894065814132271), 
+    Point(-1.16815328090727, 0.48386493188242), 
+    Point(-1.2644, 1.54844341284191e-16), 
+    Point(-1.16815328090727, -0.483864931882419), 
+    Point(-0.894065814132271, -0.894065814132271), 
+    Point(-0.483864931882419, -1.16815328090727), 
+    Point(-2.32266511926287e-16, -1.2644), 
+    Point(0.48386493188242, -1.16815328090727), 
+    Point(0.894065814132271, -0.894065814132271), 
+    Point(1.16815328090727, -0.483864931882419), 
+    Point(1.2644, -3.09688682568383e-16)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(-1.7644, 2.0644))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(-1.7644, 3.1264))
+
+public pcb-component component :
+  name = "FIDUCIAL_1MM"
+  description = "FIDUCIAL_1MM"
+  val lp = FIDUCIAL_1MM-lp
+  landpattern = lp()
+  val sym = FIDUCIAL_1MM-symbol
+  symbol = sym()
+  reference-prefix = "FID"
+

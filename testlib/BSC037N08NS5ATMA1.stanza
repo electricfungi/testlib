@@ -1,0 +1,104 @@
+#use-added-syntax(jitx)
+defpackage testlib/Infineon_Technologies/BSC037N08NS5ATMA1 :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+
+pcb-landpattern INFINEONPG-TDSON-8 :
+  pad p[1] : smd-pad(0.5, 0.85) at loc(-2.9, 1.905, 90.0) on Top
+  pad p[2] : smd-pad(0.5, 0.85) at loc(-2.9, 0.635, 90.0) on Top
+  pad p[3] : smd-pad(0.5, 0.85) at loc(-2.9, -0.635, 90.0) on Top
+  pad p[4] : smd-pad(0.5, 0.85) at loc(-2.9, -1.905, 90.0) on Top
+  pad p[5] : smd-pad(0.5, 0.85) at loc(2.9, -1.905, 90.0) on Top
+  pad p[6] : smd-pad(0.5, 0.85) at loc(2.9, -0.635, 90.0) on Top
+  pad p[7] : smd-pad(0.5, 0.85) at loc(2.9, 0.635, 90.0) on Top
+  pad p[8] : smd-pad(0.5, 0.85) at loc(2.9, 1.905, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.1, [
+    Point(-3.604, 2.922), 
+    Point(-3.60780602337444, 2.94113417161825), 
+    Point(-3.61864466094067, 2.95735533905933), 
+    Point(-3.63486582838175, 2.96819397662556), 
+    Point(-3.654, 2.972), 
+    Point(-3.67313417161825, 2.96819397662556), 
+    Point(-3.68935533905933, 2.95735533905933), 
+    Point(-3.70019397662556, 2.94113417161825), 
+    Point(-3.704, 2.922), 
+    Point(-3.70019397662556, 2.90286582838175), 
+    Point(-3.68935533905933, 2.88664466094067), 
+    Point(-3.67313417161825, 2.87580602337444), 
+    Point(-3.654, 2.872), 
+    Point(-3.63486582838175, 2.87580602337444), 
+    Point(-3.61864466094067, 2.88664466094067), 
+    Point(-3.60780602337444, 2.90286582838175), 
+    Point(-3.604, 2.922)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.227, -2.922), Point(3.227, -2.922)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.227, 2.922), Point(3.227, 2.922)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.227, -2.922), Point(3.227, -2.602)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(3.227, 2.602), Point(3.227, 2.922)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.227, -2.922), Point(-3.227, -2.602)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-3.227, 2.602), Point(-3.227, 2.922)])
+  ref-label()
+
+pcb-symbol N-FET80V100A00032Ohms-symbol :
+  pin D at Point(10.16, 2.54) with :
+    direction = Up
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin G at Point(5.08, 0.0) with :
+    direction = Left
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  pin S at Point(10.16, -2.54) with :
+    direction = Down
+    length = 5.08
+    number-size = 1.523
+    name-size = 1.523
+  layer("foreground") = Text("5, 6, 7, 8", 1.219, SW, loc(2.54, 5.08))
+  layer("foreground") = Text("1, 2, 3", 1.219, SW, loc(5.08, -7.62))
+  layer("foreground") = Line(1.0, [Point(10.16, 1.778), Point(7.62, 1.778)])
+  layer("foreground") = Line(1.0, [Point(10.16, 0.0), Point(7.62, 0.0)])
+  layer("foreground") = Line(1.0, [Point(10.16, -1.778), Point(7.62, -1.778)])
+  layer("foreground") = Line(1.0, [Point(10.16, 0.0), Point(10.16, -2.54)])
+  layer("foreground") = Line(1.0, [Point(7.112, 2.286), Point(7.112, -2.286)])
+  layer("foreground") = Line(1.0, [Point(7.62, 2.286), Point(7.62, 1.27)])
+  layer("foreground") = Line(1.0, [Point(7.62, -0.508), Point(7.62, 0.508)])
+  layer("foreground") = Line(1.0, [Point(7.62, -2.286), Point(7.62, -1.27)])
+  layer("foreground") = Line(1.0, [Point(5.08, 0.0), Point(7.112, 0.0)])
+  layer("foreground") = Line(1.0, [Point(10.16, 1.778), Point(10.16, 2.54)])
+  layer("foreground") = Line(1.0, [Point(10.16, 2.54), Point(12.7, 2.54)])
+  layer("foreground") = Line(1.0, [Point(10.16, -2.54), Point(12.7, -2.54)])
+  layer("foreground") = Line(1.0, [Point(12.7, -2.54), Point(12.7, -0.762)])
+  layer("foreground") = Line(1.0, [Point(12.7, 2.54), Point(12.7, 0.508)])
+  layer("foreground") = Line(1.0, [
+    Point(13.462, 0.762), 
+    Point(13.208, 0.508), 
+    Point(12.192, 0.508), 
+    Point(11.938, 0.254)])
+  layer("foreground") = Polygon([Point(7.62, 0.0), Point(9.144, -0.508), Point(9.144, 0.508)])
+  layer("foreground") = Polygon([Point(12.7, 0.508), Point(11.938, -0.762), Point(13.462, -0.762)])
+  layer("foreground") = Text(">VALUE", 0.762, SW, loc(2.54, 6.599))
+  layer("foreground") = Text(">REF", 0.762, SW, loc(2.54, 7.661))
+
+public pcb-component component :
+  name = "N-FET 80V 100A 0.0032Ohms"
+  description = "N-FET 80V 100A 0.0032Ohms"
+  manufacturer = "Infineon Technologies"
+  mpn = "BSC037N08NS5ATMA1"
+  pin D
+  pin G
+  pin S
+  val lp = INFINEONPG-TDSON-8
+  landpattern = lp(D => lp.p[8], D => lp.p[7], D => lp.p[6], D => lp.p[5], G => lp.p[4], S => lp.p[3], S => lp.p[2], S => lp.p[1])
+  val sym = N-FET80V100A00032Ohms-symbol
+  symbol = sym(D => sym.D, G => sym.G, S => sym.S)
+  reference-prefix = "Q"
+

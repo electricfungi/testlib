@@ -1,0 +1,67 @@
+#use-added-syntax(jitx)
+defpackage testlib/Linear_Technology_Analog_Devices/LTC2955CTS8-1#TRMPBF :
+  import core
+  import collections
+  import math
+  import jitx
+  import jitx/commands
+  import ocdb/defaults
+  import ocdb/land-patterns
+  import ocdb/generic-components
+  import ocdb/symbols
+  import ocdb/box-symbol
+
+pcb-landpattern LinearTS8TSOT-23-8 :
+  pad p[1] : smd-pad(0.4, 1.22) at loc(-1.31, 0.975, 90.0) on Top
+  pad p[2] : smd-pad(0.4, 1.22) at loc(-1.31, 0.325, 90.0) on Top
+  pad p[3] : smd-pad(0.4, 1.22) at loc(-1.31, -0.325, 90.0) on Top
+  pad p[4] : smd-pad(0.4, 1.22) at loc(-1.31, -0.975, 90.0) on Top
+  pad p[5] : smd-pad(0.4, 1.22) at loc(1.31, -0.975, 90.0) on Top
+  pad p[6] : smd-pad(0.4, 1.22) at loc(1.31, -0.325, 90.0) on Top
+  pad p[7] : smd-pad(0.4, 1.22) at loc(1.31, 0.325, 90.0) on Top
+  pad p[8] : smd-pad(0.4, 1.22) at loc(1.31, 0.975, 90.0) on Top
+
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.25, [
+    Point(-1.185, 1.725), 
+    Point(-1.19451505843609, 1.77283542904564), 
+    Point(-1.22161165235168, 1.81338834764832), 
+    Point(-1.26216457095436, 1.84048494156391), 
+    Point(-1.31, 1.85), 
+    Point(-1.35783542904564, 1.84048494156391), 
+    Point(-1.39838834764832, 1.81338834764832), 
+    Point(-1.42548494156391, 1.77283542904564), 
+    Point(-1.435, 1.725), 
+    Point(-1.42548494156391, 1.67716457095436), 
+    Point(-1.39838834764832, 1.63661165235168), 
+    Point(-1.35783542904564, 1.60951505843609), 
+    Point(-1.31, 1.6), 
+    Point(-1.26216457095436, 1.60951505843609), 
+    Point(-1.22161165235168, 1.63661165235168), 
+    Point(-1.19451505843609, 1.67716457095436), 
+    Point(-1.185, 1.725)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.381, -1.45), Point(-0.381, 1.45)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(0.381, -1.45), Point(0.381, 1.45)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.381, 1.45), Point(0.381, 1.45)])
+  layer(Silkscreen("F-SilkS", Top)) = Line(0.254, [Point(-0.381, -1.45), Point(0.381, -1.45)])
+  ref-label()
+
+public pcb-component component :
+  name = "LTC2955CTS8-1#TRMPBF"
+  description = "LTC2955CTS8-1#TRMPBF"
+  manufacturer = "Linear Technology/Analog Devices"
+  mpn = "LTC2955CTS8-1#TRMPBF"
+  pin-properties :
+    [pin:Ref | pads:Int ... | side:Dir]
+    [VIN | 6 | Right]
+    [ON | 1 | Right]
+    [TMR | 3 | Right]
+    [PB | 5 | Right]
+    [EN | 7 | Up]
+    [INT | 8 | Left]
+    [KILL | 2 | Left]
+    [GND | 4 | Left]
+
+  make-box-symbol()
+  assign-landpattern(LinearTS8TSOT-23-8)
+  reference-prefix = "U"
+
